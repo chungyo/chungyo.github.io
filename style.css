@@ -147,3 +147,30 @@ body{background:white;color:#111827}.nav,.skip-link,.scroll-hint,.hero-links,foo
 .project-card{break-inside:avoid;box-shadow:none}.project-art{print-color-adjust:exact;-webkit-print-color-adjust:exact}.project-body h3>span{display:none}.projects-grid{gap:16px}.project-body{padding:15px}
 .detail-layout{display:block}.detail-main{padding-top:25px}.detail-header{margin-top:0}.case-section{break-inside:avoid;padding-top:25px}.case-outcome{break-inside:avoid}
 }
+
+/* Resume-based background and additional experience */
+.hero-highlights small{display:block;color:var(--quiet);font-size:11px;margin-top:2px}
+.project-stage{color:var(--green);font-size:12px;margin-top:18px}
+.section-intro{color:var(--muted);font-size:14px;margin-top:-28px;margin-bottom:32px}
+.more-projects{margin-top:32px}
+.more-projects summary{cursor:pointer;list-style:none;display:flex;gap:16px;align-items:center;justify-content:center;padding:18px 22px;border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:14px}
+.more-projects summary::-webkit-details-marker{display:none}
+.more-projects summary::after{content:'+';font-size:20px;color:var(--green)}
+.more-projects[open] summary::after{content:'−'}
+.more-projects summary span{font:10px var(--mono);color:var(--quiet)}
+.more-projects[open] .projects-grid{margin-top:24px}
+.more-projects summary:hover{color:var(--text);border-color:var(--green)}
+.more-projects summary:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+.background-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:50px 55px}
+.group-label{font:500 11px/1.8 var(--mono);letter-spacing:1px;color:var(--green);margin-bottom:22px}
+.background-item{padding:18px 0;border-bottom:1px solid #33415580}
+.background-item:first-of-type{padding-top:0}
+.item-heading{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;justify-content:space-between;margin-bottom:9px}
+.item-heading h3{font-size:15px;font-weight:500;word-break:keep-all}
+.item-date{font-size:11px;color:var(--quiet)}
+.background-item p{color:var(--muted);font-size:13px;line-height:1.9;word-break:keep-all}
+.experience-list .background-item{padding:24px 0}
+.experience-list .background-item:first-child{padding-top:0}
+.experience-list p{max-width:870px}
+@media(max-width:760px){.nav-links{gap:12px}.nav-links a{font-size:11px}.nav-inner{padding-inline:12px}.hero{padding-top:110px}.background-grid{grid-template-columns:1fr;gap:38px}.more-projects summary{font-size:12px;gap:10px}.more-projects summary span{display:none}}
+@media print{.background-grid{gap:20px}.background-group,.background-item{break-inside:avoid}.hero-highlights small{color:#374151}.more-projects summary{display:none}}

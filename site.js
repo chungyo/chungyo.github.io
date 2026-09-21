@@ -16,7 +16,18 @@ window.addEventListener('scroll', () => {
   requestAnimationFrame(() => { updateNavigation(); scheduled = false; });
 }, { passive: true });
 updateNavigation();
+window.addEventListener('beforeprint', () => {
+  document.querySelectorAll('.more-projects').forEach(section => {
+    section.dataset.wasOpen = String(section.open);
+    section.open = true;
+  });
+});
+window.addEventListener('afterprint', () => {
+  document.querySelectorAll('.more-projects').forEach(section => {
+    section.open = section.dataset.wasOpen === 'true';
+    delete section.dataset.wasOpen;
+  });
+});
 document.querySelectorAll('.print-button').forEach(button => {
   button.addEventListener('click', () => window.print());
 });
-
