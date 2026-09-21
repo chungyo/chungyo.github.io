@@ -15,7 +15,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--green);outline-offs
 .nav{position:fixed;z-index:20;top:12px;left:12px;right:12px;border:1px solid transparent;border-radius:14px;transition:background .2s,border-color .2s}
 .nav.scrolled{background:#0f172aea;backdrop-filter:blur(16px);border-color:#33415599;box-shadow:0 8px 30px #0002}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;min-height:54px}
-.brand{font-family:var(--mono);font-size:17px;font-weight:600;letter-spacing:-.5px;color:var(--green)}
+.brand{font-family:var(--mono);font-size:17px;font-weight:600;letter-spacing:-.5px;color:var(--green);white-space:nowrap}
 .brand-dim{color:var(--quiet);font-weight:400}
 .nav-links{display:flex;gap:32px}
 .nav-links a{position:relative;font-size:14px;color:var(--muted);padding:8px 0}
@@ -185,6 +185,8 @@ body{background:white;color:#111827}.nav,.skip-link,.scroll-hint,.hero-links,foo
 .timeline-note{display:block;font-size:11px;color:var(--quiet);margin-top:2px}
 .timeline-detail-link{display:inline-block;font-size:11px;color:var(--green);margin-top:16px}
 .timeline-detail-link:hover{text-decoration:underline;text-underline-offset:4px}
+.nav-links{flex-shrink:0}
+@media(max-width:520px){.nav-inner{flex-wrap:wrap;gap:3px;padding-block:9px}.nav-links{width:100%;justify-content:space-between}.nav-links a{padding:2px 0}.nav-links a::after{bottom:0}}
 .timeline-item.current::after{content:'';position:absolute;left:calc(50% - 1px);top:9px;bottom:-12px;width:2px;background:var(--green)}
 .timeline-item{margin-bottom:76px}
 .timeline-mark{align-self:start;margin-top:75px}
