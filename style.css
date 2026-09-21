@@ -174,3 +174,29 @@ body{background:white;color:#111827}.nav,.skip-link,.scroll-hint,.hero-links,foo
 .experience-list p{max-width:870px}
 @media(max-width:760px){.nav-links{gap:12px}.nav-links a{font-size:11px}.nav-inner{padding-inline:12px}.hero{padding-top:110px}.background-grid{grid-template-columns:1fr;gap:38px}.more-projects summary{font-size:12px;gap:10px}.more-projects summary span{display:none}}
 @media print{.background-grid{gap:20px}.background-group,.background-item{break-inside:avoid}.hero-highlights small{color:#374151}.more-projects summary{display:none}}
+
+/* Detailed journey: context, concrete contributions, then tools */
+.timeline-highlights{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:9px}
+.timeline-highlights li{position:relative;padding-right:14px;font-size:12px;line-height:1.85;color:var(--muted);word-break:keep-all}
+.timeline-highlights li::before{content:'·';position:absolute;right:0;top:0;color:var(--green);font-weight:700}
+.timeline-highlights strong{font-weight:500;color:#d6dfeb}
+.timeline-item:nth-child(even) .timeline-highlights li{padding-right:0;padding-left:14px}
+.timeline-item:nth-child(even) .timeline-highlights li::before{right:auto;left:0}
+.timeline-note{display:block;font-size:11px;color:var(--quiet);margin-top:2px}
+.timeline-detail-link{display:inline-block;font-size:11px;color:var(--green);margin-top:16px}
+.timeline-detail-link:hover{text-decoration:underline;text-underline-offset:4px}
+.timeline-item.current::after{content:'';position:absolute;left:calc(50% - 1px);top:9px;bottom:-12px;width:2px;background:var(--green)}
+.timeline-item{margin-bottom:76px}
+.timeline-mark{align-self:start;margin-top:75px}
+@media(max-width:760px){
+.timeline-highlights li,.timeline-item:nth-child(even) .timeline-highlights li{padding-right:0;padding-left:14px}
+.timeline-highlights li::before{right:auto;left:0}
+.timeline-item.current::after{left:5px}
+.timeline-item,.timeline-item:nth-child(even){margin-bottom:48px}
+}
+@media print{
+.timeline-highlights li,.timeline-item:nth-child(even) .timeline-highlights li{padding-right:0;padding-left:14px}
+.timeline-highlights li::before{right:auto;left:0}
+.timeline-highlights strong{color:#111827}
+.timeline-item.current::after,.timeline-detail-link{display:none}
+}
