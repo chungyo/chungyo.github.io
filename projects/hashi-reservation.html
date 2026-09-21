@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="예약 응답에 없는 데이터를 캐시에 추측해 넣지 않도록 갱신 기준을 정했습니다. 재렌더 전 연속 클릭으로 생기는 중복 요청도 동기 잠금으로 처리했습니다."><meta name="theme-color" content="#0f172a">
-<title>예약 데이터의 캐시와 중복 요청 처리 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
+<title>예약 데이터의 캐시와 중복 요청 처리 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-photos"><script src="../site.js?v=20260921-photos" defer></script>
 </head>
 <body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
 <main id="main" class="detail-main container">
   <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
-  <div class="case-cover"><div class="project-art" style="--art:#fb923c" aria-hidden="true"><div class="art-corner">02 / HASHI</div><svg viewBox="0 0 416 185"><path d="M111 89h70m54 0h70" stroke="#fb923c" stroke-opacity=".35" stroke-dasharray="4 5"/><circle cx="146" cy="89" r="3" fill="#fb923c"/><circle cx="270" cy="89" r="3" fill="#fb923c"/><g transform="translate(57 62)"><rect width="54" height="54" rx="12" fill="#fb923c" fill-opacity=".07" stroke="#fb923c" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#fb923c" font-size="23" font-family="monospace">↗</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Reserve</text></g><g transform="translate(181 62)"><rect width="54" height="54" rx="12" fill="#fb923c" fill-opacity=".07" stroke="#fb923c" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#fb923c" font-size="23" font-family="monospace">◇</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Lock</text></g><g transform="translate(305 62)"><rect width="54" height="54" rx="12" fill="#fb923c" fill-opacity=".07" stroke="#fb923c" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#fb923c" font-size="23" font-family="monospace">↻</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Refetch</text></g></svg><div class="art-title">예약 상태의 정합성</div><div class="art-caption">RESERVE → LOCK → REFETCH</div></div></div>
+  <div class="case-cover image-case-cover"><img src="../assets/evidence/hashi-reservation.png" width="1440" height="810" alt="HASHI 팀 공개 자료의 식당 상세·예약 입력·예약 요청 완료 화면" fetchpriority="high"><span>TEAM PRESENTATION · HASHI</span></div>
   <header class="detail-header">
     <p class="project-category">HASHI · RESERVATION</p>
     <h1>예약 데이터의 캐시와 중복 요청 처리</h1>
@@ -26,6 +26,7 @@
       <details class="case-toc" open>
         <summary>목차 <span>CONTENTS</span></summary>
         <nav aria-label="상세 사례 목차">
+<a href="#screens" data-part="screens"><b>VIEW</b><span>제품 화면 · 두 가지 예약 흐름</span></a>
           <a href="#part-1" data-part="part-1"><b>01</b><span>배경: 예약 생성은 포인트와 다음 화면도 바꾼다</span></a>
           <a href="#part-2" data-part="part-2"><b>02</b><span>문제 분석: 응답에 없는 최신 값을 채울 수는 없다</span></a>
           <a href="#part-3" data-part="part-3"><b>03</b><span>선택 기준: 직접 갱신과 재조회는 조건이 다르다</span></a>
@@ -40,6 +41,10 @@
       <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">공개 PR #94 및 후속 코드리뷰 / 당시 테스트 보고</p>
     </aside>
     <article class="case-study" aria-label="예약 데이터의 캐시와 중복 요청 처리 상세">
+<section id="screens" class="case-section product-gallery-section"><span class="case-index">VIEW</span><h2>제품 화면: 일반 예약과 ‘어디든’ 예약</h2><p>팀이 공개한 발표 자료의 화면입니다. 일반 예약·‘어디든’ 예약 생성과 포인트 사용 API를 연결한 본문 사례의 사용자 흐름을 보여줍니다.</p>
+<figure class="product-evidence "><a class="evidence-image-link" href="../assets/evidence/hashi-reservation.png" data-image-viewer data-caption="일반 예약 · 발견한 식당에서 예약 요청까지" aria-label="일반 예약 · 발견한 식당에서 예약 요청까지 이미지 크게 보기"><img src="../assets/evidence/hashi-reservation.png" alt="식당 상세에서 메뉴 선택, 예약 입력, 요청 완료로 이어지는 HASHI 화면" width="1440" height="810" loading="lazy" decoding="async"><span class="image-expand">확대 ↗</span></a><figcaption><strong>일반 예약 · 발견한 식당에서 예약 요청까지</strong><span>팀 공개 발표 자료에 수록된 UI입니다. 본문은 이 흐름의 예약 생성·포인트·캐시 처리 기여를 다룹니다.</span></figcaption></figure>
+<figure class="product-evidence "><a class="evidence-image-link" href="../assets/evidence/hashi-anywhere.png" data-image-viewer data-caption="어디든 예약 · 직접 입력에서 포인트 사용까지" aria-label="어디든 예약 · 직접 입력에서 포인트 사용까지 이미지 크게 보기"><img src="../assets/evidence/hashi-anywhere.png" alt="HASHI 어디든 예약의 직접 입력·포인트 사용·요청 완료 화면" width="1440" height="810" loading="lazy" decoding="async"><span class="image-expand">확대 ↗</span></a><figcaption><strong>어디든 예약 · 직접 입력에서 포인트 사용까지</strong><span>식당 정보를 직접 입력하는 경로입니다. 화면 전체 디자인과 본인의 API 연동 기여는 구분합니다.</span></figcaption></figure>
+<p class="media-source">출처: <a href="https://github.com/TEAM-HASHI/HASHI-CLIENT#-main-features">HASHI 공식 저장소 · Main Features</a> · 팀 공개 자료. 현재 운영 화면의 실시간 실행 녹화는 아닙니다.</p></section>
       <section id="part-1" class="case-section">
         <span class="case-index">01</span>
         <h2>배경: 예약 생성은 포인트와 다음 화면도 바꾼다</h2>

@@ -274,3 +274,36 @@ body{background:white;color:#111827}.nav,.skip-link,.scroll-hint,.hero-links,foo
 .case-section{break-inside:auto}.case-section h2{break-after:avoid}.case-table-wrap,.case-figure,.case-note,.code-figure{break-inside:avoid}.case-table-wrap table{min-width:0;font-size:10px}.case-table-wrap th,.case-table-wrap td{padding:8px;color:#374151}.case-table-wrap caption,.case-table-wrap thead th{background:#eef2f6;color:#111827}.case-table-wrap tbody th{background:#f8fafc}
 .case-figure,.flow-steps li{background:white}.code-figure,.code-figure figcaption{background:#f8fafc}.code-figure pre{color:#166534;white-space:pre-wrap}.case-note{background:#f0fdf4}.case-section>p{font-size:12px}
 }
+
+/* Original product evidence, separate from explanatory diagrams */
+.image-case-cover{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:14px;background:#0b1220}
+.image-case-cover>img{display:block;width:100%;height:auto;max-height:590px;object-fit:contain}
+.image-case-cover>span{position:absolute;left:15px;bottom:13px;background:#0f172ae8;color:#dce8f5;border:1px solid #ffffff20;border-radius:5px;padding:6px 10px;font:9px var(--mono);letter-spacing:1px}
+.card-product-image{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0b1220;border-bottom:1px solid var(--border)}
+.card-product-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .25s}
+.project-card:hover .card-product-image img{transform:scale(1.025)}
+.card-product-image>span{position:absolute;right:12px;bottom:12px;background:#0f172ae8;color:#f1f5f9;border-radius:5px;padding:5px 9px;font-size:10px}
+.product-evidence{margin:30px 0;min-width:0}
+.evidence-image-link{position:relative;display:block;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#eaf6fa;cursor:zoom-in}
+.evidence-image-link img{display:block;width:100%;height:auto}
+.image-expand{position:absolute;right:10px;bottom:10px;padding:5px 9px;background:#0f172ae6;border-radius:5px;color:#fff;font-size:10px}
+.product-evidence figcaption{margin-top:14px;display:grid;gap:6px}
+.product-evidence figcaption strong{font-size:14px;font-weight:500;color:#e2e8f0}
+.product-evidence figcaption>span{font-size:12px;line-height:1.85;color:var(--muted)}
+.evidence-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
+.evidence-gallery .product-evidence{margin-top:12px}
+.phone-evidence .evidence-image-link{background:#edf8fd}
+.case-section .media-source,.media-source{font-size:11px;line-height:1.8;color:var(--quiet);margin-top:15px}
+.media-source a{color:var(--green);text-decoration:underline;text-underline-offset:3px}
+.case-section .media-scope{font-size:12px;color:var(--muted);line-height:1.9;border-left:2px solid var(--border);padding-left:15px;margin-top:20px}
+.experience-evidence{max-width:800px;margin-top:24px}
+.experience-evidence .evidence-image-link{background:#0b1220}
+.image-lightbox{padding:18px;border:1px solid #475569;border-radius:14px;background:#0b1220;color:var(--text);width:min(1320px,95vw);max-width:95vw;max-height:94svh;overflow:auto}
+.image-lightbox::backdrop{background:#030712e8;backdrop-filter:blur(7px)}
+.image-lightbox-header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:15px}
+.image-lightbox-header h2{font-size:15px;font-weight:500}
+.image-lightbox-close{background:var(--panel);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px 13px;cursor:pointer;flex-shrink:0;font-size:13px}
+.image-lightbox img{display:block;max-width:100%;max-height:calc(90svh - 110px);width:auto;height:auto;margin:auto;border-radius:6px;object-fit:contain}
+.image-lightbox-note{font-size:11px;color:var(--muted);text-align:center;margin-top:12px}
+@media(max-width:760px){.evidence-gallery{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(74vw,270px);overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:10px}.evidence-gallery .product-evidence{scroll-snap-align:start}.image-case-cover>span{font-size:7px;padding:4px 7px;left:8px;bottom:8px}.product-evidence figcaption strong{font-size:13px}.image-lightbox{padding:12px}.image-lightbox-header h2{font-size:13px}.image-lightbox-close{font-size:12px}}
+@media print{.image-expand,.image-lightbox,.image-case-cover>span{display:none}.product-evidence{break-inside:avoid}.product-evidence figcaption strong{color:#111827}.evidence-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible}.image-case-cover{max-width:650px}}

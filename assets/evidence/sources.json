@@ -1,0 +1,71 @@
+{
+  "updated": "2026-09-21",
+  "notes": [
+    "Images show published product UI or public presentation material, not recordings of authenticated production interactions.",
+    "Original public-source redactions are retained. Full Leaders Club source artwork containing unredacted names is not distributed."
+  ],
+  "assets": [
+    {
+      "files": [
+        "leaders-cover.webp"
+      ],
+      "source": "https://plaidlabs.ai/portfolio/1",
+      "type": "Published project cover",
+      "processing": "Unmodified local copy of the public website asset"
+    },
+    {
+      "files": [
+        "leaders-screens.png",
+        "leaders-home.png",
+        "leaders-reservations.png",
+        "leaders-sales.png",
+        "leaders-timeline.png"
+      ],
+      "source": "https://plaidlabs.ai/portfolio/1",
+      "type": "Product UI excerpt from published project presentation",
+      "processing": "Browser capture of selected source-image regions; existing blurring retained"
+    },
+    {
+      "files": [
+        "hashi-reservation.png"
+      ],
+      "source": "https://github.com/user-attachments/assets/d02a100f-44d0-4ec7-8d3f-7c2cc4b8c9aa",
+      "context": "https://github.com/TEAM-HASHI/HASHI-CLIENT#-main-features",
+      "type": "Team presentation screenshot",
+      "processing": "Browser rendering at 1440x810"
+    },
+    {
+      "files": [
+        "hashi-anywhere.png"
+      ],
+      "source": "https://github.com/user-attachments/assets/093c808c-ab57-4439-a1be-265e8b964929",
+      "context": "https://github.com/TEAM-HASHI/HASHI-CLIENT#-main-features",
+      "type": "Team presentation screenshot",
+      "processing": "Browser rendering at 1440x810"
+    },
+    {
+      "files": [
+        "kfc-controls.png"
+      ],
+      "source": "https://plaidlabs.ai/portfolio/7",
+      "type": "Product UI excerpt from published project presentation",
+      "processing": "Browser capture of the tablet-control UI region"
+    },
+    {
+      "files": [
+        "snowman-cover.webp"
+      ],
+      "source": "https://plaidlabs.ai/portfolio/3",
+      "type": "Published project cover",
+      "processing": "Unmodified local copy of the public website asset"
+    },
+    {
+      "files": [
+        "plaidlabs-website.png"
+      ],
+      "source": "https://plaidlabs.ai/",
+      "type": "Current public website screenshot",
+      "processing": "Browser capture at 1440x810"
+    }
+  ]
+}
