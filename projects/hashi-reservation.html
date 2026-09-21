@@ -3,12 +3,99 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="예약 응답에 없는 데이터를 캐시에 추측해 넣지 않도록 갱신 기준을 정했습니다. 재렌더 전 연속 클릭으로 생기는 중복 요청도 동기 잠금으로 처리했습니다."><meta name="theme-color" content="#0f172a">
-<title>예약 데이터의 캐시와 중복 요청 처리 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-brand"><script src="../site.js?v=20260921-resume" defer></script>
+<title>예약 데이터의 캐시와 중복 요청 처리 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
 </head>
-<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header><main id="main" class="detail-main container">
-<a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
-<header class="detail-header"><p class="project-category">HASHI · RESERVATION</p><h1>예약 데이터의 캐시와 중복 요청 처리</h1><p class="project-stage">2026.06 — 현재 · 앱잼 이후 후속 스프린트 진행</p><p class="detail-lead">예약 응답에 없는 데이터를 캐시에 추측해 넣지 않도록 갱신 기준을 정했습니다. 재렌더 전 연속 클릭으로 생기는 중복 요청도 동기 잠금으로 처리했습니다.</p><div class="tags"><span>React</span><span>TanStack Query</span><span>Testing Library</span></div></header>
-<div class="detail-layout"><article class="case-study"><div class="project-art" style="--art:#fb923c" aria-hidden="true"><div class="art-corner">02 / HASHI</div><svg viewBox="0 0 416 185"><path d="M111 89h70m54 0h70" stroke="#fb923c" stroke-opacity=".35" stroke-dasharray="4 5"/><circle cx="146" cy="89" r="3" fill="#fb923c"/><circle cx="270" cy="89" r="3" fill="#fb923c"/><g transform="translate(57 62)"><rect width="54" height="54" rx="12" fill="#fb923c" fill-opacity=".07" stroke="#fb923c" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#fb923c" font-size="23" font-family="monospace">↗</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Reserve</text></g><g transform="translate(181 62)"><rect width="54" height="54" rx="12" fill="#fb923c" fill-opacity=".07" stroke="#fb923c" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#fb923c" font-size="23" font-family="monospace">◇</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Lock</text></g><g transform="translate(305 62)"><rect width="54" height="54" rx="12" fill="#fb923c" fill-opacity=".07" stroke="#fb923c" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#fb923c" font-size="23" font-family="monospace">↻</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Refetch</text></g></svg><div class="art-title">예약 상태의 정합성</div><div class="art-caption">RESERVE → LOCK → REFETCH</div></div><div class="case-outcome"><span>핵심 변화</span><p>부분 응답은 재조회하고, 재렌더 전 연속 클릭은 동기 잠금으로 처리</p></div><section id="part-1" class="case-section"><span class="case-index">01</span><h2>예약이 성공한 다음, 어떤 데이터를 믿을 것인가</h2><p>예약 생성에 성공하면 응답의 ID로 상세 화면에 이동합니다. 하지만 응답에는 최신 포인트 잔액이나 완전한 예약 상세 객체가 보장되지 않았습니다. 부분 응답을 완전한 데이터처럼 캐시에 넣으면 서버가 주지 않은 값을 추측하게 됩니다.</p></section><section id="part-2" class="case-section"><span class="case-index">02</span><h2>응답과 화면 이동에 맞춘 캐시 선택</h2><p>예약 상세 캐시를 직접 만들지 않고 포인트 잔액을 무효화해 다시 조회했습니다. 같은 화면에 완전한 최신 객체가 있으면 setQueryData, 부분 응답·화면 이동·집계 변화에는 invalidateQueries를 고려하도록 기준을 문서와 API 연동 스킬에 반영했습니다.</p></section><section id="part-3" class="case-section"><span class="case-index">03</span><h2>버튼 비활성화보다 먼저 들어오는 두 번째 클릭</h2><p>회귀 테스트에서 대기 없이 확인 버튼을 두 번 누르면 예약 생성 함수가 두 번 호출됐습니다. mutation.isPending은 재렌더 뒤에 바뀌므로 두 handler가 이전 값을 읽을 수 있었습니다. handler 진입 시 useRef 잠금을 잡고 요청 종료 시 해제하도록 수정했습니다.</p></section><section id="part-4" class="case-section"><span class="case-index">04</span><h2>검증과 한계</h2><p>당시 PR 테스트는 연속 클릭 시 한 번 호출되는 것, 실패 후 재시도, 요청 중 취소·Escape 닫기 제한을 확인했습니다. 검증 범위는 클라이언트 동작이며, 서버의 중복 처리 보장과는 별개입니다.</p></section><section class="case-section"><h2>관련 링크</h2><div class="evidence-links"><a href="https://github.com/TEAM-HASHI/HASHI-CLIENT/pull/94">예약 API·포인트 연동 PR <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://github.com/TEAM-HASHI/HASHI-CLIENT">HASHI 저장소 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></section></article>
-<aside class="case-sidebar"><p class="sidebar-label">담당 범위</p><p>예약·포인트 API 연동 · 회귀 테스트</p><div class="sidebar-rule"></div><p class="sidebar-label">ON THIS PAGE</p><nav aria-label="사례 목차"><a href="#part-1">01 <span>예약이 성공한 다음, 어떤 데이터를 믿을 것인가</span></a><a href="#part-2">02 <span>응답과 화면 이동에 맞춘 캐시 선택</span></a><a href="#part-3">03 <span>버튼 비활성화보다 먼저 들어오는 두 번째 클릭</span></a><a href="#part-4">04 <span>검증과 한계</span></a></nav></aside></div>
-<a class="next-project" href="design-system.html"><span>다음 프로젝트</span><strong>npm 패키지로 배포되는 공용 Toast ↗</strong></a>
+<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
+<main id="main" class="detail-main container">
+  <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
+  <div class="case-cover"><div class="project-art" style="--art:#fb923c" aria-hidden="true"><div class="art-corner">02 / HASHI</div><svg viewBox="0 0 416 185"><path d="M111 89h70m54 0h70" stroke="#fb923c" stroke-opacity=".35" stroke-dasharray="4 5"/><circle cx="146" cy="89" r="3" fill="#fb923c"/><circle cx="270" cy="89" r="3" fill="#fb923c"/><g transform="translate(57 62)"><rect width="54" height="54" rx="12" fill="#fb923c" fill-opacity=".07" stroke="#fb923c" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#fb923c" font-size="23" font-family="monospace">↗</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Reserve</text></g><g transform="translate(181 62)"><rect width="54" height="54" rx="12" fill="#fb923c" fill-opacity=".07" stroke="#fb923c" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#fb923c" font-size="23" font-family="monospace">◇</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Lock</text></g><g transform="translate(305 62)"><rect width="54" height="54" rx="12" fill="#fb923c" fill-opacity=".07" stroke="#fb923c" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#fb923c" font-size="23" font-family="monospace">↻</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Refetch</text></g></svg><div class="art-title">예약 상태의 정합성</div><div class="art-caption">RESERVE → LOCK → REFETCH</div></div></div>
+  <header class="detail-header">
+    <p class="project-category">HASHI · RESERVATION</p>
+    <h1>예약 데이터의 캐시와 중복 요청 처리</h1>
+    <p class="detail-lead">예약 응답에 없는 데이터를 캐시에 추측해 넣지 않도록 갱신 기준을 정했습니다. 재렌더 전 연속 클릭으로 생기는 중복 요청도 동기 잠금으로 처리했습니다.</p>
+    <div class="tags"><span>React</span><span>TanStack Query</span><span>Testing Library</span></div>
+  </header>
+  <dl class="case-facts">
+    <div><dt>담당 범위</dt><dd>예약·포인트 API 연동 · 캐시 정책 · 중복 요청 회귀 처리</dd></div>
+    <div><dt>기간·맥락</dt><dd>2026.07 주요 PR / 프로젝트 2026.06–현재</dd></div>
+    <div><dt>현재 단계</dt><dd>PR 병합 / 클라이언트 회귀 검증 기록</dd></div>
+  </dl>
+  <div class="case-outcome case-summary"><span>이 사례의 핵심 변화</span><p>불완전한 응답은 재조회하고, 재렌더 전 연속 클릭은 동기 잠금으로 차단</p></div>
+  <div class="detail-layout">
+    <aside class="case-sidebar">
+      <details class="case-toc" open>
+        <summary>목차 <span>CONTENTS</span></summary>
+        <nav aria-label="상세 사례 목차">
+          <a href="#part-1" data-part="part-1"><b>01</b><span>배경: 예약 생성은 포인트와 다음 화면도 바꾼다</span></a>
+          <a href="#part-2" data-part="part-2"><b>02</b><span>문제 분석: 응답에 없는 최신 값을 채울 수는 없다</span></a>
+          <a href="#part-3" data-part="part-3"><b>03</b><span>선택 기준: 직접 갱신과 재조회는 조건이 다르다</span></a>
+          <a href="#part-4" data-part="part-4"><b>04</b><span>데이터 흐름: 예약 성공 이후의 책임 분리</span></a>
+          <a href="#part-5" data-part="part-5"><b>05</b><span>별도 발견: 버튼이 비활성화되기 전의 두 번 클릭</span></a>
+          <a href="#part-6" data-part="part-6"><b>06</b><span>후속 작업: 발견한 기준을 문서와 리뷰에 남기기</span></a>
+          <a href="#part-7" data-part="part-7"><b>07</b><span>검증: 성공 경로보다 경계 조건을 함께 확인</span></a>
+          <a href="#part-8" data-part="part-8"><b>08</b><span>이 사례의 기준: 서버가 준 정보만큼만 확정하기</span></a>
+          <a href="#references" data-part="references"><b>↗</b><span>공개 근거·관련 링크</span></a>
+        </nav>
+      </details>
+      <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">공개 PR #94 및 후속 코드리뷰 / 당시 테스트 보고</p>
+    </aside>
+    <article class="case-study" aria-label="예약 데이터의 캐시와 중복 요청 처리 상세">
+      <section id="part-1" class="case-section">
+        <span class="case-index">01</span>
+        <h2>배경: 예약 생성은 포인트와 다음 화면도 바꾼다</h2>
+<p>HASHI는 한국인 여행객을 위한 일본 맛집 큐레이션·예약 요청 서비스입니다. 일반 예약과 ‘어디든’ 예약 생성, 포인트 사용 API를 연결하면서 성공 응답 이후의 데이터 흐름을 함께 다뤘습니다.</p>
+<p>사용자는 예약을 만들고 상세 화면으로 이동합니다. 동시에 포인트 잔액도 달라질 수 있습니다. 예약 요청만 성공시키고 끝내면 화면마다 다른 시점의 데이터를 보여줄 수 있는 조건이었습니다.</p>
+      </section>
+      <section id="part-2" class="case-section">
+        <span class="case-index">02</span>
+        <h2>문제 분석: 응답에 없는 최신 값을 채울 수는 없다</h2>
+<p>예약 생성 응답에는 예약 ID가 있지만, 완전한 예약 상세 객체나 최신 포인트 잔액이 보장되지 않았습니다. 응답을 그대로 상세 캐시에 넣으면 부족한 필드를 추측해야 하고, 기존 값을 복사하면 오래된 정보가 새 결과처럼 보일 수 있습니다.</p><div class="case-table-wrap" role="region" aria-label="응답 계약과 화면에서 필요한 데이터" tabindex="0"><table><caption>응답 계약과 화면에서 필요한 데이터</caption><thead><tr><th scope="col">데이터</th><th scope="col">생성 응답에서 확보</th><th scope="col">처리</th></tr></thead><tbody><tr><th scope="row">예약 ID</th><td>상세 이동에 사용할 ID</td><td>해당 ID의 상세 경로로 이동</td></tr><tr><th scope="row">완전한 예약 상세</th><td>보장되지 않음</td><td>부분 응답으로 상세 캐시를 만들지 않음</td></tr><tr><th scope="row">최신 포인트 잔액</th><td>보장되지 않음</td><td>포인트 조회 캐시를 무효화해 재조회</td></tr></tbody></table></div>
+      </section>
+      <section id="part-3" class="case-section">
+        <span class="case-index">03</span>
+        <h2>선택 기준: 직접 갱신과 재조회는 조건이 다르다</h2>
+<p>이 흐름에서는 불완전한 상세 객체를 작성하지 않고, 현재 조회하는 포인트 잔액을 무효화해 서버의 최신 값을 다시 받도록 구현했습니다. 성공 후 다른 화면으로 이동한다는 조건도 함께 봤습니다.</p><div class="case-table-wrap" role="region" aria-label="실제 API 연동 문서에 반영한 선택 기준" tabindex="0"><table><caption>실제 API 연동 문서에 반영한 선택 기준</caption><thead><tr><th scope="col">조건</th><th scope="col">선택</th><th scope="col">판단 이유</th></tr></thead><tbody><tr><th scope="row">같은 화면에서 완전한 최신 객체를 받음</th><td>setQueryData</td><td>응답이 화면에서 필요한 정보를 충족</td></tr><tr><th scope="row">부분 응답·화면 이동·집계 변화</th><td>invalidateQueries</td><td>서버의 최신 조회 결과가 필요</td></tr><tr><th scope="row">상세 즉시 반영 + 관련 목록·집계 갱신</th><td>두 방식 조합</td><td>상세와 목록이 요구하는 갱신 시점이 다름</td></tr></tbody></table></div><p>재조회 방식은 추가 요청과 대기 상태를 수반합니다. 이 사례에서는 응답 계약이 충분하지 않으므로, 클라이언트가 상세를 구성하는 것보다 서버 조회를 기준으로 삼는 쪽이 맞았습니다. 모든 mutation에 같은 방법을 쓰도록 일반화하지 않았습니다.</p>
+      </section>
+      <section id="part-4" class="case-section">
+        <span class="case-index">04</span>
+        <h2>데이터 흐름: 예약 성공 이후의 책임 분리</h2>
+<figure class="case-figure"><ol class="flow-steps"><li><strong>예약 요청</strong><span>입력과 사용할 포인트 전달</span></li><li><strong>성공 응답</strong><span>예약 ID 수신</span></li><li><strong>포인트 갱신</strong><span>관련 query 무효화</span></li><li><strong>상세로 이동</strong><span>서버 조회를 기준으로 상세 표시</span></li></ol><figcaption>예약·포인트 연동 구현을 설명한 흐름</figcaption></figure><p>예약 ID는 다음 화면을 식별하는 데 사용하고, 포인트 잔액은 해당 조회가 최신 데이터를 가져오게 했습니다. 한 응답으로 해결할 수 없는 데이터까지 생성 결과에 억지로 합치지 않았습니다.</p>
+      </section>
+      <section id="part-5" class="case-section">
+        <span class="case-index">05</span>
+        <h2>별도 발견: 버튼이 비활성화되기 전의 두 번 클릭</h2>
+<p>같은 작업의 회귀 테스트에서는 확인 버튼을 대기 없이 연속 클릭했을 때 생성 함수가 두 번 호출됐습니다. mutation.isPending은 재렌더 뒤에 반영되므로 두 handler가 모두 이전 false 값을 읽을 수 있었습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>첫 클릭</strong><span>isPending=false를 읽음</span></li><li><strong>요청 시작</strong><span>재렌더는 아직 반영 전</span></li><li><strong>두 번째 클릭</strong><span>이전 false를 읽고 다시 요청</span></li></ol><figcaption>수정 전의 재현 조건</figcaption></figure><p>handler 진입 즉시 useRef 잠금을 잡고 onSettled에서 해제하도록 수정했습니다. 버튼 비활성화는 진행 상태를 표현하고, 동기 잠금은 재렌더 이전의 진입을 막는 역할입니다.</p><figure class="code-figure"><figcaption>동작 설명용 의사코드 — 실제 소스 그대로가 아닌 책임 요약</figcaption><pre tabindex="0"><code>예약 확인:
+  잠금이 이미 잡혀 있으면 종료
+  동기 잠금 설정
+  예약 mutation 실행
+
+요청 종료(onSettled):
+  잠금 해제
+  실패한 경우 사용자가 다시 시도할 수 있음</code></pre></figure><aside class="case-note"><strong>보장 범위</strong><p>이 처리는 클라이언트의 연속 클릭을 막습니다. 여러 기기·네트워크 재전송 등에 대한 서버의 멱등성 보장을 대신하지 않습니다.</p></aside>
+      </section>
+      <section id="part-6" class="case-section">
+        <span class="case-index">06</span>
+        <h2>후속 작업: 발견한 기준을 문서와 리뷰에 남기기</h2>
+<p>캐시 선택표를 API 연동 스킬, 데이터 계층 문서, 작업 절차에 함께 반영했습니다. 다음 작업에서 완전한 응답인지, 화면이 이동하는지, 목록이나 집계가 함께 달라지는지를 확인할 수 있게 했습니다.</p>
+<p>다른 PR 리뷰에서도 예약 취소의 재렌더 전 중복 요청과 리뷰 작성 후 식당 평점·개수 캐시 갱신 누락을 짚었습니다. 동료에게 재현 조건과 수정안을 제시한 범위이며, 후속 구현 전체를 제 기여로 포함하지 않습니다.</p>
+      </section>
+      <section id="part-7" class="case-section">
+        <span class="case-index">07</span>
+        <h2>검증: 성공 경로보다 경계 조건을 함께 확인</h2>
+<div class="case-table-wrap" role="region" aria-label="PR에 기록된 클라이언트 회귀 검증" tabindex="0"><table><caption>PR에 기록된 클라이언트 회귀 검증</caption><thead><tr><th scope="col">조건</th><th scope="col">확인한 동작</th><th scope="col">검증 범위</th></tr></thead><tbody><tr><th scope="row">같은 tick에서 연속 확인</th><td>예약 생성 호출 1회</td><td>수정 전 2회 호출 재현 후 비교</td></tr><tr><th scope="row">요청 실패 뒤 재시도</th><td>잠금 해제 후 다시 실행 가능</td><td>실패 복구</td></tr><tr><th scope="row">요청 진행 중 취소·Escape</th><td>다이얼로그 닫기 제한</td><td>클라이언트 상호작용</td></tr><tr><th scope="row">예약 성공</th><td>포인트 캐시 갱신 처리</td><td>연동 코드·당시 PR 기록</td></tr></tbody></table></div><p>위 결과는 당시 PR의 테스트·검증 보고입니다. 이번 포트폴리오 편집에서 운영 서버를 호출하거나 같은 테스트를 다시 실행한 것은 아닙니다.</p>
+      </section>
+      <section id="part-8" class="case-section">
+        <span class="case-index">08</span>
+        <h2>이 사례의 기준: 서버가 준 정보만큼만 확정하기</h2>
+<p>예약 생성에서는 응답이 보장하는 정보의 범위를, 중복 요청에서는 React 상태가 반영되는 시점을 각각 확인했습니다. 데이터의 완전성과 상태의 반영 시점을 구체적으로 나누는 것이 두 문제를 해결한 공통 기준입니다.</p>
+<p>문서와 스킬에 반영한 기준이 팀 전체의 시간 절감으로 이어졌는지는 별도 측정이 없습니다. 여기서 확인되는 결과는 동작 수정, 회귀 조건, 후속 작업에서 참조할 판단 기준입니다.</p>
+      </section>
+      <section id="references" class="case-section">
+        <span class="case-index">↗</span>
+        <h2>공개 근거·관련 링크</h2>
+<div class="evidence-links"><a href="https://github.com/TEAM-HASHI/HASHI-CLIENT/pull/94">예약 API·포인트 연동 #94 ↗</a><a href="https://github.com/TEAM-HASHI/HASHI-CLIENT/pull/91#discussion_r3567665980">예약 취소 중복 요청 리뷰 ↗</a><a href="https://github.com/TEAM-HASHI/HASHI-CLIENT/pull/148#discussion_r3901140702">리뷰 작성 후 집계 캐시 리뷰 ↗</a></div>
+      </section>
+    </article>
+  </div>
+  <a class="next-project" href="rbh-webview.html"><span>다음 프로젝트</span><strong>반복 수정하던 결과 화면의 공통 구조 정리 ↗</strong></a>
 </main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>

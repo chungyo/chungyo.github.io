@@ -3,6 +3,80 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="마음모음 1minute의 고객 요구를 웹·앱·관리자·서버 구현과 대조했습니다. 개발 차수 이동과 신규 요구를 구분하고 알림·구독 처리 기준을 정리했습니다."><meta name="theme-color" content="#0f172a">
-<title>요구사항과 웹·앱 구현의 차이를 개발 범위로 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-brand"><script src="../site.js?v=20260921-resume" defer></script>
+<title>요구사항과 웹·앱 구현의 차이를 개발 범위로 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
 </head>
-<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header><main id="main" class="detail-main container"><a class="back-link" href="../index.html#projects">← 모든 프로젝트</a><header class="detail-header"><p class="project-category">1MINUTE · WELLNESS</p><h1>요구사항과 웹·앱 구현의 차이를 개발 범위로</h1><p class="detail-lead">마음모음 1minute의 고객 요구를 웹·앱·관리자·서버 구현과 대조했습니다. 개발 차수 이동과 신규 요구를 구분하고 알림·구독 처리 기준을 정리했습니다.</p><div class="tags"><span>PM</span><span>React Native</span><span>WebView</span></div><p class="project-stage">기획·개발 기여</p></header><div class="detail-layout"><article class="case-study"><div class="project-art" style="--art:#2dd4bf" aria-hidden="true"><div class="art-corner">1MINUTE · WELLNESS</div><svg viewBox="0 0 416 185"><path d="M111 89h70m54 0h70" stroke="#2dd4bf" stroke-opacity=".35" stroke-dasharray="4 5"/><circle cx="146" cy="89" r="3" fill="#2dd4bf"/><circle cx="270" cy="89" r="3" fill="#2dd4bf"/><g transform="translate(57 62)"><rect width="54" height="54" rx="12" fill="#2dd4bf" fill-opacity=".07" stroke="#2dd4bf" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#2dd4bf" font-size="23" font-family="monospace">≡</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Request</text></g><g transform="translate(181 62)"><rect width="54" height="54" rx="12" fill="#2dd4bf" fill-opacity=".07" stroke="#2dd4bf" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#2dd4bf" font-size="23" font-family="monospace">◇</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Scope</text></g><g transform="translate(305 62)"><rect width="54" height="54" rx="12" fill="#2dd4bf" fill-opacity=".07" stroke="#2dd4bf" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#2dd4bf" font-size="23" font-family="monospace">↗</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Web / App</text></g></svg><div class="art-title">네 제품의 기준을 맞추는 PM</div><div class="art-caption">REQUIREMENTS → SCOPE → DELIVERY</div></div><div class="case-outcome"><span>핵심 변화</span><p>계약 항목 11건 중 6건을 신규 요구가 아닌 개발 차수 이동으로 판정해 범위에 반영</p></div><section id="part-1" class="case-section"><span class="case-index">01</span><h2>고객 요구와 실제 구현을 함께 확인</h2><p>고객 자료와 웹·앱·관리자·서버 구현을 대조해 무엇을 새로 만들어야 하는지 확인했습니다. 디자인이나 에셋이 없는 UI 작업은 바로 개발을 시작할 수 없으므로 착수에 필요한 조건도 정리했습니다.</p></section><section id="part-2" class="case-section"><span class="case-index">02</span><h2>새 요구인지, 다른 차수로 옮긴 일인지</h2><p>계약 항목 11건 중 6건을 신규 요구가 아니라 개발 차수 이동으로 판정해 개발 범위에 반영했습니다. 항목 수는 범위 분류 결과이며 개발량이나 비용 절감률을 뜻하지 않습니다.</p></section><section id="part-3" class="case-section"><span class="case-index">03</span><h2>알림 정책을 역할별 작업으로 전달</h2><p>알림의 동의·발송 시점·실패·딥링크 정책을 정리했습니다. 이를 FE·BE·앱·관리자 작업과 인수 기준으로 나눠 전달해 각 구현이 어떤 조건을 충족해야 하는지 명시했습니다.</p></section><section id="part-4" class="case-section"><span class="case-index">04</span><h2>웹과 앱 사이의 구독 응답 처리</h2><p>React Native–WebView 구독 응답을 정규화하고 거래 식별자를 기준으로 중복 검증을 차단했습니다. 검증 실패 후에는 잠금을 해제해 다시 시도할 수 있도록 구현했습니다. 이 작업을 앱 전체 출시나 모든 기기의 결제 검증 완료로 확대하지 않습니다.</p></section></article><aside class="case-sidebar"><p class="sidebar-label">담당 범위</p><p>고객 요구 분석 · 범위·착수 조건 조율 · 프론트엔드 개발</p><div class="sidebar-rule"></div><p class="sidebar-label">ON THIS PAGE</p><nav aria-label="사례 목차"><a href="#part-1">01 <span>고객 요구와 실제 구현을 함께 확인</span></a><a href="#part-2">02 <span>새 요구인지, 다른 차수로 옮긴 일인지</span></a><a href="#part-3">03 <span>알림 정책을 역할별 작업으로 전달</span></a><a href="#part-4">04 <span>웹과 앱 사이의 구독 응답 처리</span></a></nav></aside></div><a class="next-project" href="llm-wiki.html"><span>다음 프로젝트</span><strong>일일 기록과 일정 지원을 연결한 LLM Wiki ↗</strong></a></main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>
+<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
+<main id="main" class="detail-main container">
+  <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
+  <div class="case-cover"><div class="project-art" style="--art:#2dd4bf" aria-hidden="true"><div class="art-corner">1MINUTE · WELLNESS</div><svg viewBox="0 0 416 185"><path d="M111 89h70m54 0h70" stroke="#2dd4bf" stroke-opacity=".35" stroke-dasharray="4 5"/><circle cx="146" cy="89" r="3" fill="#2dd4bf"/><circle cx="270" cy="89" r="3" fill="#2dd4bf"/><g transform="translate(57 62)"><rect width="54" height="54" rx="12" fill="#2dd4bf" fill-opacity=".07" stroke="#2dd4bf" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#2dd4bf" font-size="23" font-family="monospace">≡</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Request</text></g><g transform="translate(181 62)"><rect width="54" height="54" rx="12" fill="#2dd4bf" fill-opacity=".07" stroke="#2dd4bf" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#2dd4bf" font-size="23" font-family="monospace">◇</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Scope</text></g><g transform="translate(305 62)"><rect width="54" height="54" rx="12" fill="#2dd4bf" fill-opacity=".07" stroke="#2dd4bf" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#2dd4bf" font-size="23" font-family="monospace">↗</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Web / App</text></g></svg><div class="art-title">네 제품의 기준을 맞추는 PM</div><div class="art-caption">REQUIREMENTS → SCOPE → DELIVERY</div></div></div>
+  <header class="detail-header">
+    <p class="project-category">1MINUTE · WELLNESS</p>
+    <h1>요구사항과 웹·앱 구현의 차이를 개발 범위로</h1>
+    <p class="detail-lead">마음모음 1minute의 고객 요구를 웹·앱·관리자·서버 구현과 대조했습니다. 개발 차수 이동과 신규 요구를 구분하고 알림·구독 처리 기준을 정리했습니다.</p>
+    <div class="tags"><span>PM</span><span>React Native</span><span>WebView</span></div>
+  </header>
+  <dl class="case-facts">
+    <div><dt>담당 범위</dt><dd>고객 요구·범위 조율 · 개발 전달 · 웹·앱 구독 응답 처리</dd></div>
+    <div><dt>기간·맥락</dt><dd>마음모음 1minute 프로젝트</dd></div>
+    <div><dt>현재 단계</dt><dd>기획·개발 기여 / 운영 효과 별도 확인</dd></div>
+  </dl>
+  <div class="case-outcome case-summary"><span>이 사례의 핵심 변화</span><p>신규 요구와 차수 이동을 구분하고 웹·앱·관리자·서버의 구현·인수 기준을 연결</p></div>
+  <div class="detail-layout">
+    <aside class="case-sidebar">
+      <details class="case-toc" open>
+        <summary>목차 <span>CONTENTS</span></summary>
+        <nav aria-label="상세 사례 목차">
+          <a href="#part-1" data-part="part-1"><b>01</b><span>배경: 하나의 서비스, 네 곳의 구현</span></a>
+          <a href="#part-2" data-part="part-2"><b>02</b><span>문제: 모든 요청을 새 개발로 계산할 수는 없다</span></a>
+          <a href="#part-3" data-part="part-3"><b>03</b><span>판단과 결과: 11건 중 6건은 차수 이동</span></a>
+          <a href="#part-4" data-part="part-4"><b>04</b><span>개발 전달: 알림 하나에도 필요한 조건</span></a>
+          <a href="#part-5" data-part="part-5"><b>05</b><span>기술 구현: WebView 경계의 응답 정규화</span></a>
+          <a href="#part-6" data-part="part-6"><b>06</b><span>검증과 한계</span></a>
+          <a href="#part-7" data-part="part-7"><b>07</b><span>돌아보며: 범위와 예외를 같은 문장으로 전달하기</span></a>
+        </nav>
+      </details>
+      <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">최신 이력서·요구 분석 기록·MAM-FE 변경 코드 조사</p>
+    </aside>
+    <article class="case-study" aria-label="요구사항과 웹·앱 구현의 차이를 개발 범위로 상세">
+      <section id="part-1" class="case-section">
+        <span class="case-index">01</span>
+        <h2>배경: 하나의 서비스, 네 곳의 구현</h2>
+<p>마음모음 1minute은 웹·앱·관리자·서버가 함께 동작하는 멘탈 웰니스 서비스입니다. 고객이 설명하는 하나의 기능이 여러 구현과 디자인·에셋에 걸쳐 있을 수 있어, 요구사항과 각 구현의 차이를 확인하는 PM 업무를 맡았습니다.</p>
+<p>프론트엔드 개발도 함께 수행하며 고객 자료에 적힌 조건이 실제 응답과 화면 흐름에서 어떤 의미인지 대조했습니다.</p>
+      </section>
+      <section id="part-2" class="case-section">
+        <span class="case-index">02</span>
+        <h2>문제: 모든 요청을 새 개발로 계산할 수는 없다</h2>
+<p>계약 항목과 고객 요구를 다시 확인하면서 신규 기능인지, 기존에 포함됐지만 개발 차수가 이동한 항목인지 구분했습니다. 또한 디자인·에셋이 없는 UI 작업은 착수에 필요한 조건부터 정리해야 했습니다.</p><div class="case-table-wrap" role="region" aria-label="범위를 판단할 때 대조한 기준" tabindex="0"><table><caption>범위를 판단할 때 대조한 기준</caption><thead><tr><th scope="col">확인 대상</th><th scope="col">질문</th><th scope="col">연결할 산출물</th></tr></thead><tbody><tr><th scope="row">고객 원문·계약 항목</th><td>처음 합의한 범위에 포함됐는가?</td><td>범위 해석</td></tr><tr><th scope="row">웹·앱·관리자·서버 구현</th><td>어디까지 구현돼 있고 무엇이 다른가?</td><td>채널별 작업</td></tr><tr><th scope="row">디자인·에셋</th><td>화면 개발을 시작할 입력이 있는가?</td><td>착수 조건</td></tr><tr><th scope="row">개발 차수</th><td>새 요구인가, 기존 작업의 이동인가?</td><td>차수별 개발 범위</td></tr></tbody></table></div>
+      </section>
+      <section id="part-3" class="case-section">
+        <span class="case-index">03</span>
+        <h2>판단과 결과: 11건 중 6건은 차수 이동</h2>
+<p>계약 항목 11건 중 6건을 신규 요구가 아닌 개발 차수 이동으로 판정해 범위에 반영했습니다. 같은 요청을 다시 신규 기능으로 계산하지 않도록 원문과 구현 상태를 함께 본 결과입니다.</p>
+<p>이 숫자는 범위 분류 결과입니다. 전체 작업량 6건을 없앴다거나 개발비를 그 비율만큼 줄였다는 의미가 아닙니다.</p><aside class="case-note"><strong>범위 판단의 단위</strong><p>항목 수, 구현 완료, QA 통과, 앱 출시 여부는 각각 다른 상태로 관리합니다. 분류가 끝났다고 해당 기능의 배포까지 끝난 것은 아닙니다.</p></aside>
+      </section>
+      <section id="part-4" class="case-section">
+        <span class="case-index">04</span>
+        <h2>개발 전달: 알림 하나에도 필요한 조건</h2>
+<p>알림 기능은 ‘발송한다’는 문장만으로 개발과 검증을 끝낼 수 없었습니다. 동의 여부·발송 시점·실패·딥링크 정책을 정리해 FE·BE·앱·관리자 작업과 인수 기준으로 전달했습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>사용자 조건</strong><span>동의·발송 대상</span></li><li><strong>처리 조건</strong><span>시점·실패 정책</span></li><li><strong>도착 후 동작</strong><span>딥링크·화면 이동</span></li><li><strong>구현·인수 기준</strong><span>FE·BE·앱·관리자 작업으로 구분</span></li></ol><figcaption>정리한 정책을 역할별 구현과 검증으로 연결</figcaption></figure><p>이 도식은 정리한 정책의 연결 관계이며 특정 발송 성공률이나 모든 기기에서의 동작 완료를 뜻하지 않습니다.</p>
+      </section>
+      <section id="part-5" class="case-section">
+        <span class="case-index">05</span>
+        <h2>기술 구현: WebView 경계의 응답 정규화</h2>
+<p>React Native와 WebView 사이의 구독 응답은 화면에서 처리할 payload와 error를 정규화했습니다. 거래 식별자를 기준으로 중복 검증 요청을 차단하고 검증 실패 시에는 잠금을 해제해 재시도할 수 있도록 구현했습니다.</p><div class="case-table-wrap" role="region" aria-label="구독 응답에서 구분한 동작" tabindex="0"><table><caption>구독 응답에서 구분한 동작</caption><thead><tr><th scope="col">상황</th><th scope="col">처리</th><th scope="col">지켜야 할 점</th></tr></thead><tbody><tr><th scope="row">네이티브 응답 수신</th><td>payload·error 정규화</td><td>화면이 응답 형태를 일관되게 해석</td></tr><tr><th scope="row">같은 거래 응답 반복</th><td>거래 ID·토큰 기준 중복 차단</td><td>검증 요청의 중복 실행 방지</td></tr><tr><th scope="row">검증 실패</th><td>재시도 가능하도록 잠금 해제</td><td>한 번의 실패가 영구 차단으로 남지 않음</td></tr></tbody></table></div><figure class="case-figure"><ol class="flow-steps"><li><strong>Native 응답</strong><span>거래 결과 전달</span></li><li><strong>Bridge 정규화</strong><span>payload / error 구분</span></li><li><strong>거래 식별</strong><span>중복 검증 차단</span></li><li><strong>실패 복구</strong><span>재시도할 수 있게 잠금 해제</span></li></ol><figcaption>코드 조사에서 확인한 응답 처리 책임</figcaption></figure>
+      </section>
+      <section id="part-6" class="case-section">
+        <span class="case-index">06</span>
+        <h2>검증과 한계</h2>
+<div class="case-table-wrap" role="region" aria-label="확인한 기여와 별도 확인 대상" tabindex="0"><table><caption>확인한 기여와 별도 확인 대상</caption><thead><tr><th scope="col">영역</th><th scope="col">확인된 내용</th><th scope="col">확대하지 않은 주장</th></tr></thead><tbody><tr><th scope="row">요구사항·범위</th><td>원문·구현 대조와 차수 분류</td><td>공수·비용 절감률</td></tr><tr><th scope="row">알림</th><td>정책·역할별 작업·인수 기준 정리</td><td>모든 발송·기기 검증 완료</td></tr><tr><th scope="row">구독 응답</th><td>정규화·중복 차단·실패 후 해제 코드</td><td>결제 플랫폼 전체의 중복 보장</td></tr><tr><th scope="row">사용 규모</th><td>이 사례에서 유효한 성과 지표 미확인</td><td>분석 방문자를 가입·유료 고객으로 변환</td></tr></tbody></table></div><p>구독 응답의 프론트엔드 수정과 서비스 전체의 출시 상태는 분리해서 설명합니다. 코드 대조 기록은 있지만 이번 편집에서 네이티브 기기나 운영 결제를 새로 테스트하지 않았습니다.</p>
+      </section>
+      <section id="part-7" class="case-section">
+        <span class="case-index">07</span>
+        <h2>돌아보며: 범위와 예외를 같은 문장으로 전달하기</h2>
+<p>PM 작업에서는 원문과 구현을 대조해 무엇을 어느 차수에 만들지 정리했고, 구독 응답 구현에서는 성공·중복·실패를 나누어 처리했습니다. 둘 다 일반적인 정상 흐름만으로 작업 완료를 판단하지 않는 접근이었습니다.</p>
+<p>이 사례는 기능 목록 자체보다, 고객이 요청한 조건을 여러 팀의 구현과 재시도·검증 기준까지 연결한 경험으로 설명할 수 있습니다.</p>
+      </section>
+    </article>
+  </div>
+  <a class="next-project" href="llm-wiki.html"><span>다음 프로젝트</span><strong>일일 기록과 일정 지원을 연결한 LLM Wiki ↗</strong></a>
+</main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>

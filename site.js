@@ -1,6 +1,13 @@
 const nav = document.getElementById('nav');
+const caseLinks = [...document.querySelectorAll('.case-toc a[data-part]')];
+const caseSections = [...document.querySelectorAll('.case-section[id]')];
 const sectionLinks = [...document.querySelectorAll('.nav-links a')];
 function updateNavigation() {
+  const activeCase = caseSections.filter(section => section.getBoundingClientRect().top <= 180).at(-1);
+  caseLinks.forEach(link => {
+    if (activeCase && link.dataset.part === activeCase.id) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  });
   nav?.classList.toggle('scrolled', window.scrollY > 32);
   const current = [...document.querySelectorAll('main > section[id]')]
     .filter(section => section.getBoundingClientRect().top <= 160).at(-1);

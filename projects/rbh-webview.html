@@ -3,6 +3,80 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="알비에치 현장실습에서 AI 서비스 꾸미의 Flutter 앱을 React WebView로 전환하는 작업에 참여했습니다. 결과 화면 3종의 공통 UI·훅·설정을 분리했습니다."><meta name="theme-color" content="#0f172a">
-<title>반복 수정하던 결과 화면의 공통 구조 정리 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-brand"><script src="../site.js?v=20260921-resume" defer></script>
+<title>반복 수정하던 결과 화면의 공통 구조 정리 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
 </head>
-<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header><main id="main" class="detail-main container"><a class="back-link" href="../index.html#projects">← 모든 프로젝트</a><header class="detail-header"><p class="project-category">RBH · FRONTEND INTERNSHIP</p><h1>반복 수정하던 결과 화면의 공통 구조 정리</h1><p class="detail-lead">알비에치 현장실습에서 AI 서비스 꾸미의 Flutter 앱을 React WebView로 전환하는 작업에 참여했습니다. 결과 화면 3종의 공통 UI·훅·설정을 분리했습니다.</p><div class="tags"><span>React</span><span>WebView</span><span>Refactoring</span></div><p class="project-stage">인턴십 수행</p></header><div class="detail-layout"><article class="case-study"><div class="project-art" style="--art:#f472b6" aria-hidden="true"><div class="art-corner">RBH · FRONTEND INTERNSHIP</div><svg viewBox="0 0 416 185"><path d="M111 89h70m54 0h70" stroke="#f472b6" stroke-opacity=".35" stroke-dasharray="4 5"/><circle cx="146" cy="89" r="3" fill="#f472b6"/><circle cx="270" cy="89" r="3" fill="#f472b6"/><g transform="translate(57 62)"><rect width="54" height="54" rx="12" fill="#f472b6" fill-opacity=".07" stroke="#f472b6" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#f472b6" font-size="23" font-family="monospace">▦</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">3 Screens</text></g><g transform="translate(181 62)"><rect width="54" height="54" rx="12" fill="#f472b6" fill-opacity=".07" stroke="#f472b6" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#f472b6" font-size="23" font-family="monospace">◇</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Shared UI</text></g><g transform="translate(305 62)"><rect width="54" height="54" rx="12" fill="#f472b6" fill-opacity=".07" stroke="#f472b6" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#f472b6" font-size="23" font-family="monospace">{ }</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Config</text></g></svg><div class="art-title">세 화면의 공통점과 차이 분리</div><div class="art-caption">3 SCREENS → SHARED UI → CONFIG</div></div><div class="case-outcome"><span>핵심 변화</span><p>신규 공통 파일을 포함한 결과 페이지 관련 코드 595줄 → 376줄, 약 37% 축소</p></div><section id="part-1" class="case-section"><span class="case-index">01</span><h2>같은 기능을 여러 화면에서 고치던 문제</h2><p>AI 서비스 꾸미의 Flutter 앱을 React WebView로 전환하고 구조를 개선했습니다. 결과 화면 3종에서 같은 기능을 반복 수정해야 하는 문제를 다뤘습니다.</p></section><section id="part-2" class="case-section"><span class="case-index">02</span><h2>공통 UI·훅·설정을 나누기</h2><p>반복되는 UI와 동작을 공통으로 분리하고 화면별 차이는 설정으로 표현했습니다. 신규 공통 파일을 포함한 결과 페이지 관련 코드가 595줄에서 376줄로 약 37% 줄었습니다. 이 수치는 해당 코드 범위의 변화이며 앱 전체 크기나 개발시간 감소율은 아닙니다.</p></section><section id="part-3" class="case-section"><span class="case-index">03</span><h2>크레딧 조회와 변경을 화면에서 분리</h2><p>크레딧 조회·충전을 API, 조회·변경 훅, UI로 구분했습니다. 이미지 생성 이후 잔액이 갱신되지 않는 흐름도 수정했습니다.</p></section><section id="part-4" class="case-section"><span class="case-index">04</span><h2>담당 범위</h2><p>2025년 7–8월 프론트엔드 인턴·현장실습으로 수행한 작업입니다. 앱 전체를 단독으로 개발하거나 생성 모델 자체를 구현한 경험으로 쓰지 않습니다.</p></section></article><aside class="case-sidebar"><p class="sidebar-label">담당 범위</p><p>프론트엔드 인턴 · 현장실습 / 2025.07–2025.08</p><div class="sidebar-rule"></div><p class="sidebar-label">ON THIS PAGE</p><nav aria-label="사례 목차"><a href="#part-1">01 <span>같은 기능을 여러 화면에서 고치던 문제</span></a><a href="#part-2">02 <span>공통 UI·훅·설정을 나누기</span></a><a href="#part-3">03 <span>크레딧 조회와 변경을 화면에서 분리</span></a><a href="#part-4">04 <span>담당 범위</span></a></nav></aside></div><a class="next-project" href="nuvion.html"><span>다음 프로젝트</span><strong>카메라 영상과 운영 로그를 브라우저로 ↗</strong></a></main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>
+<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
+<main id="main" class="detail-main container">
+  <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
+  <div class="case-cover"><div class="project-art" style="--art:#f472b6" aria-hidden="true"><div class="art-corner">RBH · FRONTEND INTERNSHIP</div><svg viewBox="0 0 416 185"><path d="M111 89h70m54 0h70" stroke="#f472b6" stroke-opacity=".35" stroke-dasharray="4 5"/><circle cx="146" cy="89" r="3" fill="#f472b6"/><circle cx="270" cy="89" r="3" fill="#f472b6"/><g transform="translate(57 62)"><rect width="54" height="54" rx="12" fill="#f472b6" fill-opacity=".07" stroke="#f472b6" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#f472b6" font-size="23" font-family="monospace">▦</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">3 Screens</text></g><g transform="translate(181 62)"><rect width="54" height="54" rx="12" fill="#f472b6" fill-opacity=".07" stroke="#f472b6" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#f472b6" font-size="23" font-family="monospace">◇</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Shared UI</text></g><g transform="translate(305 62)"><rect width="54" height="54" rx="12" fill="#f472b6" fill-opacity=".07" stroke="#f472b6" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#f472b6" font-size="23" font-family="monospace">{ }</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Config</text></g></svg><div class="art-title">세 화면의 공통점과 차이 분리</div><div class="art-caption">3 SCREENS → SHARED UI → CONFIG</div></div></div>
+  <header class="detail-header">
+    <p class="project-category">RBH · FRONTEND INTERNSHIP</p>
+    <h1>반복 수정하던 결과 화면의 공통 구조 정리</h1>
+    <p class="detail-lead">알비에치 현장실습에서 AI 서비스 꾸미의 Flutter 앱을 React WebView로 전환하는 작업에 참여했습니다. 결과 화면 3종의 공통 UI·훅·설정을 분리했습니다.</p>
+    <div class="tags"><span>React</span><span>WebView</span><span>Refactoring</span></div>
+  </header>
+  <dl class="case-facts">
+    <div><dt>담당 범위</dt><dd>프론트엔드 인턴 · 결과 화면 공통화 · API·캐시 연결</dd></div>
+    <div><dt>기간·맥락</dt><dd>2025.07–08 / 결과 공통화 2025.08.01</dd></div>
+    <div><dt>현재 단계</dt><dd>로컬 Git 이력·변경 전후 확인</dd></div>
+  </dl>
+  <div class="case-outcome case-summary"><span>이 사례의 핵심 변화</span><p>결과 페이지 관련 595줄 → 376줄 / 공통 UI·동작·설정 분리</p></div>
+  <div class="detail-layout">
+    <aside class="case-sidebar">
+      <details class="case-toc" open>
+        <summary>목차 <span>CONTENTS</span></summary>
+        <nav aria-label="상세 사례 목차">
+          <a href="#part-1" data-part="part-1"><b>01</b><span>배경: AI 서비스 꾸미의 WebView 전환</span></a>
+          <a href="#part-2" data-part="part-2"><b>02</b><span>문제 분석: 세 페이지가 같은 동작을 각각 가지고 있었다</span></a>
+          <a href="#part-3" data-part="part-3"><b>03</b><span>선택: 공통 동작과 서비스별 차이를 분리</span></a>
+          <a href="#part-4" data-part="part-4"><b>04</b><span>측정: 새로 생긴 공통 파일도 모두 포함</span></a>
+          <a href="#part-5" data-part="part-5"><b>05</b><span>연관 작업: API·서버 상태·화면 역할 분리</span></a>
+          <a href="#part-6" data-part="part-6"><b>06</b><span>검증: 변경 이력과 실행 검증의 범위</span></a>
+          <a href="#part-7" data-part="part-7"><b>07</b><span>돌아보며: 추출한 파일까지 포함해야 비교가 된다</span></a>
+        </nav>
+      </details>
+      <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">본인 회사 계정의 커밋·diff 대조 / 2026.09.20 조사</p>
+    </aside>
+    <article class="case-study" aria-label="반복 수정하던 결과 화면의 공통 구조 정리 상세">
+      <section id="part-1" class="case-section">
+        <span class="case-index">01</span>
+        <h2>배경: AI 서비스 꾸미의 WebView 전환</h2>
+<p>(주)알비에치에서 2개월간 프론트엔드 인턴·현장실습을 수행했습니다. Flutter 앱의 React WebView 전환과 화면·데이터 구조 개선에 참여했습니다.</p>
+<p>사용자 회고에서 반복 수정과 UI·로직 혼재가 작업을 어렵게 했던 맥락이 확인됐습니다. 대표 사례는 모델·아티스트·스타일리스트 결과 화면 세 종류의 공통화입니다.</p>
+      </section>
+      <section id="part-2" class="case-section">
+        <span class="case-index">02</span>
+        <h2>문제 분석: 세 페이지가 같은 동작을 각각 가지고 있었다</h2>
+<p>이전에는 각 결과 페이지에서 결과 조회, 워터마크 제거, 평가 모달과 화면 조합을 처리했습니다. 같은 기능을 바꾸려면 여러 화면을 함께 확인해야 하는 구조였습니다.</p><div class="case-table-wrap" role="region" aria-label="변경 전후의 책임" tabindex="0"><table><caption>변경 전후의 책임</caption><thead><tr><th scope="col">책임</th><th scope="col">이전</th><th scope="col">변경 후</th></tr></thead><tbody><tr><th scope="row">결과 화면 표현</th><td>서비스별 페이지에 반복</td><td>공통 GgumiResultPage</td></tr><tr><th scope="row">조회·상호작용</th><td>각 페이지의 동작과 UI 혼재</td><td>useResultPageLogic</td></tr><tr><th scope="row">서비스별 문구·이미지</th><td>페이지 내부에 분산</td><td>resultPage.config</td></tr><tr><th scope="row">개별 진입점</th><td>큰 결과 페이지 3개</td><td>서비스 타입을 전달하는 래퍼</td></tr></tbody></table></div><p>선행 ResultLayout 공통화는 다른 작성자의 작업이었습니다. 최초 공통 레이아웃을 제가 만든 것으로 합치지 않고, 이 위에 결과 화면의 UI·동작·설정을 분리한 범위로 설명합니다.</p>
+      </section>
+      <section id="part-3" class="case-section">
+        <span class="case-index">03</span>
+        <h2>선택: 공통 동작과 서비스별 차이를 분리</h2>
+<figure class="case-figure"><ol class="flow-steps"><li><strong>서비스별 진입점</strong><span>모델 / 아티스트 / 스타일리스트</span></li><li><strong>공통 화면</strong><span>결과 UI의 조합</span></li><li><strong>공통 동작 훅</strong><span>조회·워터마크·평가 흐름</span></li><li><strong>서비스별 설정</strong><span>이미지·문구 등 차이</span></li></ol><figcaption>실제 변경 파일의 역할을 설명한 구조</figcaption></figure><p>서비스마다 달라지는 내용을 설정에 두고, 반복되는 화면과 동작을 공통 파일로 옮겼습니다. 개별 결과 페이지는 서비스 타입을 넘기는 9줄 래퍼가 됐습니다.</p>
+<p>이 작업은 파일을 줄이는 것만이 목적이 아니라, 같은 동작과 달라지는 값의 위치를 구분한 것입니다. 다만 동작 변화도 일부 포함돼 순수하게 동일 동작만 보존한 리팩토링이라고 단정하지 않습니다.</p>
+      </section>
+      <section id="part-4" class="case-section">
+        <span class="case-index">04</span>
+        <h2>측정: 새로 생긴 공통 파일도 모두 포함</h2>
+<div class="case-table-wrap" role="region" aria-label="관련 물리 행 수 비교 — 공백·주석 포함" tabindex="0"><table><caption>관련 물리 행 수 비교 — 공백·주석 포함</caption><thead><tr><th scope="col">파일</th><th scope="col">이전</th><th scope="col">이후</th></tr></thead><tbody><tr><th scope="row">ArtistResultPage.jsx</th><td>197</td><td>9</td></tr><tr><th scope="row">ModelResultPage.jsx</th><td>192</td><td>9</td></tr><tr><th scope="row">StylistResultPage.jsx</th><td>206</td><td>9</td></tr><tr><th scope="row">GgumiResultPage.jsx</th><td>0</td><td>107</td></tr><tr><th scope="row">resultPage.config.jsx</th><td>0</td><td>127</td></tr><tr><th scope="row">useResultPageLogic.js</th><td>0</td><td>115</td></tr><tr><th scope="row">합계</th><td>595</td><td>376</td></tr></tbody></table></div><p>비교 기준은 결과 공통화 커밋과 그 부모입니다. 추출한 공통 파일을 모두 합산했으며 양쪽에서 바뀌지 않은 기존 ResultLayout 등은 제외했습니다. 같은 커밋의 라우팅·App·main 변경도 이 수치에 포함하지 않았습니다.</p><aside class="case-note"><strong>37%의 의미</strong><p>219줄, 약 36.8%의 관련 코드량 감소입니다. 생산성·결함률·실행 성능이 37% 개선됐다는 수치는 아닙니다.</p></aside>
+      </section>
+      <section id="part-5" class="case-section">
+        <span class="case-index">05</span>
+        <h2>연관 작업: API·서버 상태·화면 역할 분리</h2>
+<p>크레딧 조회·충전은 요청을 보내는 API, 조회 상태를 다루는 훅, 변경과 캐시 갱신을 다루는 훅, 화면 컨테이너로 나눴습니다. 하드코딩된 잔액·상품과 모의 구매 흐름을 실제 API 호출로 연결하는 작업이었습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>API</strong><span>요청·응답</span></li><li><strong>조회 훅</strong><span>현재 잔액·조회 상태</span></li><li><strong>변경 훅</strong><span>충전·변경 후 캐시</span></li><li><strong>UI</strong><span>표시와 사용자 상호작용</span></li></ol><figcaption>크레딧 기능의 책임 분리</figcaption></figure><p>이미지 생성 성공 후 갤러리만 갱신하던 세 mutation에는 currentCredit 무효화를 추가했습니다. 사용한 크레딧이 충전 화면 잔액에 반영되지 않던 연결 누락을 수정한 것입니다.</p>
+      </section>
+      <section id="part-6" class="case-section">
+        <span class="case-index">06</span>
+        <h2>검증: 변경 이력과 실행 검증의 범위</h2>
+<div class="case-table-wrap" role="region" aria-label="확인된 근거" tabindex="0"><table><caption>확인된 근거</caption><thead><tr><th scope="col">대상</th><th scope="col">확인 방법</th><th scope="col">한계</th></tr></thead><tbody><tr><th scope="row">공통화 구조</th><td>회사 계정의 커밋·실제 diff</td><td>모든 앱 구조를 단독 설계했다는 근거 아님</td></tr><tr><th scope="row">코드량</th><td>동일 비교 범위의 물리 행 수</td><td>성능·공수 지표 아님</td></tr><tr><th scope="row">잔액 갱신</th><td>세 mutation의 무효화 추가 diff</td><td>운영 오류 해결률은 미측정</td></tr><tr><th scope="row">서비스 실행</th><td>이번 조사에서는 빌드·운영 API 재실행 안 함</td><td>현재 서비스와 당시 코드 동일성 미확인</td></tr></tbody></table></div><p>검증하지 않은 동작까지 완료라고 쓰지 않았습니다. 예를 들어 당시 컨테이너가 전달한 enabled 옵션을 조회 훅이 실제 수용하지 않은 부분은 인증 선행 보장의 성과로 포함하지 않았습니다.</p>
+      </section>
+      <section id="part-7" class="case-section">
+        <span class="case-index">07</span>
+        <h2>돌아보며: 추출한 파일까지 포함해야 비교가 된다</h2>
+<p>개별 화면의 줄 수만 보면 큰 폭으로 줄었지만, 새 공통 파일을 제외하면 변화가 과장됩니다. 관련 파일 전체를 같은 기준으로 합산한 뒤 코드량과 동작·운영 효과를 나눠 설명했습니다.</p>
+<p>이 사례의 의미는 짧은 코드 자체보다, UI·로직·서비스별 설정이 어디에 있어야 수정 범위를 이해하기 쉬운지 정리한 데 있습니다.</p>
+      </section>
+    </article>
+  </div>
+  <a class="next-project" href="nuvion.html"><span>다음 프로젝트</span><strong>카메라 영상과 운영 로그를 브라우저로 ↗</strong></a>
+</main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>

@@ -3,6 +3,86 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="강북삼성병원 심케어 3.0에서 한 회기의 완료와 전체 상담의 종결을 구분하도록 제안했습니다. 고객 동의를 받아 상태 전이와 화면 규칙을 명세로 연결했습니다."><meta name="theme-color" content="#0f172a">
-<title>같은 ‘완료’에 섞여 있던 두 업무 상태 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-brand"><script src="../site.js?v=20260921-resume" defer></script>
+<title>같은 ‘완료’에 섞여 있던 두 업무 상태 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
 </head>
-<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header><main id="main" class="detail-main container"><a class="back-link" href="../index.html#projects">← 모든 프로젝트</a><header class="detail-header"><p class="project-category">SIMCARE 3.0 · PRODUCT MANAGEMENT</p><h1>같은 ‘완료’에 섞여 있던 두 업무 상태</h1><p class="detail-lead">강북삼성병원 심케어 3.0에서 한 회기의 완료와 전체 상담의 종결을 구분하도록 제안했습니다. 고객 동의를 받아 상태 전이와 화면 규칙을 명세로 연결했습니다.</p><div class="tags"><span>PM</span><span>Requirements</span><span>Frontend</span></div><p class="project-stage">개발·검증 진행 중</p></header><div class="detail-layout"><article class="case-study"><div class="project-art" style="--art:#4ade80" aria-hidden="true"><div class="art-corner">SIMCARE 3.0 · PRODUCT MANAGEMENT</div><svg viewBox="0 0 416 185"><path d="M111 89h70m54 0h70" stroke="#4ade80" stroke-opacity=".35" stroke-dasharray="4 5"/><circle cx="146" cy="89" r="3" fill="#4ade80"/><circle cx="270" cy="89" r="3" fill="#4ade80"/><g transform="translate(57 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">✓</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Session</text></g><g transform="translate(181 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">↻</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Case</text></g><g transform="translate(305 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">≡</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Spec</text></g></svg><div class="art-title">고객의 언어를 개발 기준으로</div><div class="art-caption">SESSION → CASE → SPEC</div></div><div class="case-outcome"><span>핵심 변화</span><p>상담 회기와 전체 상담을 두 상태 체계로 분리 제안하고, 고객 동의와 기능 명세 반영까지 연결</p></div><section id="part-1" class="case-section"><span class="case-index">01</span><h2>한 번의 상담이 끝나도 전체 상담은 계속된다</h2><p>관리자·상담사·내담자 세 채널의 요구사항을 정리하면서 ‘완료·진행·중단’이 개별 상담 회기와 전체 상담 과정에 섞여 쓰이는 문제를 확인했습니다. 오늘 상담은 완료됐지만 다음 회기가 남아 있는 상황을 하나의 상태로 표현하기 어려웠습니다.</p></section><section id="part-2" class="case-section"><span class="case-index">02</span><h2>업무 단위를 나누고 고객과 합의</h2><p>운영상태와 집계상태를 분리하는 방안을 고객에게 제안해 동의를 받았습니다. 이후 개별 회기와 전체 상담을 두 상태 축으로 정리하고, 상담 완료 화면의 선택에 따라 어느 상태가 바뀌는지 기능 명세에 연결했습니다.</p></section><section id="part-3" class="case-section"><span class="case-index">03</span><h2>명세가 실제 개발의 기준이 되도록</h2><p>고객 원문·기능·화면 명세·회의 결정을 GitHub에 연결해 개발 범위와 예외, 인수 기준을 전달했습니다. AI 문서 작성에서 과도한 구현 지시를 조정하고, PM 합의 사항과 개발팀이 자율적으로 설계할 영역을 공통 지침과 템플릿에 명시했습니다.</p></section><section id="part-4" class="case-section"><span class="case-index">04</span><h2>가입 경로와 차트 범위도 구체화</h2><p>기업의 명단 제공 여건에 따라 사전 등록과 링크 가입 경로를 나누고 기업·평가 차수 연결 규칙을 정리했습니다. 척도별 판정·비교 기준을 분석해 차트의 우선 구현 범위를 제안하고, 고객과 고정 차트 요구를 정리했습니다. 임상 판정 기준 자체를 개발한 것은 아닙니다.</p></section><section id="part-5" class="case-section"><span class="case-index">05</span><h2>현재 단계와 완료한 산출물</h2><p>프로젝트는 개발·검증 진행 중입니다. 이 사례에서 확인된 결과는 고객의 제안 동의와 결정 기록·기능 명세 반영입니다. 서비스 출시, 운영 오류 감소나 처리시간 개선을 완료 성과로 쓰지 않습니다.</p></section></article><aside class="case-sidebar"><p class="sidebar-label">담당 범위</p><p>고객 미팅 · 일정·범위 조율 · 요구사항 구체화 · 프론트엔드 개발</p><div class="sidebar-rule"></div><p class="sidebar-label">ON THIS PAGE</p><nav aria-label="사례 목차"><a href="#part-1">01 <span>한 번의 상담이 끝나도 전체 상담은 계속된다</span></a><a href="#part-2">02 <span>업무 단위를 나누고 고객과 합의</span></a><a href="#part-3">03 <span>명세가 실제 개발의 기준이 되도록</span></a><a href="#part-4">04 <span>가입 경로와 차트 범위도 구체화</span></a><a href="#part-5">05 <span>현재 단계와 완료한 산출물</span></a></nav></aside></div><a class="next-project" href="leaders-club.html"><span>다음 프로젝트</span><strong>네이버 예약과 현장 접수를 한 흐름으로 ↗</strong></a></main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>
+<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
+<main id="main" class="detail-main container">
+  <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
+  <div class="case-cover"><div class="project-art" style="--art:#4ade80" aria-hidden="true"><div class="art-corner">SIMCARE 3.0 · PRODUCT MANAGEMENT</div><svg viewBox="0 0 416 185"><path d="M111 89h70m54 0h70" stroke="#4ade80" stroke-opacity=".35" stroke-dasharray="4 5"/><circle cx="146" cy="89" r="3" fill="#4ade80"/><circle cx="270" cy="89" r="3" fill="#4ade80"/><g transform="translate(57 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">✓</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Session</text></g><g transform="translate(181 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">↻</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Case</text></g><g transform="translate(305 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">≡</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Spec</text></g></svg><div class="art-title">고객의 언어를 개발 기준으로</div><div class="art-caption">SESSION → CASE → SPEC</div></div></div>
+  <header class="detail-header">
+    <p class="project-category">SIMCARE 3.0 · PRODUCT MANAGEMENT</p>
+    <h1>같은 ‘완료’에 섞여 있던 두 업무 상태</h1>
+    <p class="detail-lead">강북삼성병원 심케어 3.0에서 한 회기의 완료와 전체 상담의 종결을 구분하도록 제안했습니다. 고객 동의를 받아 상태 전이와 화면 규칙을 명세로 연결했습니다.</p>
+    <div class="tags"><span>PM</span><span>Requirements</span><span>Frontend</span></div>
+  </header>
+  <dl class="case-facts">
+    <div><dt>담당 범위</dt><dd>고객 협의 · 요구 분석 · 상태 설계 제안 · 명세·개발 전달</dd></div>
+    <div><dt>기간·맥락</dt><dd>2026.04 주요 제안·고객 회신</dd></div>
+    <div><dt>현재 단계</dt><dd>심케어 3.0 개발·검증 진행 중</dd></div>
+  </dl>
+  <div class="case-outcome case-summary"><span>이 사례의 핵심 변화</span><p>상담 회기와 전체 상담의 상태를 분리 제안하고 고객 동의·명세 반영까지 연결</p></div>
+  <div class="detail-layout">
+    <aside class="case-sidebar">
+      <details class="case-toc" open>
+        <summary>목차 <span>CONTENTS</span></summary>
+        <nav aria-label="상세 사례 목차">
+          <a href="#part-1" data-part="part-1"><b>01</b><span>배경: 상담사가 처리하는 단위와 관리자가 보는 단위</span></a>
+          <a href="#part-2" data-part="part-2"><b>02</b><span>발견: 같은 ‘완료’가 서로 다른 뜻으로 쓰였다</span></a>
+          <a href="#part-3" data-part="part-3"><b>03</b><span>검토: 상태를 나누면 무엇이 명확해지는가</span></a>
+          <a href="#part-4" data-part="part-4"><b>04</b><span>설계: 화면 선택이 어느 상태를 바꾸는지 명시</span></a>
+          <a href="#part-5" data-part="part-5"><b>05</b><span>개발 전달: 고객 회신에서 화면 명세까지 연결</span></a>
+          <a href="#part-6" data-part="part-6"><b>06</b><span>같은 방식의 범위 조율: 척도별 차트 요구</span></a>
+          <a href="#part-7" data-part="part-7"><b>07</b><span>결과와 한계: 합의된 규칙과 운영 성과를 구분</span></a>
+          <a href="#part-8" data-part="part-8"><b>08</b><span>돌아보며: 용어보다 업무의 단위를 먼저 확인하기</span></a>
+        </nav>
+      </details>
+      <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">고객 회신·결정 기록·기능 명세 / 2026.09.20 대조 자료</p>
+    </aside>
+    <article class="case-study" aria-label="같은 ‘완료’에 섞여 있던 두 업무 상태 상세">
+      <section id="part-1" class="case-section">
+        <span class="case-index">01</span>
+        <h2>배경: 상담사가 처리하는 단위와 관리자가 보는 단위</h2>
+<p>강북삼성병원 심케어 3.0은 평가·결과지·상담·운영 관리를 연결하는 기업 상담·멘탈케어 프로젝트입니다. 관리자·상담사·내담자 세 채널의 요구사항을 구체화하고 고객 미팅, 일정과 범위 조율을 맡았습니다.</p>
+<p>상담 기능을 정의하려면 예약 한 건을 처리하는 일과 여러 회기를 묶은 전체 상담을 관리하는 일을 함께 설명해야 했습니다. 이번 사례는 그 업무 단위를 상태와 화면 규칙으로 옮긴 과정입니다.</p>
+      </section>
+      <section id="part-2" class="case-section">
+        <span class="case-index">02</span>
+        <h2>발견: 같은 ‘완료’가 서로 다른 뜻으로 쓰였다</h2>
+<p>요구사항에서는 ‘완료·진행·중단’이 개별 예약 회기와 전체 상담 과정에 섞여 있었습니다. 오늘 상담 한 회기를 마쳤어도 다음 상담이 남아 있을 수 있는데, 하나의 상태만으로 두 상황을 설명하기 어려웠습니다.</p><div class="case-table-wrap" role="region" aria-label="두 업무 단위를 구분해야 하는 이유 — 설명용 예시" tabindex="0"><table><caption>두 업무 단위를 구분해야 하는 이유 — 설명용 예시</caption><thead><tr><th scope="col">상황</th><th scope="col">오늘의 회기</th><th scope="col">전체 상담</th></tr></thead><tbody><tr><th scope="row">오늘 상담 종료, 다음 회기 예정</th><td>완료</td><td>계속 진행</td></tr><tr><th scope="row">마지막 회기를 마치고 상담 종료</th><td>완료</td><td>종결</td></tr></tbody></table></div><p>이 차이는 용어만 바꾸는 문제가 아닙니다. 상담사가 완료 버튼을 눌렀을 때 어느 상태를 바꿀지, 관리자가 무엇을 집계할지까지 영향을 줍니다.</p>
+      </section>
+      <section id="part-3" class="case-section">
+        <span class="case-index">03</span>
+        <h2>검토: 상태를 나누면 무엇이 명확해지는가</h2>
+<p>내부 검토 노트에는 두 상태 축 분리, 하나의 상태에 플래그 추가, 기존 혼용 유지가 대안으로 정리돼 있습니다. 이 비교 기록이 있다는 것과 모든 대안을 고객에게 설명했다는 것은 다르므로, 고객과의 합의는 확인된 분리 제안에 한정합니다.</p><div class="case-table-wrap" role="region" aria-label="내부 검토 기록을 바탕으로 정리한 선택의 차이" tabindex="0"><table><caption>내부 검토 기록을 바탕으로 정리한 선택의 차이</caption><thead><tr><th scope="col">구성</th><th scope="col">표현 방식</th><th scope="col">검토할 점</th></tr></thead><tbody><tr><th scope="row">기존 혼용 유지</th><td>하나의 완료·진행 용어를 사용</td><td>회기 처리와 전체 상담 집계의 의미가 계속 섞임</td></tr><tr><th scope="row">단일 상태 + 플래그</th><td>상태 외의 추가 값으로 구분</td><td>화면·집계에서 상태와 플래그 조합을 함께 해석해야 함</td></tr><tr><th scope="row">회기·전체 상담 분리</th><td>각 업무 단위의 상태를 별도로 정의</td><td>두 상태의 관계와 동시에 바뀌는 규칙을 명시해야 함</td></tr></tbody></table></div><p>고객에게 운영상태와 집계상태를 나누는 방안을 제안했고, 4월 21일 회신에서 분리 방향에 대한 동의를 받았습니다. 이후의 설계 책임은 두 축을 나누는 것에서 끝나지 않고 전이 규칙을 정리하는 것이었습니다.</p>
+      </section>
+      <section id="part-4" class="case-section">
+        <span class="case-index">04</span>
+        <h2>설계: 화면 선택이 어느 상태를 바꾸는지 명시</h2>
+<figure class="case-figure"><ol class="flow-steps"><li><strong>전체 상담</strong><span>여러 회기를 묶는 관리 단위</span></li><li><strong>개별 회기</strong><span>한 번의 예약·상담 처리 단위</span></li><li><strong>완료 화면의 선택</strong><span>계속 진행 / 전체 종결</span></li><li><strong>상태 전이</strong><span>어느 단위를 변경할지 규칙화</span></li></ol><figcaption>업무 개념과 화면 처리 규칙의 연결을 설명한 도식</figcaption></figure><div class="case-table-wrap" role="region" aria-label="완료 화면에 연결한 상태 변경 기준" tabindex="0"><table><caption>완료 화면에 연결한 상태 변경 기준</caption><thead><tr><th scope="col">사용자의 선택</th><th scope="col">해당 회기</th><th scope="col">전체 상담</th></tr></thead><tbody><tr><th scope="row">상담 진행</th><td>회기 완료</td><td>전체 상담은 계속 진행</td></tr><tr><th scope="row">상담 종결</th><td>회기 완료</td><td>전체 상담도 종결</td></tr></tbody></table></div><p>이후 화면 검토와 결정 기록에서 회기 상태가 7개에서 5개로 정리됐습니다. 상태 수를 줄인 결정과 두 업무 단위를 분리한 결정은 서로 다른 작업입니다. 숫자 자체를 복잡도나 오류 감소율로 표현하지 않습니다.</p>
+      </section>
+      <section id="part-5" class="case-section">
+        <span class="case-index">05</span>
+        <h2>개발 전달: 고객 회신에서 화면 명세까지 연결</h2>
+<p>고객 원문·회의 결정·기능 명세·화면 처리 규칙을 GitHub에 연결했습니다. 개발자가 상태 명칭만 보고 추측하지 않도록 회기·전체 상담의 전이, 완료 화면의 선택, 되돌리기와 회기 번호 규칙을 기능 명세로 구체화했습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>고객의 설명·회신</strong><span>업무 의미와 동의 확인</span></li><li><strong>결정 기록</strong><span>선택한 정책과 범위</span></li><li><strong>기능 명세</strong><span>상태·예외·전이 규칙</span></li><li><strong>화면·인수 기준</strong><span>사용자의 선택과 기대 동작</span></li></ol><figcaption>기획 산출물 간의 확인 경로</figcaption></figure><p>AI와 함께 문서를 작성하면서 과도한 구현 지시도 조정했습니다. PM이 합의해야 할 동작과 개발팀이 자율적으로 설계할 영역을 공통 지침과 템플릿에 나눠 적었습니다.</p>
+      </section>
+      <section id="part-6" class="case-section">
+        <span class="case-index">06</span>
+        <h2>같은 방식의 범위 조율: 척도별 차트 요구</h2>
+<p>결과지 차트에서도 여러 척도를 하나의 상태값 그래프로 표현하기 어려운 문제가 있었습니다. 척도마다 판정 단계, 하위요인, 평균 비교와 상대 기준 등이 달랐기 때문입니다.</p>
+<p>척도 기준과 비교 데이터를 분석해 기준이 명확한 고정 차트를 우선 구현하는 방안을 제안했습니다. 고객은 구현 가능 범위를 고려해 차트 자료를 다시 정리했다고 회신했습니다. 다만 제안한 모든 제외·연기 항목이 그대로 최종 합의된 것은 아니며, 후속 논의에서 범위가 달라졌습니다.</p><aside class="case-note"><strong>현재 단계</strong><p>고객의 전문적인 판정 기준 자체를 제가 개발한 것은 아닙니다. 이번 기여는 그 기준을 구현 가능한 화면·데이터 조건으로 구체화한 것입니다.</p></aside>
+      </section>
+      <section id="part-7" class="case-section">
+        <span class="case-index">07</span>
+        <h2>결과와 한계: 합의된 규칙과 운영 성과를 구분</h2>
+<div class="case-table-wrap" role="region" aria-label="이 사례에서 확인 가능한 결과" tabindex="0"><table><caption>이 사례에서 확인 가능한 결과</caption><thead><tr><th scope="col">항목</th><th scope="col">변화·산출물</th><th scope="col">현재 확인 범위</th></tr></thead><tbody><tr><th scope="row">상담 상태</th><td>회기와 전체 상담의 두 축으로 분리</td><td>고객 동의·결정 기록·기능 명세</td></tr><tr><th scope="row">회기 상태 목록</th><td>7개에서 5개로 정리</td><td>명세의 설계 범위</td></tr><tr><th scope="row">차트 요구</th><td>구현 가능 범위 제안 후 고객 자료 재정리</td><td>발신 제안·고객 회신</td></tr><tr><th scope="row">제품 상태</th><td>개발·검증 진행 중</td><td>전체 운영 검증 완료 아님</td></tr><tr><th scope="row">운영 효과</th><td>오류율·처리시간 개선 수치 없음</td><td>별도 측정 필요</td></tr></tbody></table></div><p>완료한 것은 제안·협의와 개발 기준을 만드는 작업입니다. 기능 명세에는 후속 정책과 검토 항목이 남아 있어, 제품 출시나 운영 정확도 개선까지 완료했다고 설명하지 않습니다.</p>
+      </section>
+      <section id="part-8" class="case-section">
+        <span class="case-index">08</span>
+        <h2>돌아보며: 용어보다 업무의 단위를 먼저 확인하기</h2>
+<p>‘완료’라는 단어를 그대로 상태값으로 옮기기 전에 무엇이 끝난 것인지 확인해야 했습니다. 회기와 전체 상담의 단위가 정리되자 화면의 선택과 관리자의 집계 기준도 따로 설명할 수 있었습니다.</p>
+<p>이 사례에서 제 역할을 가장 잘 보여주는 근거는 문서 개수가 아니라 고객의 업무 해석이 어떻게 상태·전이·화면 규칙으로 이어졌는지입니다.</p>
+      </section>
+    </article>
+  </div>
+  <a class="next-project" href="leaders-club.html"><span>다음 프로젝트</span><strong>네이버 예약과 현장 접수를 한 흐름으로 ↗</strong></a>
+</main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>

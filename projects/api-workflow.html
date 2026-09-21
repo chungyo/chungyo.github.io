@@ -3,12 +3,88 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="오래된 상태 파일이 문서에 다시 게시되던 문제를 소스 기반 분석으로 개선했습니다. 코드 연결, 테스트, 실제 API QA를 각각의 근거로 보여줍니다."><meta name="theme-color" content="#0f172a">
-<title>코드에서 다시 계산하는 API 연동 현황 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-brand"><script src="../site.js?v=20260921-resume" defer></script>
+<title>코드에서 다시 계산하는 API 연동 현황 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
 </head>
-<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header><main id="main" class="detail-main container">
-<a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
-<header class="detail-header"><p class="project-category">PLAIDLABS · DEVELOPER EXPERIENCE</p><h1>코드에서 다시 계산하는 API 연동 현황</h1><p class="detail-lead">오래된 상태 파일이 문서에 다시 게시되던 문제를 소스 기반 분석으로 개선했습니다. 코드 연결, 테스트, 실제 API QA를 각각의 근거로 보여줍니다.</p><div class="tags"><span>TypeScript AST</span><span>OpenAPI</span><span>GitHub Actions</span></div></header>
-<div class="detail-layout"><article class="case-study"><div class="project-art" style="--art:#4ade80" aria-hidden="true"><div class="art-corner">01 / PLAIDLABS</div><svg viewBox="0 0 416 185"><path d="M111 89h70m54 0h70" stroke="#4ade80" stroke-opacity=".35" stroke-dasharray="4 5"/><circle cx="146" cy="89" r="3" fill="#4ade80"/><circle cx="270" cy="89" r="3" fill="#4ade80"/><g transform="translate(57 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">{ }</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">OpenAPI</text></g><g transform="translate(181 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">⌘</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">AST</text></g><g transform="translate(305 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">✓</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Report</text></g></svg><div class="art-title">API 연동 현황 자동화</div><div class="art-caption">SOURCE → ANALYSIS → EVIDENCE</div></div><div class="case-outcome"><span>핵심 변화</span><p>저장된 상태를 갱신하는 방식에서, 현재 소스로 상태를 재산출하는 방식으로 전환</p></div><section id="part-1" class="case-section"><span class="case-index">01</span><h2>오래된 현황이 다시 게시되는 문제</h2><p>API 연동 현황을 상태 파일과 문서로 관리했습니다. PR 변경을 확인한 bot이 상태 파일을 수정하도록 했지만, CI 환경에 GitHub CLI가 없어 갱신이 반복 실패했습니다. 문서 동기화는 바뀌지 않은 파일을 다시 게시하고 있었습니다.</p></section><section id="part-2" class="case-section"><span class="case-index">02</span><h2>OpenAPI와 현재 소스를 분석 기준으로</h2><p>커밋된 OpenAPI와 소스 전체에서 연동 상태를 다시 계산하도록 바꿨습니다. 담당자·메모·수동 예외는 상태 파일에 남기고, 코드에서 알 수 있는 정보는 매번 산출하도록 역할을 나눴습니다. TypeScript AST로 호출 경로를 해석하고 import 관계로 화면 연결을 확인했습니다.</p></section><section id="part-3" class="case-section"><span class="case-index">03</span><h2>구현과 검증을 같은 상태로 취급하지 않기</h2><p>테스트 파일의 호출은 제품 구현 근거에서 제외했습니다. 정적으로 해석하지 못한 호출과 계약에 없는 호출도 검사 대상으로 드러냈습니다. 코드 연결, endpoint 테스트, 실제 API QA를 별도로 두고, CI가 성공한 커밋의 분석 결과를 문서와 PR 보고서에 연결했습니다.</p></section><section id="part-4" class="case-section"><span class="case-index">04</span><h2>확인한 범위</h2><p>당시 PR에는 분석·상태 판정 테스트와 문서 동기화 dry-run 통과가 기록돼 있습니다. 이 사례는 분석·게시 구조 개선을 다룹니다. 코드 연결만으로 실제 서버 동작이나 배포 완료를 보장하지 않습니다.</p></section></article>
-<aside class="case-sidebar"><p class="sidebar-label">담당 범위</p><p>분석 자동화 · 개발 workflow</p><div class="sidebar-rule"></div><p class="sidebar-label">ON THIS PAGE</p><nav aria-label="사례 목차"><a href="#part-1">01 <span>오래된 현황이 다시 게시되는 문제</span></a><a href="#part-2">02 <span>OpenAPI와 현재 소스를 분석 기준으로</span></a><a href="#part-3">03 <span>구현과 검증을 같은 상태로 취급하지 않기</span></a><a href="#part-4">04 <span>확인한 범위</span></a></nav></aside></div>
-<a class="next-project" href="hashi-reservation.html"><span>다음 프로젝트</span><strong>예약 데이터의 캐시와 중복 요청 처리 ↗</strong></a>
+<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
+<main id="main" class="detail-main container">
+  <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
+  <div class="case-cover"><div class="project-art" style="--art:#4ade80" aria-hidden="true"><div class="art-corner">01 / PLAIDLABS</div><svg viewBox="0 0 416 185"><path d="M111 89h70m54 0h70" stroke="#4ade80" stroke-opacity=".35" stroke-dasharray="4 5"/><circle cx="146" cy="89" r="3" fill="#4ade80"/><circle cx="270" cy="89" r="3" fill="#4ade80"/><g transform="translate(57 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">{ }</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">OpenAPI</text></g><g transform="translate(181 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">⌘</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">AST</text></g><g transform="translate(305 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">✓</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Report</text></g></svg><div class="art-title">API 연동 현황 자동화</div><div class="art-caption">SOURCE → ANALYSIS → EVIDENCE</div></div></div>
+  <header class="detail-header">
+    <p class="project-category">PLAIDLABS · DEVELOPER EXPERIENCE</p>
+    <h1>코드에서 다시 계산하는 API 연동 현황</h1>
+    <p class="detail-lead">오래된 상태 파일이 문서에 다시 게시되던 문제를 소스 기반 분석으로 개선했습니다. 코드 연결, 테스트, 실제 API QA를 각각의 근거로 보여줍니다.</p>
+    <div class="tags"><span>TypeScript AST</span><span>OpenAPI</span><span>GitHub Actions</span></div>
+  </header>
+  <dl class="case-facts">
+    <div><dt>담당 범위</dt><dd>완료 판정 기준 · 분석 자동화 · CI·문서 연결</dd></div>
+    <div><dt>기간·맥락</dt><dd>2026.08–09 주요 변경</dd></div>
+    <div><dt>현재 단계</dt><dd>분석·게시 구조 구현 / 실제 API QA 별도</dd></div>
+  </dl>
+  <div class="case-outcome case-summary"><span>이 사례의 핵심 변화</span><p>저장된 상태표를 재게시하던 방식에서 성공한 CI 커밋의 소스를 재분석하는 방식으로 전환</p></div>
+  <div class="detail-layout">
+    <aside class="case-sidebar">
+      <details class="case-toc" open>
+        <summary>목차 <span>CONTENTS</span></summary>
+        <nav aria-label="상세 사례 목차">
+          <a href="#part-1" data-part="part-1"><b>01</b><span>배경: 팀이 공유하는 API 현황의 기준</span></a>
+          <a href="#part-2" data-part="part-2"><b>02</b><span>문제: 문서 게시 성공이 최신 상태를 뜻하지 않았다</span></a>
+          <a href="#part-3" data-part="part-3"><b>03</b><span>판단: 계산할 정보와 사람이 기록할 정보를 분리</span></a>
+          <a href="#part-4" data-part="part-4"><b>04</b><span>구조: 명세에서 호출, 화면 연결, 보고서까지</span></a>
+          <a href="#part-5" data-part="part-5"><b>05</b><span>핵심 구현 1: 무엇을 ‘연동 완료’라고 부를 것인가</span></a>
+          <a href="#part-6" data-part="part-6"><b>06</b><span>핵심 구현 2: 검증한 커밋과 게시한 커밋 맞추기</span></a>
+          <a href="#part-7" data-part="part-7"><b>07</b><span>결과: 산출 가능한 상태와 검증 대상을 분리</span></a>
+          <a href="#part-8" data-part="part-8"><b>08</b><span>돌아보며: 파생 상태의 원본을 어디에 둘 것인가</span></a>
+        </nav>
+      </details>
+      <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">설계 기록·작성 PR·코드 대조 / 2026.09.20 로컬 분석·dry-run 기록</p>
+    </aside>
+    <article class="case-study" aria-label="코드에서 다시 계산하는 API 연동 현황 상세">
+      <section id="part-1" class="case-section">
+        <span class="case-index">01</span>
+        <h2>배경: 팀이 공유하는 API 현황의 기준</h2>
+<p>심케어 3.0은 관리자·상담사·내담자 웹에서 각각 API를 연결하는 프로젝트입니다. PM과 개발자가 같은 구현 현황을 확인할 수 있도록 API 상태 파일과 Confluence 문서를 관리했습니다.</p>
+<p>이때 필요한 정보는 단순한 진행률이 아니었습니다. 어떤 호출이 구현돼 있고, 실제 화면에서 사용되는지, 서버와 통신하는 QA까지 끝났는지를 구분해야 다음 작업을 결정할 수 있었습니다.</p><aside class="case-note"><strong>제가 맡은 범위</strong><p>API 현황을 분석하고 CI와 Confluence에 연결하는 도구를 구현했습니다. 팀이 각 API를 구현한 기여와 이 현황 도구를 만든 기여는 구분합니다.</p></aside>
+      </section>
+      <section id="part-2" class="case-section">
+        <span class="case-index">02</span>
+        <h2>문제: 문서 게시 성공이 최신 상태를 뜻하지 않았다</h2>
+<p>첫 자동화는 PR의 변경을 확인한 bot이 상태 파일을 수정하는 방식이었습니다. 그러나 당시 runner에 없는 GitHub CLI에 의존해 갱신이 반복 실패했고, 게시 단계는 바뀌지 않은 JSON을 다시 문서로 옮겼습니다.</p>
+<p>표가 다시 게시됐다는 사실만 보면 최신화된 것처럼 보일 수 있었습니다. 실제로는 상태를 계산하는 단계와 문서를 게시하는 단계 사이에 오래된 파일이 남아 있었습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>코드 변경</strong><span>API 구현이 추가됨</span></li><li><strong>상태 갱신 실패</strong><span>bot writer의 실행 환경 의존</span></li><li><strong>이전 JSON 유지</strong><span>새 구현이 상태에 반영되지 않음</span></li><li><strong>문서 재게시</strong><span>게시 성공과 데이터 최신성이 분리됨</span></li></ol><figcaption>기존 설계 기록에서 확인한 실패 경로</figcaption></figure><p>호출 탐지도 단순하지 않았습니다. 상수·template literal·helper를 거친 호출을 충분히 감지하지 못했고, 기존 상태 행이 수동 지정으로 취급돼 구현이 있어도 미착수로 남는 경우가 설계 기록에 있습니다.</p>
+      </section>
+      <section id="part-3" class="case-section">
+        <span class="case-index">03</span>
+        <h2>판단: 계산할 정보와 사람이 기록할 정보를 분리</h2>
+<p>현재 소스 전체와 커밋된 OpenAPI에서 연동 상태를 다시 계산하도록 바꿨습니다. 코드에서 구할 수 있는 결과를 상태 파일에 계속 써 넣는 의존성을 줄이고, 사람이 판단해야 하는 정보만 별도로 남겼습니다.</p><div class="case-table-wrap" role="region" aria-label="기존 방식과 변경한 방식" tabindex="0"><table><caption>기존 방식과 변경한 방식</caption><thead><tr><th scope="col">기준</th><th scope="col">이전</th><th scope="col">변경 후</th></tr></thead><tbody><tr><th scope="row">분석 범위</th><td>PR 변경 중심</td><td>해당 커밋의 현재 소스 전체</td></tr><tr><th scope="row">일반 연동 상태</th><td>bot이 저장 파일을 수정</td><td>OpenAPI·호출·화면 연결에서 재산출</td></tr><tr><th scope="row">담당·메모·예외</th><td>상태와 함께 저장</td><td>수동 메타데이터로 유지</td></tr><tr><th scope="row">실제 API QA</th><td>코드 구현과 혼동될 여지</td><td>별도 검증 기록으로 유지</td></tr><tr><th scope="row">게시 대상</th><td>현재 저장된 JSON</td><td>성공한 CI의 기준 커밋 분석</td></tr></tbody></table></div><p>이 표는 실제 변경 전후를 정리한 것입니다. CLI 설치만 보완하는 방안 등은 당시 검토했다고 확인되지 않아, 제가 비교 후 기각한 대안으로 쓰지 않았습니다.</p>
+      </section>
+      <section id="part-4" class="case-section">
+        <span class="case-index">04</span>
+        <h2>구조: 명세에서 호출, 화면 연결, 보고서까지</h2>
+<figure class="case-figure"><ol class="flow-steps"><li><strong>OpenAPI snapshot</strong><span>method·path별 operation 목록</span></li><li><strong>TypeScript AST</strong><span>호출 경로와 상수·표현식 해석</span></li><li><strong>화면 참조 확인</strong><span>import 관계로 사용 근거 탐색</span></li><li><strong>상태·예외 결합</strong><span>자동 판정 + 수동 예외·QA</span></li><li><strong>CI·문서 보고</strong><span>앱별 현황과 기준 커밋 표시</span></li></ol><figcaption>실제 소스 분석·보고 구조를 공개 가능한 수준으로 정리</figcaption></figure><p>관리자·상담사·내담자 앱을 분석해 API 호출의 method와 path를 명세에 대조했습니다. 호출 함수가 있다는 것에서 멈추지 않고 화면의 import 관계까지 확인했습니다.</p>
+<p>테스트 파일의 호출은 제품 구현 근거에서 제외했습니다. 정적으로 해석하지 못한 호출과 계약에 등록되지 않은 호출은 별도의 검사 대상으로 드러내도록 했습니다.</p>
+      </section>
+      <section id="part-5" class="case-section">
+        <span class="case-index">05</span>
+        <h2>핵심 구현 1: 무엇을 ‘연동 완료’라고 부를 것인가</h2>
+<div class="case-table-wrap" role="region" aria-label="완료 판정과 검증 경계" tabindex="0"><table><caption>완료 판정과 검증 경계</caption><thead><tr><th scope="col">표시 상태</th><th scope="col">확인한 근거</th><th scope="col">이 상태만으로 알 수 없는 것</th></tr></thead><tbody><tr><th scope="row">미착수</th><td>해당 operation의 호출 근거 없음</td><td>서버의 구현 여부</td></tr><tr><th scope="row">진행 중</th><td>호출 코드는 있으나 화면 참조 근거 없음</td><td>실제 화면에서 실행되는지</td></tr><tr><th scope="row">연동 완료</th><td>호출과 화면 참조 관계 확인</td><td>운영 서버 응답 성공</td></tr><tr><th scope="row">차단·연동 제외</th><td>명시한 수동 예외 우선</td><td>예외 해소·기능 배포 여부</td></tr><tr><th scope="row">실제 API QA</th><td>별도의 검증 결과 기록</td><td>정적 분석으로 자동 대체 불가</td></tr></tbody></table></div><p>코드 연결, endpoint 테스트, 실제 API QA는 서로 다른 근거입니다. 분석 도구가 이해할 수 있는 범위를 완료 기준에 명시해야, 읽는 사람이 코드상 연결을 운영 검증으로 받아들이지 않습니다.</p>
+      </section>
+      <section id="part-6" class="case-section">
+        <span class="case-index">06</span>
+        <h2>핵심 구현 2: 검증한 커밋과 게시한 커밋 맞추기</h2>
+<p>develop의 CI가 성공하면 해당 실행의 head SHA를 checkout해서 분석·게시하도록 구성했습니다. 이 연결이 없으면 CI는 A 커밋을 검증했는데 문서는 이후 B 커밋을 분석하는 식으로 기준이 달라질 수 있습니다.</p>
+<p>Confluence 전체 문서를 덮어쓰지 않고 자동 관리 영역만 교체하며 기준 커밋과 동기화 시각을 표시합니다. 같은 분석 결과를 PR 보고서에도 전달해 검토자가 변경을 확인하는 위치에서 볼 수 있게 했습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>CI 성공</strong><span>성공 실행의 head SHA 확보</span></li><li><strong>같은 SHA 분석</strong><span>현재 소스·명세로 상태 재계산</span></li><li><strong>관리 영역 갱신</strong><span>커밋·시각과 함께 문서에 게시</span></li></ol><figcaption>정기·수동 실행과 별도로 존재하는 CI 성공 연계 경로</figcaption></figure><aside class="case-note"><strong>실행 조건</strong><p>실제 Confluence 동기화는 설정 변수와 실행 옵션에 따라 활성화됩니다. workflow 코드가 있다는 사실만으로 최신 게시 성공을 단정하지 않습니다.</p></aside>
+      </section>
+      <section id="part-7" class="case-section">
+        <span class="case-index">07</span>
+        <h2>결과: 산출 가능한 상태와 검증 대상을 분리</h2>
+<div class="case-table-wrap" role="region" aria-label="확인된 결과와 근거" tabindex="0"><table><caption>확인된 결과와 근거</caption><thead><tr><th scope="col">항목</th><th scope="col">확인된 내용</th><th scope="col">근거·범위</th></tr></thead><tbody><tr><th scope="row">분석 구조</th><td>소스 전체 재계산 및 앱별 상태 보고</td><td>본인 작성 변경 이력·소스 대조</td></tr><tr><th scope="row">PR 검토</th><td>분석 결과를 PR 보고서로 전달</td><td>보고서 연결 변경</td></tr><tr><th scope="row">실행 확인</th><td>상태 검사와 Confluence dry-run 정상 종료</td><td>2026.09.20 당시 로컬 확인 기록</td></tr><tr><th scope="row">실제 게시·통신</th><td>최신 원격 CI·Confluence 게시와 운영 API 통신은 별도</td><td>위 로컬 확인에서 실행하지 않음</td></tr></tbody></table></div><p>자동화의 핵심 결과는 진행률 숫자 자체보다, 무엇을 근거로 완료라고 판단했는지 확인할 수 있게 한 것입니다. 정적 분석의 미해석 경로와 실제 QA 미검증 상태도 함께 남겼습니다.</p>
+      </section>
+      <section id="part-8" class="case-section">
+        <span class="case-index">08</span>
+        <h2>돌아보며: 파생 상태의 원본을 어디에 둘 것인가</h2>
+<p>이 변경에서 제가 사용한 기준은 ‘코드로 다시 계산할 수 있는 상태인가, 사람이 별도로 기록해야 하는 판단인가’였습니다. 전자는 기준 커밋에서 산출하고 후자는 예외·메모·QA로 남기는 구분이 구현과 보고에 함께 적용됐습니다.</p>
+<p>현재 확보한 자료로 팀의 수작업 시간 절감이나 도입률까지 수치화할 수는 없습니다. 이후 효과를 확인하려면 실제 사용자가 이전 상태표와 새 보고서로 어떤 판단을 다르게 했는지까지 연결해야 합니다.</p>
+      </section>
+    </article>
+  </div>
+  <a class="next-project" href="hashi-reservation.html"><span>다음 프로젝트</span><strong>예약 데이터의 캐시와 중복 요청 처리 ↗</strong></a>
 </main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>

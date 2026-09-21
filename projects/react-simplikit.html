@@ -3,12 +3,93 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="탭 간 저장소 초기화 이벤트와 ref·effect 실행 순서에서 발생한 오류를 수정했습니다. 회귀 테스트와 리뷰를 거쳐 react-simplikit에 두 PR이 병합됐습니다."><meta name="theme-color" content="#0f172a">
-<title>React 훅의 이벤트·생명주기 오류 수정 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-brand"><script src="../site.js?v=20260921-resume" defer></script>
+<title>React 훅의 이벤트·생명주기 오류 수정 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
 </head>
-<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header><main id="main" class="detail-main container">
-<a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
-<header class="detail-header"><p class="project-category">TOSS · OPEN SOURCE</p><h1>React 훅의 이벤트·생명주기 오류 수정</h1><p class="detail-lead">탭 간 저장소 초기화 이벤트와 ref·effect 실행 순서에서 발생한 오류를 수정했습니다. 회귀 테스트와 리뷰를 거쳐 react-simplikit에 두 PR이 병합됐습니다.</p><div class="tags"><span>React</span><span>Browser QA</span><span>Open Source</span></div></header>
-<div class="detail-layout"><article class="case-study"><div class="project-art" style="--art:#38bdf8" aria-hidden="true"><div class="art-corner">04 / TOSS</div><svg viewBox="0 0 416 185"><g transform="translate(208 91)" fill="none" stroke="#38bdf8"><ellipse rx="69" ry="25" stroke-opacity=".8"/><ellipse rx="69" ry="25" transform="rotate(60)" stroke-opacity=".8"/><ellipse rx="69" ry="25" transform="rotate(120)" stroke-opacity=".8"/><circle r="9" fill="#38bdf8" stroke="none"/><circle r="89" stroke-opacity=".12"/><circle r="104" stroke-opacity=".06"/></g><g transform="translate(273 118)"><rect width="73" height="25" rx="12" fill="#163333" stroke="#2e6251"/><text x="36" y="16" text-anchor="middle" font-size="9" fill="#4ade80" font-family="monospace">✓ merged</text></g></svg><div class="art-title">React의 경계 조건</div><div class="art-caption">REPRODUCE → TEST → MERGE</div></div><div class="case-outcome"><span>핵심 변화</span><p>useStorageState와 useRefEffect 수정 PR 2건 병합</p></div><section id="part-1" class="case-section"><span class="case-index">01</span><h2>다른 탭의 전체 삭제를 놓치는 이벤트</h2><p>탭 B에서 localStorage.clear()를 실행하면 탭 A에는 이전 값이 남았습니다. 전체 삭제의 StorageEvent.key는 null인데 기존 코드는 관찰하는 key와 일치하는 이벤트만 처리했습니다. null일 때도 구독자를 깨워 기존 snapshot 로직이 저장소를 다시 읽게 수정했습니다.</p></section><section id="part-2" class="case-section"><span class="case-index">02</span><h2>ref가 effect보다 먼저 부착되는 경우</h2><p>의존성이 A에서 B로 바뀌었는데 ref 부착이 effect보다 먼저 실행되면서 이전 콜백을 읽어 setup(A)가 다시 호출됐습니다. useIntersectionObserver에서도 옵션 변경 시 이전 observer에 요소를 붙이는 문제로 이어졌습니다.</p></section><section id="part-3" class="case-section"><span class="case-index">03</span><h2>의존성별로 콜백을 보관하기</h2><p>의존성이 바뀔 때 콜백을 담는 객체를 새로 만들도록 수정했습니다. 의존성이 같을 때 effect에서 콜백을 갱신하는 기존 의미는 유지했습니다. 렌더 중 기존 객체를 덮어쓰지 않아 미커밋 렌더의 콜백이 현재 동작에 섞이지 않도록 했습니다.</p></section><section id="part-4" class="case-section"><span class="case-index">04</span><h2>리뷰와 검증</h2><p>당시 검증에는 기본값 복원·저장소 구분, StrictMode·observer 옵션 변경·DOM 교체·미커밋 렌더 테스트가 포함됐습니다. 브라우저 확인과 React 18·19 및 React Compiler 모드 테스트도 기록했습니다. #482는 2026년 9월 8일, #483은 9월 9일 병합됐습니다. 패키지 릴리즈 포함 여부와는 별도입니다.</p></section><section class="case-section"><h2>관련 링크</h2><div class="evidence-links"><a href="https://github.com/toss/react-simplikit/pull/482">useStorageState #482 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://github.com/toss/react-simplikit/pull/483">useRefEffect #483 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></section></article>
-<aside class="case-sidebar"><p class="sidebar-label">담당 범위</p><p>버그 재현 · 수정 · 테스트 · 리뷰 반영</p><div class="sidebar-rule"></div><p class="sidebar-label">ON THIS PAGE</p><nav aria-label="사례 목차"><a href="#part-1">01 <span>다른 탭의 전체 삭제를 놓치는 이벤트</span></a><a href="#part-2">02 <span>ref가 effect보다 먼저 부착되는 경우</span></a><a href="#part-3">03 <span>의존성별로 콜백을 보관하기</span></a><a href="#part-4">04 <span>리뷰와 검증</span></a></nav></aside></div>
-<a class="next-project" href="eatty.html"><span>다음 프로젝트</span><strong>기획부터 첫 배포까지, 입맛 테스트 MVP ↗</strong></a>
+<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
+<main id="main" class="detail-main container">
+  <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
+  <div class="case-cover"><div class="project-art" style="--art:#38bdf8" aria-hidden="true"><div class="art-corner">04 / TOSS</div><svg viewBox="0 0 416 185"><g transform="translate(208 91)" fill="none" stroke="#38bdf8"><ellipse rx="69" ry="25" stroke-opacity=".8"/><ellipse rx="69" ry="25" transform="rotate(60)" stroke-opacity=".8"/><ellipse rx="69" ry="25" transform="rotate(120)" stroke-opacity=".8"/><circle r="9" fill="#38bdf8" stroke="none"/><circle r="89" stroke-opacity=".12"/><circle r="104" stroke-opacity=".06"/></g><g transform="translate(273 118)"><rect width="73" height="25" rx="12" fill="#163333" stroke="#2e6251"/><text x="36" y="16" text-anchor="middle" font-size="9" fill="#4ade80" font-family="monospace">✓ merged</text></g></svg><div class="art-title">React의 경계 조건</div><div class="art-caption">REPRODUCE → TEST → MERGE</div></div></div>
+  <header class="detail-header">
+    <p class="project-category">TOSS · OPEN SOURCE</p>
+    <h1>React 훅의 이벤트·생명주기 오류 수정</h1>
+    <p class="detail-lead">탭 간 저장소 초기화 이벤트와 ref·effect 실행 순서에서 발생한 오류를 수정했습니다. 회귀 테스트와 리뷰를 거쳐 react-simplikit에 두 PR이 병합됐습니다.</p>
+    <div class="tags"><span>React</span><span>Browser QA</span><span>Open Source</span></div>
+  </header>
+  <dl class="case-facts">
+    <div><dt>담당 범위</dt><dd>버그 재현 · 동작 수정 · 회귀 테스트 · 리뷰 반영</dd></div>
+    <div><dt>기간·맥락</dt><dd>2026.09 / #482·#483 병합</dd></div>
+    <div><dt>현재 단계</dt><dd>공개 PR 병합 / 패키지 릴리즈 포함 시점 별도</dd></div>
+  </dl>
+  <div class="case-outcome case-summary"><span>이 사례의 핵심 변화</span><p>저장소 전체 삭제와 ref 부착 순서의 두 경계 조건 수정</p></div>
+  <div class="detail-layout">
+    <aside class="case-sidebar">
+      <details class="case-toc" open>
+        <summary>목차 <span>CONTENTS</span></summary>
+        <nav aria-label="상세 사례 목차">
+          <a href="#part-1" data-part="part-1"><b>01</b><span>배경: 정상적인 업데이트 사이에 숨어 있는 경계 조건</span></a>
+          <a href="#part-2" data-part="part-2"><b>02</b><span>사례 1 — 재현: 다른 탭에서 전체 삭제한 뒤에도 이전 값</span></a>
+          <a href="#part-3" data-part="part-3"><b>03</b><span>사례 1 — 원인과 선택: null 이벤트도 snapshot을 다시 읽기</span></a>
+          <a href="#part-4" data-part="part-4"><b>04</b><span>사례 2 — 재현: 새 의존성인데 이전 setup이 실행</span></a>
+          <a href="#part-5" data-part="part-5"><b>05</b><span>사례 2 — 구현: 의존성이 바뀔 때 새 콜백 보관 객체</span></a>
+          <a href="#part-6" data-part="part-6"><b>06</b><span>검증과 메인테이너 리뷰</span></a>
+          <a href="#part-7" data-part="part-7"><b>07</b><span>결과와 이후 확인할 범위</span></a>
+          <a href="#part-8" data-part="part-8"><b>08</b><span>돌아보며: 조건과 순서를 테스트 이름으로 남기기</span></a>
+          <a href="#references" data-part="references"><b>↗</b><span>공개 근거·관련 링크</span></a>
+        </nav>
+      </details>
+      <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">공개 PR·브라우저·React 버전별 당시 검증 기록</p>
+    </aside>
+    <article class="case-study" aria-label="React 훅의 이벤트·생명주기 오류 수정 상세">
+      <section id="part-1" class="case-section">
+        <span class="case-index">01</span>
+        <h2>배경: 정상적인 업데이트 사이에 숨어 있는 경계 조건</h2>
+<p>Toss react-simplikit에서 저장소 이벤트와 React ref/effect 실행 순서에 관한 두 오류를 수정했습니다. 공개 함수의 사용 방법을 바꾸기보다 기존 동작이 지켜져야 할 조건을 재현하고 회귀 테스트로 남긴 기여입니다.</p>
+<p>두 PR은 각각 useStorageState와 useRefEffect를 다룹니다. 같은 저장소의 기여이지만 서로 다른 오류이므로 재현·원인·수정·검증도 구분해 설명합니다.</p>
+      </section>
+      <section id="part-2" class="case-section">
+        <span class="case-index">02</span>
+        <h2>사례 1 — 재현: 다른 탭에서 전체 삭제한 뒤에도 이전 값</h2>
+<figure class="case-figure"><ol class="flow-steps"><li><strong>탭 A</strong><span>저장된 이름을 읽음</span></li><li><strong>탭 B</strong><span>localStorage.clear() 실행</span></li><li><strong>저장소</strong><span>전체 값이 비워짐</span></li><li><strong>탭 A의 훅</strong><span>이전 이름이 남음</span></li></ol><figcaption>useStorageState 오류의 재현 흐름</figcaption></figure><p>기본값이 Guest라면 저장소 전체 삭제 후에는 Guest를 보여줘야 하는 상황이었습니다. 하지만 전체 삭제 이벤트를 기존 구독 조건이 놓치고 있었습니다.</p>
+      </section>
+      <section id="part-3" class="case-section">
+        <span class="case-index">03</span>
+        <h2>사례 1 — 원인과 선택: null 이벤트도 snapshot을 다시 읽기</h2>
+<p>전체 삭제 이벤트의 key는 null인데 기존 코드는 관찰하는 key와 일치하는 이벤트만 처리했습니다. null인 경우에도 구독자를 깨워 기존 snapshot 로직이 저장소를 다시 읽도록 조건을 수정했습니다.</p><div class="case-table-wrap" role="region" aria-label="수정의 범위" tabindex="0"><table><caption>수정의 범위</caption><thead><tr><th scope="col">항목</th><th scope="col">기존 문제</th><th scope="col">수정 기준</th></tr></thead><tbody><tr><th scope="row">관찰 key 변경</th><td>해당 key 이벤트 처리</td><td>기존 의미 유지</td></tr><tr><th scope="row">전체 삭제</th><td>key=null이라 처리 누락</td><td>구독자에게 변경 알림</td></tr><tr><th scope="row">반영 값</th><td>이벤트 newValue를 곧바로 적용할 위험</td><td>훅이 사용하는 저장소의 snapshot 재조회</td></tr><tr><th scope="row">다른 저장소의 삭제</th><td>현재 저장소와 구분 필요</td><td>현재 저장소 값이 잘못 초기화되지 않도록 검증</td></tr></tbody></table></div><p>단순히 null 이벤트를 받으면 기본값으로 바꾸는 접근은 선택하지 않았습니다. 현재 훅이 읽는 저장소에 어떤 값이 있는지 다시 확인하는 기존 흐름을 유지했습니다.</p>
+      </section>
+      <section id="part-4" class="case-section">
+        <span class="case-index">04</span>
+        <h2>사례 2 — 재현: 새 의존성인데 이전 setup이 실행</h2>
+<p>useRefEffect의 의존성이 A에서 B로 바뀌면 cleanup(A) 다음에 setup(B)가 실행돼야 했습니다. 그러나 ref 부착이 effect보다 먼저 실행되면서 이전 콜백을 읽어 setup(A)가 다시 호출되는 문제가 있었습니다.</p><div class="case-table-wrap" role="region" aria-label="의존성 변경 시 순서" tabindex="0"><table><caption>의존성 변경 시 순서</caption><thead><tr><th scope="col">단계</th><th scope="col">기대 동작</th><th scope="col">재현된 문제</th></tr></thead><tbody><tr><th scope="row">이전 연결 정리</th><td>cleanup(A)</td><td>이전 연결 정리</td></tr><tr><th scope="row">새 ref 부착</th><td>새 의존성의 콜백 사용</td><td>effect 갱신 전 이전 콜백 읽음</td></tr><tr><th scope="row">새 연결 설정</th><td>setup(B)</td><td>setup(A)가 다시 실행</td></tr><tr><th scope="row">영향받는 소비 훅</th><td>새 observer 옵션 적용</td><td>이전 observer에 요소를 연결</td></tr></tbody></table></div><p>이 흐름은 useIntersectionObserver에도 이어져 observer 옵션을 바꿨을 때 이전 observer에 요소를 붙이는 문제로 나타났습니다.</p>
+      </section>
+      <section id="part-5" class="case-section">
+        <span class="case-index">05</span>
+        <h2>사례 2 — 구현: 의존성이 바뀔 때 새 콜백 보관 객체</h2>
+<p>의존성이 바뀌면 콜백을 담는 객체를 새로 만들도록 수정했습니다. 의존성이 같을 때는 effect에서 콜백을 갱신하는 기존 의미를 유지했습니다.</p>
+<p>렌더 도중 기존 객체를 덮어쓰지 않는 것도 중요했습니다. 커밋되지 않은 렌더에서 만든 콜백이 현재 동작에 섞이지 않도록, 의존성별 보관 구조로 구분했습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>의존성 변경</strong><span>새 보관 객체</span></li><li><strong>새 ref 부착</strong><span>새 의존성의 콜백</span></li><li><strong>의존성 동일</strong><span>기존 effect 갱신 의미 유지</span></li><li><strong>미커밋 렌더</strong><span>현재 객체 오염 방지</span></li></ol><figcaption>수정이 지키려는 두 조건</figcaption></figure><aside class="case-note"><strong>변경 범위</strong><p>공개 함수 시그니처와 공통 usePreservedCallback은 유지했습니다. 공통 훅을 광범위하게 바꾸는 대신 문제가 있는 수명주기의 범위를 수정했습니다.</p></aside>
+      </section>
+      <section id="part-6" class="case-section">
+        <span class="case-index">06</span>
+        <h2>검증과 메인테이너 리뷰</h2>
+<div class="case-table-wrap" role="region" aria-label="당시 검증에 포함한 조건" tabindex="0"><table><caption>당시 검증에 포함한 조건</caption><thead><tr><th scope="col">대상</th><th scope="col">회귀 조건</th><th scope="col">검증 형태</th></tr></thead><tbody><tr><th scope="row">useStorageState</th><td>기본값 유무·다른 저장소 전체 삭제·무관한 key 삭제</td><td>명세 테스트</td></tr><tr><th scope="row">탭 간 동기화</th><td>실제 두 페이지에서 전체 삭제 전후</td><td>Chromium 브라우저 확인</td></tr><tr><th scope="row">useRefEffect</th><td>StrictMode·정리 함수·DOM 교체·미커밋 렌더</td><td>회귀 테스트</td></tr><tr><th scope="row">observer</th><td>옵션 변경 시 실제 IntersectionObserver 동작</td><td>React 18·19 브라우저 확인</td></tr><tr><th scope="row">컴파일 환경</th><td>React Compiler 모드</td><td>당시 테스트 기록</td></tr></tbody></table></div><p>메인테이너 리뷰를 반영해 테스트를 기존 명세 파일에 합치고 중복 사례를 줄였습니다. Suspense 테스트는 무엇을 보호하는지 이름에서 드러나도록 정리했습니다. 위 테스트는 당시 검증이며 이번 글 작성에서 재실행한 결과가 아닙니다.</p>
+      </section>
+      <section id="part-7" class="case-section">
+        <span class="case-index">07</span>
+        <h2>결과와 이후 확인할 범위</h2>
+<p>useStorageState #482는 2026년 9월 8일, useRefEffect #483은 9월 9일 병합됐습니다. 공개 PR에서 수정·리뷰·병합 이력을 확인할 수 있습니다.</p>
+<p>병합과 패키지 릴리즈 포함은 다른 상태입니다. 다운로드 수를 곧바로 영향 사용자 수로 계산하거나, 전체 소비 서비스의 오류 감소를 제 성과로 주장하지 않습니다.</p>
+      </section>
+      <section id="part-8" class="case-section">
+        <span class="case-index">08</span>
+        <h2>돌아보며: 조건과 순서를 테스트 이름으로 남기기</h2>
+<p>첫 오류는 어떤 이벤트를 받는지, 두 번째는 콜백 갱신과 ref 부착 중 무엇이 먼저인지가 원인이었습니다. 일반적인 업데이트만 확인하면 놓칠 수 있는 조건을 실제 재현으로 좁히고 테스트에 남겼습니다.</p>
+<p>리뷰 과정에서는 테스트의 양보다 보호하려는 동작이 분명한지도 확인했습니다. 수정 범위를 설명하는 것과 같은 수준으로 회귀 조건을 설명할 수 있어야 했습니다.</p>
+      </section>
+      <section id="references" class="case-section">
+        <span class="case-index">↗</span>
+        <h2>공개 근거·관련 링크</h2>
+<div class="evidence-links"><a href="https://github.com/toss/react-simplikit/pull/482">useStorageState #482 ↗</a><a href="https://github.com/toss/react-simplikit/pull/483">useRefEffect #483 ↗</a></div>
+      </section>
+    </article>
+  </div>
+  <a class="next-project" href="eatty.html"><span>다음 프로젝트</span><strong>기획부터 첫 배포까지, 입맛 테스트 MVP ↗</strong></a>
 </main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>

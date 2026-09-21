@@ -3,12 +3,92 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="상태·액션·닫기를 조합하는 공용 API와 디자인 토큰을 구현했습니다. 닫기 요청과 큐 제거 시점을 분리하고, 사용 시나리오를 Storybook으로 정리했습니다."><meta name="theme-color" content="#0f172a">
-<title>npm 패키지로 배포되는 공용 Toast | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-brand"><script src="../site.js?v=20260921-resume" defer></script>
+<title>npm 패키지로 배포되는 공용 Toast | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
 </head>
-<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header><main id="main" class="detail-main container">
-<a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
-<header class="detail-header"><p class="project-category">PLAIDLABS · DESIGN SYSTEM</p><h1>npm 패키지로 배포되는 공용 Toast</h1><p class="detail-lead">상태·액션·닫기를 조합하는 공용 API와 디자인 토큰을 구현했습니다. 닫기 요청과 큐 제거 시점을 분리하고, 사용 시나리오를 Storybook으로 정리했습니다.</p><div class="tags"><span>React Aria</span><span>Storybook</span><span>vanilla-extract</span></div></header>
-<div class="detail-layout"><article class="case-study"><div class="project-art" style="--art:#c084fc" aria-hidden="true"><div class="art-corner">03 / PLAIDLABS</div><svg viewBox="0 0 416 185"><g fill="none" stroke="#c084fc" stroke-opacity=".2"><rect x="119" y="33" width="215" height="58" rx="10"/><rect x="107" y="48" width="215" height="58" rx="10"/></g><rect x="94" y="64" width="228" height="62" rx="10" fill="#191e34" stroke="#c084fc" stroke-opacity=".65"/><circle cx="120" cy="95" r="10" fill="#c084fc" fill-opacity=".16"/><path d="m116 95 3 3 6-7" fill="none" stroke="#c084fc" stroke-width="1.8"/><text x="143" y="90" fill="#e2e8f0" font-size="12" font-family="monospace">Changes saved</text><text x="143" y="108" fill="#8b98ae" font-size="10" font-family="monospace">toast.success()</text><path d="m299 90 8 8m0-8-8 8" stroke="#718096"/></svg><div class="art-title">공용 Toast 컴포넌트</div><div class="art-caption">COMPOSE → QUEUE → DISMISS</div></div><div class="case-outcome"><span>핵심 변화</span><p>공용 API와 사용 예시를 갖춘 Toast 구현이 npm 배포 패키지에 포함</p></div><section id="part-1" class="case-section"><span class="case-index">01</span><h2>화면에서 사용할 알림 API</h2><p>설명·액션 버튼·닫기 버튼을 조합하고 사내 디자인에 맞게 표현할 Toast가 필요했습니다. React Aria의 Toast 구성 요소와 큐를 사용하고, 그 위에 사내 디자인 토큰과 공용 API를 구현했습니다.</p></section><section id="part-2" class="case-section"><span class="case-index">02</span><h2>소비 화면과 렌더링의 역할 분리</h2><p>화면에서는 제목·설명·상태·크기·액션·닫기 여부를 전달하도록 했습니다. toast.success, toast.error 등 호출 API를 제공하고 ToastRegion이 공통 렌더링을 담당하게 구성했습니다.</p></section><section id="part-3" class="case-section"><span class="case-index">03</span><h2>닫기 요청과 실제 제거 사이</h2><p>종료 애니메이션을 위해 닫기 요청이 오면 종료 상태를 먼저 알리고 지정한 시간 뒤 큐에서 제거했습니다. 이미 닫는 중인 항목은 중복 요청을 무시합니다. 진입·종료 상태는 useSyncExternalStore로 구독하고 움직임 감소 설정을 위한 스타일도 포함했습니다.</p></section><section id="part-4" class="case-section"><span class="case-index">04</span><h2>배포와 기여 범위</h2><p>상태·크기·긴 문구·액션·닫기 조합을 Storybook으로 정리했습니다. 구현은 병합됐고 npm 패키지 실행 코드와 타입 선언에 포함돼 있습니다. React Aria가 큐와 구성 요소를 제공했으며, 스타일 빌드 규칙·토큰 import·일부 타입은 동료가 후속 보정했습니다.</p></section><section class="case-section"><h2>관련 링크</h2><div class="evidence-links"><a href="https://www.npmjs.com/package/@plaidlabs/ui">공개 npm 패키지 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></section></article>
-<aside class="case-sidebar"><p class="sidebar-label">담당 범위</p><p>공용 호출 API · 스타일 · 애니메이션</p><div class="sidebar-rule"></div><p class="sidebar-label">ON THIS PAGE</p><nav aria-label="사례 목차"><a href="#part-1">01 <span>화면에서 사용할 알림 API</span></a><a href="#part-2">02 <span>소비 화면과 렌더링의 역할 분리</span></a><a href="#part-3">03 <span>닫기 요청과 실제 제거 사이</span></a><a href="#part-4">04 <span>배포와 기여 범위</span></a></nav></aside></div>
-<a class="next-project" href="react-simplikit.html"><span>다음 프로젝트</span><strong>React 훅의 이벤트·생명주기 오류 수정 ↗</strong></a>
+<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
+<main id="main" class="detail-main container">
+  <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
+  <div class="case-cover"><div class="project-art" style="--art:#c084fc" aria-hidden="true"><div class="art-corner">03 / PLAIDLABS</div><svg viewBox="0 0 416 185"><g fill="none" stroke="#c084fc" stroke-opacity=".2"><rect x="119" y="33" width="215" height="58" rx="10"/><rect x="107" y="48" width="215" height="58" rx="10"/></g><rect x="94" y="64" width="228" height="62" rx="10" fill="#191e34" stroke="#c084fc" stroke-opacity=".65"/><circle cx="120" cy="95" r="10" fill="#c084fc" fill-opacity=".16"/><path d="m116 95 3 3 6-7" fill="none" stroke="#c084fc" stroke-width="1.8"/><text x="143" y="90" fill="#e2e8f0" font-size="12" font-family="monospace">Changes saved</text><text x="143" y="108" fill="#8b98ae" font-size="10" font-family="monospace">toast.success()</text><path d="m299 90 8 8m0-8-8 8" stroke="#718096"/></svg><div class="art-title">공용 Toast 컴포넌트</div><div class="art-caption">COMPOSE → QUEUE → DISMISS</div></div></div>
+  <header class="detail-header">
+    <p class="project-category">PLAIDLABS · DESIGN SYSTEM</p>
+    <h1>npm 패키지로 배포되는 공용 Toast</h1>
+    <p class="detail-lead">상태·액션·닫기를 조합하는 공용 API와 디자인 토큰을 구현했습니다. 닫기 요청과 큐 제거 시점을 분리하고, 사용 시나리오를 Storybook으로 정리했습니다.</p>
+    <div class="tags"><span>React Aria</span><span>Storybook</span><span>vanilla-extract</span></div>
+  </header>
+  <dl class="case-facts">
+    <div><dt>담당 범위</dt><dd>공용 호출 API · 디자인 토큰 · 애니메이션 상태 · Storybook</dd></div>
+    <div><dt>기간·맥락</dt><dd>PlaidLabs 디자인시스템 작업</dd></div>
+    <div><dt>현재 단계</dt><dd>병합 및 npm 패키지 포함 확인</dd></div>
+  </dl>
+  <div class="case-outcome case-summary"><span>이 사례의 핵심 변화</span><p>소비 화면이 상태·액션·닫기를 조합할 수 있는 공용 Toast 제공</p></div>
+  <div class="detail-layout">
+    <aside class="case-sidebar">
+      <details class="case-toc" open>
+        <summary>목차 <span>CONTENTS</span></summary>
+        <nav aria-label="상세 사례 목차">
+          <a href="#part-1" data-part="part-1"><b>01</b><span>배경: 여러 화면에서 조합해 쓰는 알림</span></a>
+          <a href="#part-2" data-part="part-2"><b>02</b><span>설계: 소비 화면은 내용과 옵션을 전달</span></a>
+          <a href="#part-3" data-part="part-3"><b>03</b><span>문제: 닫는 순간 제거하면 종료 동작을 표현할 수 없다</span></a>
+          <a href="#part-4" data-part="part-4"><b>04</b><span>핵심 구현: 상태 구독과 중복 닫기 처리</span></a>
+          <a href="#part-5" data-part="part-5"><b>05</b><span>사용 시나리오: Storybook에서 조합 확인</span></a>
+          <a href="#part-6" data-part="part-6"><b>06</b><span>기여와 배포 결과</span></a>
+          <a href="#part-7" data-part="part-7"><b>07</b><span>이 사례에서 남긴 설계 기준</span></a>
+          <a href="#references" data-part="references"><b>↗</b><span>공개 근거·관련 링크</span></a>
+        </nav>
+      </details>
+      <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">요구사항·본인 최초 구현·후속 수정·@plaidlabs/ui@0.1.14 확인 기록</p>
+    </aside>
+    <article class="case-study" aria-label="npm 패키지로 배포되는 공용 Toast 상세">
+      <section id="part-1" class="case-section">
+        <span class="case-index">01</span>
+        <h2>배경: 여러 화면에서 조합해 쓰는 알림</h2>
+<p>사내 제품 화면에서 상태별 알림에 설명·액션 버튼·닫기 버튼을 조합하고, 디자인에 맞게 CSS를 조정할 수 있는 Toast가 필요했습니다. 공용 컴포넌트는 한 화면에서 보기 좋은 것뿐 아니라 소비 화면이 어떤 정보를 넘길 수 있는지까지 정해야 했습니다.</p>
+<p>React Aria의 Toast 구성 요소와 큐를 바탕으로 사내 디자인 토큰, 호출 API와 진입·종료 상태를 구현했습니다.</p>
+      </section>
+      <section id="part-2" class="case-section">
+        <span class="case-index">02</span>
+        <h2>설계: 소비 화면은 내용과 옵션을 전달</h2>
+<div class="case-table-wrap" role="region" aria-label="공용 API에 담은 정보" tabindex="0"><table><caption>공용 API에 담은 정보</caption><thead><tr><th scope="col">분류</th><th scope="col">화면이 전달하는 값</th><th scope="col">공통 컴포넌트의 책임</th></tr></thead><tbody><tr><th scope="row">내용</th><td>제목·설명</td><td>긴 문구와 줄바꿈 표현</td></tr><tr><th scope="row">상태·크기</th><td>상태별 호출·크기 옵션</td><td>디자인 토큰과 스타일 적용</td></tr><tr><th scope="row">상호작용</th><td>액션·닫기 여부</td><td>버튼 조합과 닫기 동작</td></tr><tr><th scope="row">렌더링</th><td>toast.success / toast.error 등</td><td>ToastRegion의 공통 렌더링</td></tr></tbody></table></div><p>상태별 표현을 매번 화면에서 조립하지 않도록 호출과 렌더링을 나눴습니다. 큐 자체는 React Aria가 제공하고, 제가 구현한 부분은 소비 화면에 노출할 옵션과 사내 디자인·동작의 연결입니다.</p>
+      </section>
+      <section id="part-3" class="case-section">
+        <span class="case-index">03</span>
+        <h2>문제: 닫는 순간 제거하면 종료 동작을 표현할 수 없다</h2>
+<p>닫기 요청과 화면에서 실제로 사라지는 시점은 달라야 합니다. 큐에서 바로 제거하면 종료 애니메이션을 표현할 대상이 없어지므로, 먼저 닫는 상태를 알리고 지정한 시간이 지난 뒤 제거하도록 구성했습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>호출</strong><span>내용·상태·옵션 전달</span></li><li><strong>표시</strong><span>ToastRegion 렌더링</span></li><li><strong>닫기 요청</strong><span>종료 상태로 전환</span></li><li><strong>애니메이션</strong><span>종료 스타일 표시</span></li><li><strong>큐 제거</strong><span>지정 시간 뒤 실제 제거</span></li></ol><figcaption>Toast 수명주기의 책임을 설명한 흐름</figcaption></figure>
+      </section>
+      <section id="part-4" class="case-section">
+        <span class="case-index">04</span>
+        <h2>핵심 구현: 상태 구독과 중복 닫기 처리</h2>
+<p>진입·종료 상태는 useSyncExternalStore로 구독하고 스타일에 전달했습니다. 이미 닫는 중인 항목에 추가 닫기 요청이 들어오면 무시하도록 처리했습니다.</p><figure class="code-figure"><figcaption>실제 구현의 책임을 요약한 의사코드</figcaption><pre tabindex="0"><code>닫기 요청:
+  이미 닫는 중이면 종료
+  종료 상태를 알림
+  지정한 종료 시간 뒤 큐에서 제거
+
+렌더링:
+  진입·종료 상태를 구독
+  상태에 맞는 스타일을 적용</code></pre></figure><p>시간을 기준으로 제거하는 구조이므로 CSS 재생 시간과 큐 제거 시점을 함께 관리해야 합니다. 움직임 감소 설정에 맞춘 스타일도 포함했지만, 이를 모든 접근성 요구의 검증 완료로 표현하지 않습니다.</p>
+      </section>
+      <section id="part-5" class="case-section">
+        <span class="case-index">05</span>
+        <h2>사용 시나리오: Storybook에서 조합 확인</h2>
+<div class="case-table-wrap" role="region" aria-label="정리한 사용 시나리오" tabindex="0"><table><caption>정리한 사용 시나리오</caption><thead><tr><th scope="col">축</th><th scope="col">확인할 조합</th><th scope="col">목적</th></tr></thead><tbody><tr><th scope="row">상태·크기</th><td>각 상태와 크기</td><td>디자인 표현 비교</td></tr><tr><th scope="row">본문</th><td>짧은 문구·긴 문구·설명</td><td>내용 길이에 따른 배치</td></tr><tr><th scope="row">액션</th><td>액션 있음·없음</td><td>사용자가 취할 다음 행동</td></tr><tr><th scope="row">닫기</th><td>닫기 있음·없음 및 조합</td><td>소비 화면의 사용 방식</td></tr></tbody></table></div><p>이 조합을 Storybook에서 같은 환경으로 확인할 수 있게 정리했습니다. Storybook 예시의 존재를 자동 회귀 테스트나 전 소비 화면의 검증 완료와 동일하게 쓰지 않습니다.</p>
+      </section>
+      <section id="part-6" class="case-section">
+        <span class="case-index">06</span>
+        <h2>기여와 배포 결과</h2>
+<div class="case-table-wrap" role="region" aria-label="누가 무엇을 제공했는가" tabindex="0"><table><caption>누가 무엇을 제공했는가</caption><thead><tr><th scope="col">주체</th><th scope="col">범위</th><th scope="col">결과</th></tr></thead><tbody><tr><th scope="row">React Aria</th><td>Toast 구성 요소·큐</td><td>기존 라이브러리 기능 활용</td></tr><tr><th scope="row">본인</th><td>공용 API·디자인 토큰·진입/종료 상태·스토리</td><td>구현 PR 병합</td></tr><tr><th scope="row">동료 후속 작업</th><td>스타일 빌드 규칙·토큰 import·일부 타입 보정</td><td>소비·배포 구조 보완</td></tr><tr><th scope="row">패키지</th><td>Toast 실행 코드와 타입 선언</td><td>당시 공개 @plaidlabs/ui@0.1.14 포함 확인</td></tr></tbody></table></div><p>라이브러리 선정 당시 다른 후보와 비교한 기록이나 팀 전체의 개발시간 절감 수치는 확보하지 못했습니다. 공용 API부터 스타일·사용 예시까지 연결해 배포 패키지에 포함된 범위로 결과를 설명합니다.</p>
+      </section>
+      <section id="part-7" class="case-section">
+        <span class="case-index">07</span>
+        <h2>이 사례에서 남긴 설계 기준</h2>
+<p>소비 화면이 전달할 정보와 컴포넌트 내부의 수명주기를 분리했습니다. 특히 사용자에게는 한 번의 닫기처럼 보여도 구현에서는 닫기 요청·종료 표현·큐 제거를 별개 단계로 다뤄야 했습니다.</p>
+<p>공용 컴포넌트의 완료를 본체 코드만으로 판단하지 않고 사용 예시, 타입 선언, 배포 패키지 포함까지 확인한 경험입니다.</p>
+      </section>
+      <section id="references" class="case-section">
+        <span class="case-index">↗</span>
+        <h2>공개 근거·관련 링크</h2>
+<div class="evidence-links"><a href="https://www.npmjs.com/package/@plaidlabs/ui">공개 npm 패키지 @plaidlabs/ui ↗</a></div>
+      </section>
+    </article>
+  </div>
+  <a class="next-project" href="react-simplikit.html"><span>다음 프로젝트</span><strong>React 훅의 이벤트·생명주기 오류 수정 ↗</strong></a>
 </main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>
