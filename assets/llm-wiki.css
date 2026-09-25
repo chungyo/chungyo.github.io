@@ -1,0 +1,79 @@
+/* Scoped presentation for the LLM Wiki case and its project card. */
+.llm-heading{margin-top:36px;max-width:940px}
+.llm-heading h1{font-size:clamp(27px,3.5vw,40px);line-height:1.45;word-break:keep-all}
+.llm-name{display:block;color:#c4b5fd;font:500 15px/1.7 var(--mono);letter-spacing:0;margin:10px 0}
+.llm-eyebrow{display:block;color:#c4b5fd;font:500 10px/1.8 var(--mono);letter-spacing:1.5px}
+.llm-showcase{display:grid;grid-template-columns:0.8fr 1.2fr;align-items:center;gap:26px 32px;margin:38px 0;padding:38px;border:1px solid #a78bfa40;border-radius:16px;background:radial-gradient(ellipse at 90% 20%,#8b5cf61a,transparent 65%),#0b1220}
+.llm-showcase-copy h2{font-size:clamp(21px,2.4vw,27px);font-weight:600;line-height:1.65;letter-spacing:-.5px;margin:14px 0}
+.llm-showcase-copy p{font-size:13px;line-height:1.9;color:var(--muted)}
+.llm-jump{display:inline-flex;gap:24px;font-size:12px;color:#ddd6fe;margin-top:26px;border-bottom:1px solid #a78bfa50;padding-bottom:5px}
+.llm-showcase-media{min-width:0}
+.llm-image-link{display:block;position:relative;border:1px solid #ffffff20;border-radius:12px;overflow:hidden;box-shadow:0 22px 45px #0004;cursor:zoom-in}
+.llm-image-link img{display:block;width:100%;height:auto}
+.llm-image-hint{position:absolute;bottom:7px;right:8px;background:#0b1220e6;color:#fff;font-size:9px;padding:3px 7px;border-radius:4px;opacity:0;transition:opacity .2s}
+.llm-image-link:hover .llm-image-hint,.llm-image-link:focus-visible .llm-image-hint{opacity:1}
+.llm-showcase figcaption{grid-column:1/-1;color:#a1aec1;font-size:10px;line-height:1.8;border-top:1px solid #ffffff12;padding-top:18px}
+.llm-card-art{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;padding:22px 28px;background:radial-gradient(ellipse at 50% 30%,#8b5cf622,transparent 75%),#0b1220;border-bottom:1px solid var(--border);overflow:hidden}
+.llm-card-art img{display:block;width:88%;height:auto;border:1px solid #ffffff20;border-radius:10px;box-shadow:0 10px 25px #0004;transition:transform .25s}
+.project-card:hover .llm-card-art img{transform:translateY(-3px)}
+.llm-card-caption{font-size:10px;color:var(--muted)}
+.llm-comparison{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0}
+.llm-comparison>div{padding:22px;border:1px solid var(--border);border-radius:10px;background:#111c2e}
+.llm-comparison>div:last-child{border-color:#a78bfa65;background:#a78bfa08}
+.llm-case h3{font-size:15px;font-weight:600;line-height:1.65}
+.llm-comparison h3{margin:10px 0}
+.llm-comparison p,.llm-storage p{color:var(--muted);font-size:12px;line-height:1.85;word-break:keep-all}
+.llm-storage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:28px 0}
+.llm-storage>div{display:flex;flex-direction:column;padding:22px 18px;border:1px solid #a78bfa40;border-radius:10px;background:#a78bfa06}
+.llm-storage-key{font:500 21px/1.6 var(--mono);color:#c4b5fd}
+.llm-storage h3{margin:10px 0}
+.llm-storage p{margin-bottom:18px}
+.llm-storage-rule{display:block;margin-top:auto;padding-top:13px;border-top:1px solid #a78bfa30;color:#d5dbea;font-size:10px}
+.llm-routes{display:grid;gap:12px;margin:28px 0}
+.llm-route{display:grid;grid-template-columns:32px minmax(0,1fr);gap:18px;padding:22px;background:#111c2e;border:1px solid var(--border);border-radius:10px}
+.llm-route-number{width:32px;height:32px;display:grid;place-items:center;border:1px solid #a78bfa60;border-radius:8px;color:#c4b5fd;font:500 12px var(--mono)}
+.llm-route p{font-size:12px;line-height:1.9;color:#d5dbea;margin:7px 0}
+.llm-route div>span{font-size:11px;color:var(--muted);line-height:1.8;display:block}
+.llm-reuse{padding:25px;margin:28px 0;border:1px solid #22c55e50;border-radius:12px;background:#22c55e06}
+.llm-reuse .llm-eyebrow{color:#6ee7a0}
+.llm-reuse h3{margin:12px 0}
+.llm-reuse p{font-size:12px;color:var(--muted);line-height:2}
+.llm-reuse p span{margin:0 5px;color:#6ee7a0}
+.llm-reuse a{display:inline-block;margin-top:18px;font-size:12px;color:#6ee7a0;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:760px){
+  .llm-heading{margin-top:28px}
+  .llm-showcase{grid-template-columns:1fr;padding:22px;gap:23px;margin:28px 0}
+  .llm-showcase-copy h2 br{display:none}
+  .llm-showcase-copy h2{font-size:22px;word-break:keep-all}
+  .llm-showcase-copy p br{display:none}
+  .llm-showcase-copy p{word-break:keep-all}
+  .llm-jump{margin-top:18px}
+  .llm-showcase figcaption{font-size:10px}
+  .llm-card-art{gap:10px;padding:18px 22px}
+  .llm-card-art img{width:90%}
+  .llm-card-art .llm-eyebrow{font-size:9px}
+  .llm-comparison,.llm-storage{grid-template-columns:1fr}
+  .llm-storage>div{display:grid;grid-template-columns:75px 1fr;gap:4px 16px;padding:20px}
+  .llm-storage-key{grid-row:1/3;font-size:19px}
+  .llm-storage h3{margin:0}
+  .llm-storage p{margin:0}
+  .llm-storage-rule{grid-column:2;margin-top:8px}
+  .llm-route{padding:18px;gap:13px}
+  .llm-reuse{padding:22px}
+}
+@media(prefers-reduced-motion:reduce){.llm-card-art img,.llm-image-hint{transition:none}}
+@media print{
+  .llm-showcase,.llm-comparison,.llm-storage,.llm-route,.llm-reuse{background:white;box-shadow:none;break-inside:avoid;border-color:#cbd5e1}
+  .llm-showcase{grid-template-columns:0.8fr 1.2fr;padding:20px;gap:15px}
+  .llm-showcase-media{max-width:420px}
+  .llm-showcase-copy h2{font-size:18px}
+  .llm-heading h1{font-size:28px}
+  .llm-case .llm-eyebrow,.llm-name,.llm-storage-key,.llm-route-number{color:#6d28d9}
+  .llm-case h3,.llm-case .llm-showcase-copy h2{color:#111827}
+  .llm-case .llm-showcase-copy p,.llm-showcase figcaption,.llm-comparison p,.llm-storage p,.llm-storage-rule,.llm-route p,.llm-route div>span,.llm-reuse p,.llm-reuse a{color:#374151}
+  .llm-jump,.llm-image-hint{display:none}
+  .llm-comparison>div,.llm-storage>div,.llm-comparison>div:last-child{background:white;border-color:#cbd5e1}
+  .llm-storage{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .llm-storage>div{display:flex}
+  .llm-comparison{grid-template-columns:1fr 1fr}
+}
