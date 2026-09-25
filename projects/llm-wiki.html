@@ -4,132 +4,112 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="직접 기록하고 정리하는 부담을 줄이고, 활동과 대화의 맥락을 축적하기 위해 구축한 시스템입니다. AI로 정리한 내용을 원본 근거와 연결해 이후의 회고와 판단에 활용할 수 있도록 설계했습니다."><meta name="theme-color" content="#0f172a">
 <title>LLM Wiki — 개인 기록·지식 관리 시스템 구축 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
-<link rel="stylesheet" href="../assets/llm-wiki.css?v=20260925">
+<link rel="stylesheet" href="../assets/llm-wiki.css?v=20260925-visual">
 <link rel="canonical" href="https://chungyo.github.io/projects/llm-wiki.html">
 </head>
 <body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
-<main id="main" class="detail-main container llm-case">
+<main id="main" class="detail-main container llm-case llm-visual">
   <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
   <header class="detail-header llm-heading">
     <p class="project-category">PERSONAL PROJECT · AI WORKFLOW</p>
     <h1><span class="llm-name">LLM Wiki</span>개인 기록·지식 관리 시스템 구축</h1>
-    <p class="detail-lead">직접 기록하고 정리하는 부담을 줄이고, 활동과 대화의 맥락을 축적하기 위해 구축한 시스템입니다. AI로 정리한 내용을 원본 근거와 연결해 이후의 회고와 판단에 활용할 수 있도록 설계했습니다.</p>
-    <div class="tags"><span>Codex</span><span>Obsidian</span><span>Telegram</span><span>Markdown</span></div>
+    <p class="detail-lead">직접 기록하는 부담은 줄이고,<br> <strong>무엇을 했고 왜 결정했는지</strong> 다시 찾을 수 있도록.</p>
+    <dl class="llm-meta"><div><dt>역할</dt><dd>구조·처리 기준 설계 / AI와 함께 구현</dd></div><div><dt>기간</dt><dd>2026 · 개인 프로젝트</dd></div><div><dt>상태</dt><dd>개인 활용 · 개선 중</dd></div></dl>
   </header>
 
-  <figure class="llm-showcase">
-    <div class="llm-showcase-copy">
-      <span class="llm-eyebrow">실제 사용 화면</span>
-      <h2>오늘의 우선순위와<br> 남은 일을 묻는 챗봇</h2>
-      <p>Telegram에서 짧게 답변하며<br> 활동만으로 알 수 없는 맥락을 보충합니다.</p>
-      <a class="llm-jump" href="#part-5">입력·저장 흐름 보기 <span aria-hidden="true">↗</span></a>
-    </div>
-    <div class="llm-showcase-media">
-      <a class="llm-image-link" href="../assets/evidence/llm-wiki-telegram.webp" data-image-viewer data-caption="Telegram 기반 기록·회고 챗봇의 실제 알림">
-        <img src="../assets/evidence/llm-wiki-telegram.webp" width="625" height="313" alt="Telegram 챗봇이 저녁에는 완료한 일과 남은 장애물을, 아침에는 가장 중요한 일 1~3개를 묻는 실제 알림 두 개" fetchpriority="high">
-        <span class="llm-image-hint">클릭하여 확대 ↗</span>
+  <section class="llm-overview" id="architecture" aria-labelledby="architecture-title">
+    <div class="llm-figure-heading"><div><span class="llm-eyebrow">SYSTEM OVERVIEW</span><h2 id="architecture-title">기록이 들어오고, 맥락이 남는 구조</h2></div><a href="../assets/diagrams/llm-wiki-architecture.html" target="_blank" rel="noopener">구조도 탐색 ↗</a></div>
+    <figure class="llm-architecture">
+      <a href="../assets/diagrams/llm-wiki-architecture.svg" data-image-viewer data-caption="LLM Wiki — 세 입력 경로와 저장 범위">
+        <img src="../assets/diagrams/llm-wiki-architecture.svg" width="1000" height="525" alt="작업 기록은 일일 정리를 거쳐 Daily에, 자료는 데스크톱 ingest를 거쳐 Raw와 Wiki에 반영된다. Telegram의 Wiki 저장은 미리보기와 사용자 확인 후 로컬 동기화로 전달된다." fetchpriority="high">
+        <span class="llm-diagram-hint">구조도 크게 보기 ↗</span>
       </a>
-    </div>
-    <figcaption>Telegram의 실제 알림 화면 · 개인 일정은 제외했습니다. 알림 수신과 Wiki 저장 완료는 별도 단계입니다.</figcaption>
-  </figure>
+      <figcaption>운영 규칙과 동기화 구현을 요약한 구조도입니다. 세 경로의 처리 범위는 다르며, 모든 기록이 자동으로 Wiki에 저장되는 것은 아닙니다.</figcaption>
+    </figure>
+    <div class="llm-route-summary"><p><b>01</b><span>활동 기록 <strong>→ Daily</strong></span></p><p><b>02</b><span>자료·회의 <strong>→ Raw · Wiki</strong></span></p><p><b>03</b><span>Telegram <strong>→ 확인 후 저장</strong></span></p></div>
+  </section>
 
-  <dl class="case-facts">
-    <div><dt>담당 범위</dt><dd>개인 기록 구조·처리 기준 설계<br>AI 도구와 함께 구현·검토</dd></div>
-    <div><dt>기간·맥락</dt><dd>2026년 개인 프로젝트</dd></div>
-    <div><dt>현재 단계</dt><dd>개인 기록·회고에 활용<br>기록 품질과 운영 안정성 개선 중</dd></div>
-  </dl>
-  <div class="case-outcome case-summary"><span>핵심 판단</span><p>원본과 해석을 나누고, 판단의 맥락은 질문으로 보충해 다시 활용할 수 있는 기록으로 정리했습니다.</p></div>
+  <nav class="llm-chapter-nav" aria-label="상세 사례 목차"><a href="#part-1">시작 계기</a><a href="#part-2">Wiki 선택</a><a href="#part-3">수집 방식</a><a href="#part-4">기록 구조</a><a href="#part-5">질문과 확인</a><a href="#part-6">활용 결과</a></nav>
 
-  <div class="detail-layout">
-    <aside class="case-sidebar">
-      <details class="case-toc" open>
-        <summary>목차 <span>CONTENTS</span></summary>
-        <nav aria-label="상세 사례 목차">
-          <a href="#part-1" data-part="part-1"><b>01</b><span>직접 기록하는 부담</span></a>
-          <a href="#part-2" data-part="part-2"><b>02</b><span>LLM Wiki를 선택한 이유</span></a>
-          <a href="#part-3" data-part="part-3"><b>03</b><span>수집 방식의 시행착오</span></a>
-          <a href="#part-4" data-part="part-4"><b>04</b><span>원본·하루·지식의 구분</span></a>
-          <a href="#part-5" data-part="part-5"><b>05</b><span>자동화와 확인의 경계</span></a>
-          <a href="#part-6" data-part="part-6"><b>06</b><span>활용 결과와 남은 과제</span></a>
-        </nav>
-      </details>
-      <p class="case-evidence-label">작성 근거</p>
-      <p class="case-evidence-text">사용 경험 · 운영 스키마 · 정리 지침 · 동기화 구현 · 실제 알림 화면<br>2026.09.25 편집</p>
-    </aside>
-    <article class="case-study" aria-label="LLM Wiki — 개인 기록·지식 관리 시스템 구축 상세">
-      <section id="part-1" class="case-section">
-        <span class="case-index">01 · BACKGROUND</span>
-        <h2>기록은 필요했지만,<br>직접 남기는 일은 부담스러웠습니다</h2>
-        <p>내가 무엇을 했고, 어떤 고민 끝에 결정을 내렸는지 남기고 싶었습니다. 과거의 경험을 돌아보며 나를 이해하고 개선할 점을 찾으려면, 결과뿐 아니라 당시의 맥락도 필요하다고 생각했습니다. 하지만 매번 시간을 내어 기억을 더듬고 글로 정리하는 일은 부담스러웠습니다.</p>
-        <p>그래서 일상에서 이미 만들어지는 활동과 대화를 기록의 출발점으로 삼았습니다. Mac에서의 활동은 화면 기록으로, 회의나 중요한 대화는 녹음으로 남기는 방식부터 시도했습니다.</p>
-      </section>
+  <article aria-label="LLM Wiki의 설계 판단과 활용">
+    <section id="part-1" class="case-section llm-chapter">
+      <header><span class="case-index">01 · PROBLEM</span><h2>남기고 싶었던 건<br> 활동보다 그때의 판단</h2></header>
+      <div class="llm-chapter-body">
+        <p class="llm-chapter-lead">“무엇을 했지?”뿐 아니라<br> <strong>“왜 그렇게 결정했지?”에도 답하고 싶었습니다.</strong></p>
+        <p>나를 이해하고 개선할 점을 찾으려면 당시의 맥락이 필요했습니다. 하지만 매번 기억을 더듬어 글로 정리하는 일은 부담스러웠습니다. 그래서 이미 만들어지는 활동과 대화를 기록의 출발점으로 삼았습니다.</p>
+        <div class="llm-question-strip"><span>무엇을 했는가</span><span>왜 선택했는가</span><span>무엇이 남았는가</span></div>
+      </div>
+    </section>
 
-      <section id="part-2" class="case-section">
-        <span class="case-index">02 · WHY WIKI</span>
-        <h2>기록을 모으는 것에서,<br>맥락을 축적하는 것으로</h2>
-        <p>기록을 확보하는 것과 그 기록을 이후의 판단에 활용하는 것은 다른 문제였습니다. 자료를 쌓아두는 데서 그치지 않고, 어떤 일과 관련된 내용인지, 무엇을 고민했고 어떤 결정을 내렸는지 연결해두고 싶었습니다.</p>
-        <p>더 좋은 AI 모델이 등장하더라도 그 모델이 저의 경험과 판단 배경을 처음부터 알고 있는 것은 아닙니다. 사용하는 모델이나 도구가 바뀌어도 필요한 맥락을 다시 전달할 수 있도록, 기록을 특정 대화 안에만 남겨두지 않으려 했습니다.</p>
-        <p>이 목적에 맞춰 Karpathy의 LLM Wiki 패턴을 참고했습니다. 원본 자료와 정리된 지식을 분리하고, 새 자료가 들어오면 기존 내용과 연결해 갱신하는 방식을 개인 기록 관리에 적용했습니다. Obsidian의 Markdown 문서를 지식 저장소로 두고, 일일 기록과 장기적으로 활용할 지식을 구분했습니다.</p>
-        <div class="case-note"><strong>모델이 바뀌어도, 기록은 남도록</strong><p>모든 모델이 자동으로 저를 이해하게 만드는 것이 목표는 아닙니다. 관련 기록과 근거를 찾아 새로운 대화에도 제공할 수 있도록, 맥락을 유지하는 기반을 만들고자 했습니다.</p></div>
-        <p class="media-source">참고한 원형: <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">Andrej Karpathy — LLM Wiki ↗</a><br>원형을 바탕으로 개인 기록 분류와 입력·저장 흐름을 확장했으며, 개발은 AI 도구와 함께 진행했습니다.</p>
-      </section>
-
-      <section id="part-3" class="case-section">
-        <span class="case-index">03 · ITERATION</span>
-        <h2>화면 기록 방식의 한계를 겪고<br>수집 경로를 바꿨습니다</h2>
-        <p>처음에는 Screenpipe로 Mac 화면 활동을 기록했습니다. 사용하면서 저장 용량이 부담됐고, 기록을 살펴봐도 제가 원했던 세부 맥락을 충분히 파악하기 어려웠습니다. 이후 Codex Computer History가 나오면서 화면 활동을 기록하는 방식을 전환했습니다.</p>
-        <div class="llm-comparison">
-          <div><span class="llm-eyebrow">처음 시도한 방식</span><h3>Screenpipe</h3><p>화면 활동을 남겼지만 저장 용량과 필요한 맥락을 찾는 데 부담을 느꼈습니다.</p></div>
-          <div><span class="llm-eyebrow">변경한 방식</span><h3>Codex Computer History</h3><p>화면 활동의 수집 경로를 전환하고, Codex 작업 기록과 함께 정리 근거로 사용했습니다.</p></div>
+    <section id="part-2" class="case-section llm-chapter">
+      <header><span class="case-index">02 · DECISION</span><h2>대화가 끝나도<br> 맥락은 남도록</h2></header>
+      <div class="llm-chapter-body">
+        <p>더 좋은 모델도 제 경험과 판단 배경을 처음부터 알지는 못합니다. 특정 대화 안에만 기록을 남기지 않고, <strong>관련 자료를 찾아 새 대화에 다시 제공할 수 있는 저장소</strong>를 만들고자 했습니다.</p>
+        <div class="llm-context-compare">
+          <div><span class="llm-eyebrow">대화 안에만 남기면</span><h3>다시 찾아서, 다시 설명</h3><p>과거 대화와 자료를 따로 확인해<br> 필요한 배경을 모아야 합니다.</p></div>
+          <span class="llm-transition-arrow" aria-hidden="true">→</span>
+          <div><span class="llm-eyebrow">Wiki에 연결해두면</span><h3>주제와 출처를 함께 참조</h3><p>관련 기록을 찾아<br> 다음 질문의 근거로 제공할 수 있습니다.</p></div>
         </div>
-        <p>회의와 중요한 대화는 PLAUD Note로 녹음했습니다. 화면 활동과 중요한 대화는 담고 있는 맥락이 다르기 때문에 각각의 입력 경로로 구분했습니다.</p>
-        <p>기록을 정리할 때도 화면에서 관찰한 활동, 대화에서 명시한 판단, 실제 확인된 결과를 구분하도록 했습니다. 페이지를 열었다는 사실만으로 작업을 끝냈다고 판단하거나, 화면만 보고 선택의 이유를 추측하지 않도록 작성 기준을 두었습니다.</p>
-      </section>
+        <p class="llm-small">Karpathy의 LLM Wiki 패턴을 참고해 Obsidian의 Markdown 문서를 저장소로 삼고, 개인 기록 분류와 입력·저장 흐름을 확장했습니다. 새 모델이 자동으로 저를 학습하는 구조는 아닙니다.</p>
+        <a class="llm-text-link" href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">참고한 원형: Andrej Karpathy — LLM Wiki ↗</a>
+      </div>
+    </section>
 
-      <section id="part-4" class="case-section">
-        <span class="case-index">04 · KNOWLEDGE STRUCTURE</span>
-        <h2>원본·하루의 기록·재사용할 지식을<br>분리했습니다</h2>
-        <p>기록을 관리하는 구조는 Raw, Daily, Wiki로 나눴습니다. 날짜로 찾을 때는 Daily를, 주제나 프로젝트로 찾을 때는 Wiki의 색인과 링크를 이용하도록 했습니다.</p>
-        <div class="llm-storage" role="group" aria-label="Obsidian 저장소의 세 구역">
-          <div><span class="llm-storage-key">Raw</span><h3>원본과 출처</h3><p>확보한 원문·자료를 보관합니다. 정리된 해석으로 원본을 덮어쓰지 않습니다.</p><span class="llm-storage-rule">근거 보존</span></div>
-          <div><span class="llm-storage-key">Daily</span><h3>하루의 맥락</h3><p>날짜별 계획·관찰·결정·실행·후속 행동을 구분해 남깁니다.</p><span class="llm-storage-rule">계획 ≠ 실행 결과</span></div>
-          <div><span class="llm-storage-key">Wiki</span><h3>다시 활용할 지식</h3><p>주제·개념·프로젝트별로 출처와 관련 기록을 연결하고 갱신합니다.</p><span class="llm-storage-rule">연결·재사용</span></div>
+    <section id="part-3" class="case-section llm-chapter">
+      <header><span class="case-index">03 · ITERATION</span><h2>계속 쌓기 전에,<br> 수집 방식부터 변경</h2></header>
+      <div class="llm-chapter-body">
+        <div class="llm-iteration">
+          <div class="llm-before"><span class="llm-step-label">처음 시도</span><h3>Screenpipe</h3><p>Mac 화면 활동 기록</p><ul><li>저장 용량에 대한 부담</li><li>원했던 세부 맥락을 찾기 어려움</li></ul></div>
+          <div class="llm-after"><span class="llm-step-label">수집 경로 변경</span><h3>Codex Computer History</h3><p>활동 요약 + Codex 작업 기록</p><ul><li>작업 기록을 주 근거로 사용</li><li>저장된 활동 요약으로 보완</li></ul></div>
+          <div class="llm-audio"><span aria-hidden="true">◉</span><div><strong>회의·중요한 대화는 PLAUD Note로 별도 수집</strong><p>화면 활동과 회의 녹음은 담고 있는 맥락이 달라 입력 경로를 구분했습니다.</p></div></div>
         </div>
-        <p>하루 동안의 모든 활동을 장기 지식으로 옮기지는 않습니다. 그날의 맥락은 Daily에 남기고, 다시 활용할 자료는 별도의 지식 정리 과정으로 다룹니다.</p>
-        <div class="case-table-wrap" role="region" aria-label="log와 ingest의 역할" tabindex="0"><table><caption>정리 목적에 따라 나눈 두 가지 스킬</caption><thead><tr><th scope="col">작업</th><th scope="col">정리하는 내용</th><th scope="col">반영 범위</th></tr></thead><tbody>
-          <tr><th scope="row"><code>log</code></th><td>대화 속 문제, 판단과 이유, 확인된 결과, 남은 일</td><td>Daily</td></tr>
-          <tr><th scope="row"><code>ingest</code></th><td>원문·출처, 저장 목적, 관련 맥락과 기존 자료</td><td>Raw 보존 및 관련 Wiki 정리</td></tr>
-        </tbody></table></div>
-        <p>대화에 필요한 맥락이 없으면 질문하도록 지침을 구성했습니다. 과거 기록을 다시 읽을 때도 요약만 보는 대신, 그 판단의 근거가 된 자료를 함께 확인할 수 있게 했습니다.</p>
-      </section>
+        <p class="llm-small">사용하면서 느낀 제약을 바탕으로 방식을 바꿨습니다. 전환 후의 용량 감소나 정리 시간 절감은 측정하지 않았습니다.</p>
+      </div>
+    </section>
 
-      <section id="part-5" class="case-section">
-        <span class="case-index">05 · WORKFLOW &amp; CONTROL</span>
-        <h2>입력과 저장 경로에 따라<br>자동화 범위를 나눴습니다</h2>
-        <p>핵심 저장소는 Obsidian에 두고, 기록을 가져오는 경로별로 처리 범위를 정했습니다. 모든 입력이 하나의 자동 저장 절차를 거치는 구조는 아닙니다.</p>
-        <div class="llm-routes">
-          <div class="llm-route"><span class="llm-route-number">A</span><div><h3>일일 기록 자동화</h3><p>Codex 작업 기록 + 저장된 Computer History 요약 → 날짜별 기록 정리</p><span>Daily만 갱신 · 자료가 없는 구간은 추측하지 않음</span></div></div>
-          <div class="llm-route"><span class="llm-route-number">B</span><div><h3>데스크톱의 ingest</h3><p>자료 입력 → 출처·중복·저장 맥락 확인 → 관련 지식과 연결</p><span>Raw 보존 · 관련 Wiki·색인·운영 로그의 제한된 갱신</span></div></div>
-          <div class="llm-route"><span class="llm-route-number">C</span><div><h3>Telegram 기반 기록·회고 챗봇</h3><p>대화·자료 입력 → Wiki 저장 미리보기·확인 → 로컬 동기화</p><span>챗봇의 저장 경로 · 데스크톱 ingest와 처리 범위가 다름</span></div></div>
-        </div>
-        <p>챗봇 ‘깍두’는 기록에 접근하는 경로 중 하나입니다. 위의 실제 알림처럼 아침에는 중요한 일을, 저녁에는 끝낸 일과 남은 장애물을 묻습니다. 사용자가 답변하며 화면 기록에 없는 판단과 의도를 덧붙일 수 있도록 했습니다.</p>
-        <p>특히 챗봇의 저장 경로에서는 승인한 내용을 만드는 단계와 실제 파일에 반영하는 단계를 나눴습니다. 로컬 동기화 코드는 예상한 파일 내용과 현재 내용의 해시를 비교하고, 다르면 충돌로 처리합니다. 쓰기 시점에도 변경 여부를 다시 확인하고, 저장한 파일을 읽어 결과를 대조합니다.</p>
-        <div class="case-note"><strong>저장 성공과 내용의 타당성은 별개입니다</strong><p>파일 검사는 기존 기록을 잘못 덮어쓰는 위험을 다룹니다. AI가 작성한 내용이 사실과 의도를 정확히 담았는지는 원본과 사용자 확인을 통해 별도로 검토해야 합니다.</p></div>
-      </section>
+    <section id="part-4" class="case-section llm-chapter">
+      <header><span class="case-index">04 · STRUCTURE</span><h2>원본, 하루, 지식은<br> 다르게 관리</h2></header>
+      <div class="llm-chapter-body">
+        <figure class="llm-vault">
+          <div class="llm-vault-bar"><span class="llm-eyebrow">OBSIDIAN · MARKDOWN</span><span>실제 운영 스키마 기반 요약</span></div>
+          <div class="llm-vault-row"><code>Raw/</code><div><h3>원본을 보존</h3><p>회의 녹음·자료·원문<br> 해석으로 원본을 덮어쓰지 않음</p></div><span class="llm-file-label">SOURCE</span></div>
+          <div class="llm-vault-row"><code>Daily/</code><div><h3>그날의 맥락을 기록</h3><p>계획 · 관찰 · 결정 · 실행 · 다음 행동<br> 하려던 일과 끝낸 일을 구분</p></div><span class="llm-file-label">BY DATE</span></div>
+          <div class="llm-vault-row"><code>Wiki/</code><div><h3>주제별 지식을 연결</h3><p>Sources · Concepts · Projects · INDEX<br> 관련 기록과 출처를 함께 참조</p></div><span class="llm-file-label">BY TOPIC</span></div>
+          <figcaption>운영 문서에 정의한 폴더 역할과 관리 기준을 요약했습니다.</figcaption>
+        </figure>
+        <div class="llm-skill-pair"><p><code>log</code><strong>대화 → 하루의 기록</strong><span>판단·이유·결과·남은 일을 Daily에</span></p><p><code>ingest</code><strong>자료 → 연결된 지식</strong><span>출처·목적·관련 맥락을 확인해 Wiki에</span></p></div>
+        <p class="llm-small">모든 Daily를 자동으로 Wiki에 옮기지는 않습니다. 필요한 맥락이 없으면 질문하고, 다시 활용할 자료를 별도로 정리합니다.</p>
+      </div>
+    </section>
 
-      <section id="part-6" class="case-section">
-        <span class="case-index">06 · OUTCOME &amp; NEXT</span>
-        <h2>쌓인 기록을<br>다음 작업의 근거로 사용합니다</h2>
-        <p>이번 포트폴리오를 준비할 때도 AI와 함께 Wiki에 저장해둔 AI 개발 워크플로우 영상의 정리와 자막을 다시 확인했습니다. 영상에서 설명한 원칙과 HASHI의 실제 문서·코드를 대조해, 이미 구현한 부분과 앞으로 검토할 부분을 구분하는 데 활용했습니다.</p>
-        <div class="llm-reuse"><span class="llm-eyebrow">실제 재사용 사례</span><h3>저장해둔 영상 자료를 HASHI 사례 검토에 활용</h3><p>Wiki의 영상 정리·자막 <span aria-hidden="true">→</span> 실제 문서·코드와 대조 <span aria-hidden="true">→</span> 구현한 범위와 향후 과제 구분</p><a href="hashi-ai-workflow.html">HASHI AI 하네스 적용 사례 보기 ↗</a></div>
-        <p>현재는 기록 분류와 정리 지침, 일일 기록 자동화 설정, 챗봇의 게시·동기화 코드까지 마련돼 있습니다. 기록을 다시 찾아 활용한 사례도 있지만, 기록 품질과 장기 운영의 안정성은 계속 확인해야 합니다.</p>
-        <div class="case-table-wrap" role="region" aria-label="현재 결과와 남은 검증" tabindex="0"><table><caption>구현·사용 경험과 후속 검증을 구분했습니다</caption><thead><tr><th scope="col">현재 확인한 범위</th><th scope="col">계속 확인할 부분</th></tr></thead><tbody>
-          <tr><td>Raw·Daily·Wiki 분류, 정리 지침, 자동화 설정과 동기화 구현</td><td>예약 실행·외부 서비스·로컬 반영의 장기 운영 안정성</td></tr>
-          <tr><td>Telegram 알림 수신, 저장해둔 자료의 재활용</td><td>필요한 근거를 다시 찾을 수 있는지, 중요한 판단이 요약에서 빠지지 않는지</td></tr>
-        </tbody></table></div>
-        <p>수집 방식 변경 후의 용량 감소나 정리 시간 절감은 측정하지 않았습니다. 모델이 바뀌어도 필요한 맥락을 충분히 전달할 수 있는지는 후속 검증 과제입니다. 앞으로는 기록량보다 필요한 근거를 다시 찾고, 당시의 판단을 정확히 남길 수 있는지를 기준으로 개선하려 합니다.</p>
-      </section>
-    </article>
-  </div>
+    <section id="part-5" class="case-section llm-chapter">
+      <header><span class="case-index">05 · HUMAN IN THE LOOP</span><h2>AI가 모르는 이유는<br> 사람에게 질문</h2></header>
+      <div class="llm-chapter-body">
+        <figure class="llm-real-screen">
+          <div class="llm-figure-heading"><span class="llm-eyebrow">실제 TELEGRAM 알림</span><span>개인 일정 제외</span></div>
+          <a class="llm-image-link" href="../assets/evidence/llm-wiki-telegram.webp" data-image-viewer data-caption="Telegram 기반 기록·회고 챗봇의 실제 알림">
+            <img src="../assets/evidence/llm-wiki-telegram.webp" width="625" height="313" alt="아침에는 가장 중요한 일 1~3개를, 저녁에는 완료한 일과 남은 장애물을 묻는 챗봇의 실제 알림" loading="lazy">
+          </a>
+          <figcaption>아침에는 우선순위, 저녁에는 끝낸 일과 장애물을 묻습니다. 사용자의 답변으로 활동 기록에 없는 의도와 판단을 보충합니다.</figcaption>
+        </figure>
+        <p>화면에서 페이지를 열었다고 작업을 끝낸 것은 아닙니다. 관찰한 활동, 사용자가 말한 판단, 확인된 결과를 구분하는 기준을 두었습니다.</p>
+        <div class="llm-save-boundary"><h3>챗봇의 Wiki 저장은 확인 후에</h3><ol><li><span>01</span><strong>초안 확인</strong><small>미리보기·사용자 승인</small></li><li><span>02</span><strong>파일 대조</strong><small>해시가 다르면 충돌 처리</small></li><li><span>03</span><strong>반영 재확인</strong><small>쓰기 전 확인·저장 후 읽기</small></li></ol></div>
+        <details class="llm-detail"><summary>저장 검증의 범위와 한계</summary><p>승인한 초안을 만드는 단계와 실제 로컬 파일에 반영하는 단계를 나눴습니다. 해시 비교와 저장 후 읽기는 기존 기록을 잘못 덮어쓰는 위험을 다룹니다. 내용이 사실과 의도를 정확히 담았는지는 별도로 검토해야 합니다. Telegram은 데스크톱 ingest와 처리 범위가 다르며, 알림 수신만으로 Wiki 저장 완료를 판단하지 않습니다.</p></details>
+      </div>
+    </section>
+
+    <section id="part-6" class="case-section llm-chapter">
+      <header><span class="case-index">06 · REUSE</span><h2>저장한 자료를<br> 다음 작업의 근거로</h2></header>
+      <div class="llm-chapter-body">
+        <p>포트폴리오를 준비하며 Wiki에 저장한 AI 개발 워크플로우 영상의 정리와 자막을 다시 확인했습니다. <strong>HASHI의 실제 문서·코드와 대조해 구현한 범위와 앞으로의 과제를 구분</strong>하는 데 활용했습니다.</p>
+        <figure class="llm-reuse-evidence">
+          <a href="hashi-ai-workflow.html"><img src="../assets/diagrams/hashi-harness.svg" alt="Wiki의 영상 자료를 다시 참조해 검토한 HASHI AI 개발 하네스 사례의 공개 구조도" loading="lazy"><span>HASHI AI 개발 하네스 적용 사례 ↗</span></a>
+          <figcaption>재사용한 결과가 반영된 포트폴리오 사례 · 클릭하면 상세 내용으로 이동합니다.</figcaption>
+        </figure>
+        <div class="llm-result"><div><span class="llm-eyebrow">현재 활용</span><p>기록 분류·정리 지침과 자동화·동기화 구현을 마련하고, 저장된 자료를 다시 찾아 사례 검토에 사용했습니다.</p></div><div><span class="llm-eyebrow">다음 검증</span><p>필요한 근거를 잘 찾는지, 중요한 판단이 요약에서 빠지지 않는지, 장기 운영이 안정적인지 확인하고 있습니다.</p></div></div>
+        <p class="llm-small">모델이 달라져도 맥락을 충분히 전달할 수 있는지는 후속 검증 과제입니다. 시간·비용 절감률이나 장기 운영 안정성을 달성 성과로 제시하지 않습니다.</p>
+      </div>
+    </section>
+  </article>
   <a class="next-project" href="api-workflow.html"><span>다음 프로젝트</span><strong>코드에서 다시 계산하는 API 연동 현황 ↗</strong></a>
 </main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>
