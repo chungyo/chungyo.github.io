@@ -1,0 +1,14 @@
+sequenceDiagram
+  participant P as 내담자
+  participant S as 서비스
+  participant C as 상담사
+  P->>S: 상담 신청 · 예약
+  Note over P,S: 동의서 미작성 상태에서도 예약 가능
+  S-->>P: 예약 확정 후 동의서 전달 · 작성 안내
+  opt 첫 상담 전까지 미작성한 경우
+    P->>C: 방문 또는 접속
+    C-->>P: 동의서 작성 안내
+  end
+  P->>S: 상담동의서 작성 · 제출
+  Note over P,C: 첫 상담 시작 전 동의 완료 필수
+  C->>P: 동의 완료 확인 후 상담 시작

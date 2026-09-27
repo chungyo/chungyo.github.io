@@ -1,82 +1,122 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="마음모음 1minute의 고객 요구를 웹·앱·관리자·서버 구현과 대조했습니다. 개발 차수 이동과 신규 요구를 구분하고 알림·구독 처리 기준을 정리했습니다."><meta name="theme-color" content="#0f172a">
-<title>요구사항과 웹·앱 구현의 차이를 개발 범위로 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="마음모음 1minute에서 출시 범위를 정하고 건강 데이터·AI 상담 기능의 앱 심사 이슈를 조율한 PM 사례입니다.">
+  <meta name="theme-color" content="#0f172a">
+  <title>웰니스 앱 출시 범위와 심사 대응 | 김충영</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Noto+Sans+KR:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=20260921-cases">
+  <link rel="stylesheet" href="../assets/one-minute-case.css?v=20260927">
+  <script src="../site.js?v=20260921-cases" defer></script>
 </head>
-<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
-<main id="main" class="detail-main container">
-  <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
-  <div class="case-cover"><div class="project-art" style="--art:#2dd4bf" aria-hidden="true"><div class="art-corner">1MINUTE · WELLNESS</div><svg viewBox="0 0 416 185"><path d="M111 89h70m54 0h70" stroke="#2dd4bf" stroke-opacity=".35" stroke-dasharray="4 5"/><circle cx="146" cy="89" r="3" fill="#2dd4bf"/><circle cx="270" cy="89" r="3" fill="#2dd4bf"/><g transform="translate(57 62)"><rect width="54" height="54" rx="12" fill="#2dd4bf" fill-opacity=".07" stroke="#2dd4bf" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#2dd4bf" font-size="23" font-family="monospace">≡</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Request</text></g><g transform="translate(181 62)"><rect width="54" height="54" rx="12" fill="#2dd4bf" fill-opacity=".07" stroke="#2dd4bf" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#2dd4bf" font-size="23" font-family="monospace">◇</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Scope</text></g><g transform="translate(305 62)"><rect width="54" height="54" rx="12" fill="#2dd4bf" fill-opacity=".07" stroke="#2dd4bf" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#2dd4bf" font-size="23" font-family="monospace">↗</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Web / App</text></g></svg><div class="art-title">네 제품의 기준을 맞추는 PM</div><div class="art-caption">REQUIREMENTS → SCOPE → DELIVERY</div></div></div>
-  <header class="detail-header">
-    <p class="project-category">1MINUTE · WELLNESS</p>
-    <h1>요구사항과 웹·앱 구현의 차이를 개발 범위로</h1>
-    <p class="detail-lead">마음모음 1minute의 고객 요구를 웹·앱·관리자·서버 구현과 대조했습니다. 개발 차수 이동과 신규 요구를 구분하고 알림·구독 처리 기준을 정리했습니다.</p>
-    <div class="tags"><span>PM</span><span>React Native</span><span>WebView</span></div>
+<body>
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
+  <header class="nav" id="nav">
+    <nav class="container nav-inner" aria-label="주요 메뉴">
+      <a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a>
+      <div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div>
+    </nav>
   </header>
-  <dl class="case-facts">
-    <div><dt>담당 범위</dt><dd>고객 요구·범위 조율 · 개발 전달 · 웹·앱 구독 응답 처리</dd></div>
-    <div><dt>기간·맥락</dt><dd>마음모음 1minute 프로젝트</dd></div>
-    <div><dt>현재 단계</dt><dd>기획·개발 기여 / 운영 효과 별도 확인</dd></div>
-  </dl>
-  <div class="case-outcome case-summary"><span>이 사례의 핵심 변화</span><p>신규 요구와 차수 이동을 구분하고 웹·앱·관리자·서버의 구현·인수 기준을 연결</p></div>
-  <div class="detail-layout">
-    <aside class="case-sidebar">
-      <details class="case-toc" open>
-        <summary>목차 <span>CONTENTS</span></summary>
-        <nav aria-label="상세 사례 목차">
-          <a href="#part-1" data-part="part-1"><b>01</b><span>배경: 하나의 서비스, 네 곳의 구현</span></a>
-          <a href="#part-2" data-part="part-2"><b>02</b><span>문제: 모든 요청을 새 개발로 계산할 수는 없다</span></a>
-          <a href="#part-3" data-part="part-3"><b>03</b><span>판단과 결과: 11건 중 6건은 차수 이동</span></a>
-          <a href="#part-4" data-part="part-4"><b>04</b><span>개발 전달: 알림 하나에도 필요한 조건</span></a>
-          <a href="#part-5" data-part="part-5"><b>05</b><span>기술 구현: WebView 경계의 응답 정규화</span></a>
-          <a href="#part-6" data-part="part-6"><b>06</b><span>검증과 한계</span></a>
-          <a href="#part-7" data-part="part-7"><b>07</b><span>돌아보며: 범위와 예외를 같은 문장으로 전달하기</span></a>
-        </nav>
-      </details>
-      <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">최신 이력서·요구 분석 기록·MAM-FE 변경 코드 조사</p>
-    </aside>
-    <article class="case-study" aria-label="요구사항과 웹·앱 구현의 차이를 개발 범위로 상세">
-      <section id="part-1" class="case-section">
-        <span class="case-index">01</span>
-        <h2>배경: 하나의 서비스, 네 곳의 구현</h2>
-<p>마음모음 1minute은 웹·앱·관리자·서버가 함께 동작하는 멘탈 웰니스 서비스입니다. 고객이 설명하는 하나의 기능이 여러 구현과 디자인·에셋에 걸쳐 있을 수 있어, 요구사항과 각 구현의 차이를 확인하는 PM 업무를 맡았습니다.</p>
-<p>프론트엔드 개발도 함께 수행하며 고객 자료에 적힌 조건이 실제 응답과 화면 흐름에서 어떤 의미인지 대조했습니다.</p>
+  <main id="main" class="detail-main container minute-case">
+    <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
+
+    <header class="minute-hero">
+      <div class="minute-hero-copy">
+        <p class="project-category">1MINUTE · PROJECT MANAGEMENT</p>
+        <h1>웰니스 앱 출시 범위와<br>심사 대응</h1>
+        <p class="detail-lead">마음모음 1minute의 PM으로 MVP 개발부터 스토어 심사, 출시 후 개선까지 참여했습니다. 고객 요청을 일정에 맞는 작업으로 나누고, Apple이 건강 데이터와 AI 기능을 문제 삼았을 때는 고객이 설명해야 할 근거와 제품에서 바꿔야 할 부분을 구분해 대응했습니다.</p>
+        <div class="tags"><span>고객 커뮤니케이션</span><span>범위·일정 관리</span><span>심사 대응</span></div>
+        <div class="minute-store-links" aria-label="출시된 앱 보기">
+          <a href="https://apps.apple.com/kr/app/1minute/id6757288398" target="_blank" rel="noopener noreferrer">App Store에서 보기 ↗</a>
+          <a href="https://play.google.com/store/apps/details?id=com.maummoum.oneminute" target="_blank" rel="noopener noreferrer">Google Play에서 보기 ↗</a>
+        </div>
+      </div>
+      <figure class="minute-hero-screen">
+        <div class="minute-phone-window"><img src="../assets/one-minute-home-figma.png" alt="1minute 홈 화면 설계 시안. 감정 기록 그래프, 종합 지표, 마음 챙김 콘텐츠가 한 화면에 배치되어 있다" width="780" height="3180" decoding="async"></div>
+        <figcaption>1minute 홈 화면 설계 시안 · Figma</figcaption>
+      </figure>
+    </header>
+
+    <dl class="minute-facts">
+      <div><dt>역할</dt><dd>고객사 소통 및 프로젝트 PM</dd></div>
+      <div><dt>협업</dt><dd>고객사 · 협업사 · 디자인 · 웹/앱/서버 개발</dd></div>
+      <div><dt>결과</dt><dd>iOS 심사 승인 · 양대 스토어 공개</dd></div>
+    </dl>
+
+    <nav class="minute-contents" aria-label="사례 목차">
+      <span>CONTENTS</span>
+      <a href="#context">출시 전의 문제</a>
+      <a href="#scope">무엇을 먼저 만들지</a>
+      <a href="#review">심사 대응</a>
+      <a href="#next">출시 이후</a>
+    </nav>
+
+    <article class="minute-reading">
+      <section id="context" class="case-section">
+        <span class="minute-index">01 / CONTEXT</span>
+        <h2>하나의 앱에 담아야 할 것이 많았습니다</h2>
+        <p>1minute은 HRV 측정과 심리검사, 결과 확인, 콘텐츠, AI 생활 가이드를 하나의 앱에서 연결하는 서비스입니다. 온보딩부터 측정·콘텐츠·AI·관리자 기능까지 작업 축이 나뉘어 있었고, 같은 요청도 앱 화면만 고치면 끝나는지 서버와 운영 정책까지 바뀌는지에 따라 일정이 달라졌습니다.</p>
+        <p>저는 고객 요구를 화면 흐름과 기능 명세로 옮기고, WBS에서 작업과 담당 범위를 확인하며 고객사·협업사·디자인·개발팀 사이의 진행 상황을 정리했습니다. 측정 근거나 상담 정책처럼 고객의 판단이 필요한 부분은 개발팀이 임의로 정하지 않도록 되돌려 물었습니다. 앱 구현은 각 개발 담당자가 맡았고, 저는 무엇을 이번 버전에 넣고 어떤 조건에서 검수할지를 맞추는 역할이었습니다.</p>
+        <p>MVP 개발과 내부 QA를 병행하면서 고객 테스트와 스토어 제출을 준비했습니다. 이 시점부터는 요청을 모두 같은 ‘수정사항’으로 볼 수 없었습니다. 심사·테스트를 막는 문제와 다음 버전의 편의 개선을 구분해야 제출 범위가 흔들리지 않았습니다.</p>
       </section>
-      <section id="part-2" class="case-section">
-        <span class="case-index">02</span>
-        <h2>문제: 모든 요청을 새 개발로 계산할 수는 없다</h2>
-<p>계약 항목과 고객 요구를 다시 확인하면서 신규 기능인지, 기존에 포함됐지만 개발 차수가 이동한 항목인지 구분했습니다. 또한 디자인·에셋이 없는 UI 작업은 착수에 필요한 조건부터 정리해야 했습니다.</p><div class="case-table-wrap" role="region" aria-label="범위를 판단할 때 대조한 기준" tabindex="0"><table><caption>범위를 판단할 때 대조한 기준</caption><thead><tr><th scope="col">확인 대상</th><th scope="col">질문</th><th scope="col">연결할 산출물</th></tr></thead><tbody><tr><th scope="row">고객 원문·계약 항목</th><td>처음 합의한 범위에 포함됐는가?</td><td>범위 해석</td></tr><tr><th scope="row">웹·앱·관리자·서버 구현</th><td>어디까지 구현돼 있고 무엇이 다른가?</td><td>채널별 작업</td></tr><tr><th scope="row">디자인·에셋</th><td>화면 개발을 시작할 입력이 있는가?</td><td>착수 조건</td></tr><tr><th scope="row">개발 차수</th><td>새 요구인가, 기존 작업의 이동인가?</td><td>차수별 개발 범위</td></tr></tbody></table></div>
+
+      <section id="scope" class="case-section">
+        <span class="minute-index">02 / SCOPE</span>
+        <h2>요청 14개를 같은 우선순위로 놓지 않았습니다</h2>
+        <p>3월 3일 고객과 합의한 내용을 심사 전 반영 14건과 후속 고도화 2건으로 나눠 공유했습니다. 14건에는 HRV 측정 화면의 안내·표현, Android 측정 중 화면이 꺼지는 문제, 콘텐츠 재생 영역, 2차 비밀번호 재인증 조건 등이 들어갔습니다. 예를 들어 재인증은 단순한 문구 변경이 아니라 앱이 백그라운드에서 돌아온 뒤 3분이 지났는지, 프로세스가 다시 시작됐는지에 따라 동작이 달라지는 작업이었습니다.</p>
+        <p>반면 PIN 입력 후 자동 이동과 닉네임 금칙어 차단은 필요성을 인정하되 심사 제출의 선행 조건에서는 분리했습니다. 회의 직후 고객과 개발팀에 같은 목록·일정·제외 항목을 보내, 나중에 ‘요청했으니 이번에 들어가는 것 아니었나’라는 기대 차이가 생기지 않도록 했습니다. 당시 공유한 개발 반영 완료일과 심사 제출일은 <em>목표 일정</em>이었고, 실제 승인까지의 일정과는 구분했습니다.</p>
+        <figure class="minute-decision">
+          <figcaption><span>RELEASE SCOPE</span><strong>요청이 들어오면, 먼저 출시 판단에 필요한지 확인했습니다</strong></figcaption>
+          <div class="minute-decision-grid">
+            <div><span>심사 전 · 14건</span><strong>측정·안정성·보안</strong><p>HRV 안내와 결과 화면, Android 측정 오류, 재인증 조건 등</p></div>
+            <div><span>후속 · 2건</span><strong>편의 기능 고도화</strong><p>PIN 자동 이동과 닉네임 필터링은 별도 협의 대상으로 분리</p></div>
+          </div>
+        </figure>
+        <p>범위를 나누는 일은 우선순위표를 만드는 데서 끝나지 않았습니다. 고객 테스트에서 다시 나온 항목은 기존 합의사항인지 새로운 요청인지 확인하고, 구현 상태와 디자인·에셋 준비 여부를 함께 봤습니다. 같은 이름의 작업이라도 어느 화면과 플랫폼까지 적용할지 정해져야 개발 일정과 검수 기준을 설명할 수 있었습니다.</p>
       </section>
-      <section id="part-3" class="case-section">
-        <span class="case-index">03</span>
-        <h2>판단과 결과: 11건 중 6건은 차수 이동</h2>
-<p>계약 항목 11건 중 6건을 신규 요구가 아닌 개발 차수 이동으로 판정해 범위에 반영했습니다. 같은 요청을 다시 신규 기능으로 계산하지 않도록 원문과 구현 상태를 함께 본 결과입니다.</p>
-<p>이 숫자는 범위 분류 결과입니다. 전체 작업량 6건을 없앴다거나 개발비를 그 비율만큼 줄였다는 의미가 아닙니다.</p><aside class="case-note"><strong>범위 판단의 단위</strong><p>항목 수, 구현 완료, QA 통과, 앱 출시 여부는 각각 다른 상태로 관리합니다. 분류가 끝났다고 해당 기능의 배포까지 끝난 것은 아닙니다.</p></aside>
+
+      <section id="review" class="case-section">
+        <span class="minute-index">03 / APP REVIEW</span>
+        <h2>심사 의견을 ‘답변할 질문’과 ‘바꿔야 할 제품’으로 나눴습니다</h2>
+        <p>첫 심사부터 개인정보 표시, 구독 정보, 건강 점수 산출 방식에 대한 보완 요청이 있었습니다. 이어 Apple은 PHQ-9 등 설문 결과가 표준 점수인지 별도 해석을 더한 것인지, 우울·불안 점수가 독자 알고리즘인지 물었습니다. 이 질문에는 화면 문구만 고쳐서는 답할 수 없었습니다. 고객과 협업사에 실제 산출 근거와 사용자에게 노출되는 해석 범위를 요청하고, 확인된 내용으로 심사 답변을 정리했습니다.</p>
+        <p>AI 기능은 더 까다로웠습니다. ‘AI counselor’가 상담·치료를 제공하는 것처럼 보일 수 있다는 지적과 함께, 자해나 급성 정신적 고통을 표현한 사용자에게 어떻게 반응하는지, 진단·치료 요청은 어떻게 제한하는지, 데이터를 어떻게 처리하는지까지 설명해야 했습니다. 저는 답변 가능한 안전장치와 아직 근거가 부족한 부분을 나눠 고객에게 공유했습니다. 자료를 보완해 재제출하되 같은 문제가 계속된다면 AI 기능 축소나 이번 버전에서의 제외까지 선택지로 올렸습니다.</p>
+        <p>이후에도 반려가 이어져 Apple App Review 담당자와 직접 확인했습니다. 그때 알게 된 핵심은 ‘웰니스 앱’이라는 설명이나 ‘AI 웰니스 가이드’라는 이름보다, 실제로 화면에 표시되는 심박수·HRV 수치와 AI의 응답이 중요하다는 점이었습니다. 심사 쟁점을 문구 수정만으로 좁히지 않고, 필요하면 수치 표현·기능 범위까지 다시 검토하도록 고객과 개발팀에 전달했습니다.</p>
+        <ol class="minute-review-timeline" aria-label="앱 심사 주요 진행 경과">
+          <li><time datetime="2026-03">03월</time><span>첫 제출 이후 개인정보·구독 정보와 건강 측정·점수 설명 보완 요청</span></li>
+          <li><time datetime="2026-04">04월</time><span>설문 산식과 AI 기능의 목적·안전장치 질의에 자료를 모아 재제출</span></li>
+          <li><time datetime="2026-05">05월</time><span>재반려 뒤 App Review 담당자에게 실제 판단 기준을 확인</span></li>
+          <li><time datetime="2026-06">06월</time><span>iOS 심사 승인 및 스토어 등록 상태 확인</span></li>
+        </ol>
+        <figure class="minute-review-flow">
+          <figcaption><span>REVIEW → ACTION</span><strong>심사 코멘트를 다음 결정으로 바꾸는 방식</strong></figcaption>
+          <ol>
+            <li><b>01</b><strong>질문 해석</strong><span>설문·HRV 산식인지, AI 기능의 안전성인지 구분</span></li>
+            <li><b>02</b><strong>근거 확보</strong><span>고객·협업사 자료와 실제 화면·동작을 대조</span></li>
+            <li><b>03</b><strong>대응 선택</strong><span>설명 보완, 화면 수정, 기능 범위 재검토를 분리</span></li>
+          </ol>
+        </figure>
+        <div class="minute-milestone"><span>2026.06.02</span><p>여러 차례의 보완과 심사를 거쳐 iOS 앱 심사가 승인됐습니다. 현재 1minute은 <a href="https://apps.apple.com/kr/app/1minute/id6757288398" target="_blank" rel="noopener noreferrer">App Store</a>와 <a href="https://play.google.com/store/apps/details?id=com.maummoum.oneminute" target="_blank" rel="noopener noreferrer">Google Play</a>에서 확인할 수 있습니다.</p></div>
       </section>
-      <section id="part-4" class="case-section">
-        <span class="case-index">04</span>
-        <h2>개발 전달: 알림 하나에도 필요한 조건</h2>
-<p>알림 기능은 ‘발송한다’는 문장만으로 개발과 검증을 끝낼 수 없었습니다. 동의 여부·발송 시점·실패·딥링크 정책을 정리해 FE·BE·앱·관리자 작업과 인수 기준으로 전달했습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>사용자 조건</strong><span>동의·발송 대상</span></li><li><strong>처리 조건</strong><span>시점·실패 정책</span></li><li><strong>도착 후 동작</strong><span>딥링크·화면 이동</span></li><li><strong>구현·인수 기준</strong><span>FE·BE·앱·관리자 작업으로 구분</span></li></ol><figcaption>정리한 정책을 역할별 구현과 검증으로 연결</figcaption></figure><p>이 도식은 정리한 정책의 연결 관계이며 특정 발송 성공률이나 모든 기기에서의 동작 완료를 뜻하지 않습니다.</p>
-      </section>
-      <section id="part-5" class="case-section">
-        <span class="case-index">05</span>
-        <h2>기술 구현: WebView 경계의 응답 정규화</h2>
-<p>React Native와 WebView 사이의 구독 응답은 화면에서 처리할 payload와 error를 정규화했습니다. 거래 식별자를 기준으로 중복 검증 요청을 차단하고 검증 실패 시에는 잠금을 해제해 재시도할 수 있도록 구현했습니다.</p><div class="case-table-wrap" role="region" aria-label="구독 응답에서 구분한 동작" tabindex="0"><table><caption>구독 응답에서 구분한 동작</caption><thead><tr><th scope="col">상황</th><th scope="col">처리</th><th scope="col">지켜야 할 점</th></tr></thead><tbody><tr><th scope="row">네이티브 응답 수신</th><td>payload·error 정규화</td><td>화면이 응답 형태를 일관되게 해석</td></tr><tr><th scope="row">같은 거래 응답 반복</th><td>거래 ID·토큰 기준 중복 차단</td><td>검증 요청의 중복 실행 방지</td></tr><tr><th scope="row">검증 실패</th><td>재시도 가능하도록 잠금 해제</td><td>한 번의 실패가 영구 차단으로 남지 않음</td></tr></tbody></table></div><figure class="case-figure"><ol class="flow-steps"><li><strong>Native 응답</strong><span>거래 결과 전달</span></li><li><strong>Bridge 정규화</strong><span>payload / error 구분</span></li><li><strong>거래 식별</strong><span>중복 검증 차단</span></li><li><strong>실패 복구</strong><span>재시도할 수 있게 잠금 해제</span></li></ol><figcaption>코드 조사에서 확인한 응답 처리 책임</figcaption></figure>
-      </section>
-      <section id="part-6" class="case-section">
-        <span class="case-index">06</span>
-        <h2>검증과 한계</h2>
-<div class="case-table-wrap" role="region" aria-label="확인한 기여와 별도 확인 대상" tabindex="0"><table><caption>확인한 기여와 별도 확인 대상</caption><thead><tr><th scope="col">영역</th><th scope="col">확인된 내용</th><th scope="col">확대하지 않은 주장</th></tr></thead><tbody><tr><th scope="row">요구사항·범위</th><td>원문·구현 대조와 차수 분류</td><td>공수·비용 절감률</td></tr><tr><th scope="row">알림</th><td>정책·역할별 작업·인수 기준 정리</td><td>모든 발송·기기 검증 완료</td></tr><tr><th scope="row">구독 응답</th><td>정규화·중복 차단·실패 후 해제 코드</td><td>결제 플랫폼 전체의 중복 보장</td></tr><tr><th scope="row">사용 규모</th><td>이 사례에서 유효한 성과 지표 미확인</td><td>분석 방문자를 가입·유료 고객으로 변환</td></tr></tbody></table></div><p>구독 응답의 프론트엔드 수정과 서비스 전체의 출시 상태는 분리해서 설명합니다. 코드 대조 기록은 있지만 이번 편집에서 네이티브 기기나 운영 결제를 새로 테스트하지 않았습니다.</p>
-      </section>
-      <section id="part-7" class="case-section">
-        <span class="case-index">07</span>
-        <h2>돌아보며: 범위와 예외를 같은 문장으로 전달하기</h2>
-<p>PM 작업에서는 원문과 구현을 대조해 무엇을 어느 차수에 만들지 정리했고, 구독 응답 구현에서는 성공·중복·실패를 나누어 처리했습니다. 둘 다 일반적인 정상 흐름만으로 작업 완료를 판단하지 않는 접근이었습니다.</p>
-<p>이 사례는 기능 목록 자체보다, 고객이 요청한 조건을 여러 팀의 구현과 재시도·검증 기준까지 연결한 경험으로 설명할 수 있습니다.</p>
+
+      <section id="next" class="case-section">
+        <span class="minute-index">04 / NEXT ITERATION</span>
+        <h2>‘이름만 바꾸는 일’도 적용 범위부터 확인했습니다</h2>
+        <p>스토어 등록 뒤 고객은 MWS-S를 PWS로 바꾸고 HRV 측정 중 카메라 화면을 다시 보이게 해달라고 요청했습니다. 두 항목은 추가 고도화 목록에도 있었고 계약 전 선반영 여부를 협의해야 했습니다. 특히 명칭 변경은 앱 한 화면의 글자만 바꾸는지, 결과지·관리자·알림·API 식별자까지 바꾸는지에 따라 작업 범위가 크게 달라졌습니다. 저는 이 차이를 먼저 짚고 협업사와 대응 방향을 맞췄습니다.</p>
+        <p>이후 1.0.0 업데이트에서는 사용자에게 보이는 MWS/MWS-S 문구를 PWS로 바꾸고 HRV 카메라 프리뷰를 반영했습니다. 내부 API와 라우트 식별자는 호환성을 위해 유지했습니다. ‘명칭 변경 완료’라고만 쓰면 보이지 않는 곳까지 모두 교체한 것처럼 들리기에, 고객에게도 적용 범위를 나눠 공유했습니다.</p>
+        <p>추가 고도화에서 검사 결과를 더 자세히 보여달라는 요청에는 필요한 필드, 점수 산식, 계산 예시와 고위험 판단 기준을 확인 항목으로 돌렸습니다. 정책과 데이터가 정해지지 않은 상태에서 화면만 먼저 그려도 재작업이 생길 수 있기 때문입니다.</p>
+        <div class="minute-question-row" aria-label="결과지 요구사항 정리 흐름">
+          <span>고객 요청</span><strong>“검사 결과를 더 자세히”</strong><i aria-hidden="true">→</i><span>착수 기준</span><strong>필드 · 산식 · 예시 · 예외</strong>
+        </div>
+        <p>진행 상황을 공유할 때도 코드 반영, 통합 QA, 운영 배포를 같은 ‘완료’로 묶지 않았습니다. 고객이 지금 확인할 수 있는 상태와 다음 단계에 필요한 조건을 따로 적는 것이 PM으로서 제가 지키려 한 기준입니다.</p>
       </section>
     </article>
-  </div>
-  <a class="next-project" href="llm-wiki.html"><span>다음 프로젝트</span><strong>일일 기록과 일정 지원을 연결한 LLM Wiki ↗</strong></a>
-</main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>
+
+    <a class="next-project" href="llm-wiki.html"><span>다음 프로젝트</span><strong>일일 기록과 일정 지원을 연결한 LLM Wiki ↗</strong></a>
+  </main>
+  <footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub">GitHub</a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer>
+</body>
+</html>

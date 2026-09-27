@@ -4,111 +4,141 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="직접 기록하고 정리하는 부담을 줄이고, 활동과 대화의 맥락을 축적하기 위해 구축한 시스템입니다. AI로 정리한 내용을 원본 근거와 연결해 이후의 회고와 판단에 활용할 수 있도록 설계했습니다."><meta name="theme-color" content="#0f172a">
 <title>LLM Wiki — 개인 기록·지식 관리 시스템 구축 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
-<link rel="stylesheet" href="../assets/llm-wiki.css?v=20260925-visual">
+<link rel="stylesheet" href="../assets/llm-wiki-article.css?v=20260925-local">
 <link rel="canonical" href="https://chungyo.github.io/projects/llm-wiki.html">
 </head>
 <body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
-<main id="main" class="detail-main container llm-case llm-visual">
+<main id="main" class="detail-main container llm-article">
   <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
-  <header class="detail-header llm-heading">
-    <p class="project-category">PERSONAL PROJECT · AI WORKFLOW</p>
-    <h1><span class="llm-name">LLM Wiki</span>개인 기록·지식 관리 시스템 구축</h1>
-    <p class="detail-lead">직접 기록하는 부담은 줄이고,<br> <strong>무엇을 했고 왜 결정했는지</strong> 다시 찾을 수 있도록.</p>
-    <dl class="llm-meta"><div><dt>역할</dt><dd>구조·처리 기준 설계 / AI와 함께 구현</dd></div><div><dt>기간</dt><dd>2026 · 개인 프로젝트</dd></div><div><dt>상태</dt><dd>개인 활용 · 개선 중</dd></div></dl>
+  <header class="detail-header">
+    <p class="llm-preview-note">로컬 검토본 · 공개 사이트 미반영</p>
+    <h1>LLM Wiki — 개인 기록·지식 관리 시스템 구축</h1>
+    <p class="detail-lead">활동 기록과 회의 자료를 모으고, AI와 함께 정리한 내용을 다음 작업에 다시 활용하기 위해 만든 개인 프로젝트입니다. 기록 수집 방식을 바꾼 과정과 원본 보존, 사용자 확인, 로컬 저장을 구분한 이유를 정리했습니다.</p>
+    <p class="llm-byline">2026 · 개인 프로젝트<br>기록 구조·처리 기준 설계 및 검토 / AI 도구와 함께 구현</p>
+    <div class="tags"><span>Obsidian</span><span>Codex</span><span>Telegram</span><span>TypeScript</span></div>
   </header>
+  <nav class="llm-contents" aria-label="상세 사례 목차">
+    <h2>목차</h2>
+    <ol>
+      <li><a href="#part-1">배경: 기록은 필요했지만, 직접 정리하는 일이 부담스러웠다</a></li>
+      <li><a href="#part-2">수집 방식 변경: Screenpipe에서 Computer History로</a></li>
+      <li><a href="#part-3">저장 구조: 채팅 기록 대신 Wiki를 선택한 이유</a></li>
+      <li><a href="#part-4">챗봇 확장: 클라우드 처리와 Mac 파일 저장 분리</a></li>
+      <li><a href="#part-5">저장 통제: 승인한 내용도 파일 상태를 다시 확인</a></li>
+      <li><a href="#part-6">활용 사례: 저장한 영상 자료를 HASHI 포트폴리오 검토에 사용</a></li>
+      <li><a href="#part-7">검증 결과와 남은 과제</a></li>
+    </ol>
+  </nav>
 
-  <section class="llm-overview" id="architecture" aria-labelledby="architecture-title">
-    <div class="llm-figure-heading"><div><span class="llm-eyebrow">SYSTEM OVERVIEW</span><h2 id="architecture-title">기록이 들어오고, 맥락이 남는 구조</h2></div><a href="../assets/diagrams/llm-wiki-architecture.html" target="_blank" rel="noopener">구조도 탐색 ↗</a></div>
-    <figure class="llm-architecture">
-      <a href="../assets/diagrams/llm-wiki-architecture.svg" data-image-viewer data-caption="LLM Wiki — 세 입력 경로와 저장 범위">
-        <img src="../assets/diagrams/llm-wiki-architecture.svg" width="1000" height="525" alt="작업 기록은 일일 정리를 거쳐 Daily에, 자료는 데스크톱 ingest를 거쳐 Raw와 Wiki에 반영된다. Telegram의 Wiki 저장은 미리보기와 사용자 확인 후 로컬 동기화로 전달된다." fetchpriority="high">
-        <span class="llm-diagram-hint">구조도 크게 보기 ↗</span>
-      </a>
-      <figcaption>운영 규칙과 동기화 구현을 요약한 구조도입니다. 세 경로의 처리 범위는 다르며, 모든 기록이 자동으로 Wiki에 저장되는 것은 아닙니다.</figcaption>
-    </figure>
-    <div class="llm-route-summary"><p><b>01</b><span>활동 기록 <strong>→ Daily</strong></span></p><p><b>02</b><span>자료·회의 <strong>→ Raw · Wiki</strong></span></p><p><b>03</b><span>Telegram <strong>→ 확인 후 저장</strong></span></p></div>
-  </section>
-
-  <nav class="llm-chapter-nav" aria-label="상세 사례 목차"><a href="#part-1">시작 계기</a><a href="#part-2">Wiki 선택</a><a href="#part-3">수집 방식</a><a href="#part-4">기록 구조</a><a href="#part-5">질문과 확인</a><a href="#part-6">활용 결과</a></nav>
-
-  <article aria-label="LLM Wiki의 설계 판단과 활용">
-    <section id="part-1" class="case-section llm-chapter">
-      <header><span class="case-index">01 · PROBLEM</span><h2>남기고 싶었던 건<br> 활동보다 그때의 판단</h2></header>
-      <div class="llm-chapter-body">
-        <p class="llm-chapter-lead">“무엇을 했지?”뿐 아니라<br> <strong>“왜 그렇게 결정했지?”에도 답하고 싶었습니다.</strong></p>
-        <p>나를 이해하고 개선할 점을 찾으려면 당시의 맥락이 필요했습니다. 하지만 매번 기억을 더듬어 글로 정리하는 일은 부담스러웠습니다. 그래서 이미 만들어지는 활동과 대화를 기록의 출발점으로 삼았습니다.</p>
-        <div class="llm-question-strip"><span>무엇을 했는가</span><span>왜 선택했는가</span><span>무엇이 남았는가</span></div>
-      </div>
+  <article class="llm-reading" aria-label="LLM Wiki 구축 과정">
+    <section id="part-1" class="case-section">
+      <h2>배경: 기록은 필요했지만, 직접 정리하는 일이 부담스러웠다</h2>
+      <p>제가 무엇을 했고 어떤 고민 끝에 결정을 내렸는지 남기고 싶었습니다. 지나간 일을 돌아보며 개선할 점을 찾으려면 결과뿐 아니라 당시의 이유도 필요하다고 생각했습니다. 다만 매번 시간을 내어 기억을 더듬고 글로 정리하는 일은 부담스러웠습니다.</p>
+      <p>처음에는 Mac 화면 활동과 중요한 대화를 남기는 것부터 시작했습니다. 화면은 Screenpipe로 기록하고, 회의나 중요한 순간의 대화는 PLAUD Note로 녹음했습니다. 이미 생긴 자료를 활용하면 처음부터 빈 문서에 하루를 다시 적는 부담을 줄일 수 있겠다고 생각했습니다.</p>
+      <p>화면과 녹음만으로 알 수 없는 부분도 있습니다. 어떤 일을 먼저 하기로 했는지, 무엇 때문에 막혔는지는 제가 설명해야 합니다. Telegram 챗봇에는 아침에 우선순위를, 저녁에 완료한 일과 남은 장애물을 묻는 흐름을 두었습니다.</p>
+      <figure class="llm-evidence-photo">
+        <a href="../assets/evidence/llm-wiki-telegram.webp" data-image-viewer data-caption="실제 사용 중 수신한 Telegram 알림">
+          <img src="../assets/evidence/llm-wiki-telegram.webp" width="625" height="313" alt="아침에는 가장 중요한 일을, 저녁에는 끝낸 일과 남은 장애물을 묻는 실제 Telegram 알림" fetchpriority="high">
+        </a>
+        <figcaption>실제 수신한 알림입니다. 개인 일정은 제외했습니다. 이 화면은 질문·알림의 사용 사례이며, 뒤에서 설명하는 클라우드 이전이나 Wiki 저장 완료를 증명하는 화면은 아닙니다.</figcaption>
+      </figure>
     </section>
 
-    <section id="part-2" class="case-section llm-chapter">
-      <header><span class="case-index">02 · DECISION</span><h2>대화가 끝나도<br> 맥락은 남도록</h2></header>
-      <div class="llm-chapter-body">
-        <p>더 좋은 모델도 제 경험과 판단 배경을 처음부터 알지는 못합니다. 특정 대화 안에만 기록을 남기지 않고, <strong>관련 자료를 찾아 새 대화에 다시 제공할 수 있는 저장소</strong>를 만들고자 했습니다.</p>
-        <div class="llm-context-compare">
-          <div><span class="llm-eyebrow">대화 안에만 남기면</span><h3>다시 찾아서, 다시 설명</h3><p>과거 대화와 자료를 따로 확인해<br> 필요한 배경을 모아야 합니다.</p></div>
-          <span class="llm-transition-arrow" aria-hidden="true">→</span>
-          <div><span class="llm-eyebrow">Wiki에 연결해두면</span><h3>주제와 출처를 함께 참조</h3><p>관련 기록을 찾아<br> 다음 질문의 근거로 제공할 수 있습니다.</p></div>
-        </div>
-        <p class="llm-small">Karpathy의 LLM Wiki 패턴을 참고해 Obsidian의 Markdown 문서를 저장소로 삼고, 개인 기록 분류와 입력·저장 흐름을 확장했습니다. 새 모델이 자동으로 저를 학습하는 구조는 아닙니다.</p>
-        <a class="llm-text-link" href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">참고한 원형: Andrej Karpathy — LLM Wiki ↗</a>
-      </div>
+    <section id="part-2" class="case-section">
+      <h2>수집 방식 변경: Screenpipe에서 Computer History로</h2>
+      <p>Screenpipe를 쓰면서 저장 용량이 부담됐고, 기록을 살펴봐도 제가 원했던 세부 내용을 충분히 찾기 어려웠습니다. Codex Computer History가 나온 뒤에는 화면 활동의 수집 경로를 바꿨습니다.</p>
+      <p>일일 기록은 Codex에서 주고받은 작업 내용을 주 근거로 정리하고, 저장된 Computer History 요약으로 보완하도록 구성했습니다. 회의와 중요한 대화는 계속 PLAUD Note로 따로 녹음했습니다. 화면에서 한 작업과 회의에서 나온 이야기는 서로 다른 근거이기 때문입니다.</p>
+      <div class="case-table-wrap" role="region" aria-label="기록 수집 방식 변경" tabindex="0"><table><caption>직접 사용하며 변경한 범위</caption><thead><tr><th scope="col">대상</th><th scope="col">처음 시도</th><th scope="col">변경·유지한 방식</th></tr></thead><tbody>
+        <tr><th scope="row">Mac 활동</th><td>Screenpipe 화면 기록</td><td>Codex 작업 기록 + Computer History 요약</td></tr>
+        <tr><th scope="row">회의·중요한 대화</th><td>PLAUD Note 녹음</td><td>별도 수집 경로로 유지</td></tr>
+        <tr><th scope="row">선택한 이유·남은 일</th><td>활동 기록만으로는 확인하기 어려움</td><td>대화와 챗봇 질문에 직접 답변</td></tr>
+      </tbody></table></div>
+      <p>정리 기준도 함께 정했습니다. 페이지를 열었다는 관찰을 작업 완료로 바꾸지 않고, 사용자가 말한 판단과 실제로 확인한 결과를 구분하도록 했습니다. 기록이 없는 시간대는 AI가 채우지 않도록 했습니다.</p>
     </section>
 
-    <section id="part-3" class="case-section llm-chapter">
-      <header><span class="case-index">03 · ITERATION</span><h2>계속 쌓기 전에,<br> 수집 방식부터 변경</h2></header>
-      <div class="llm-chapter-body">
-        <div class="llm-iteration">
-          <div class="llm-before"><span class="llm-step-label">처음 시도</span><h3>Screenpipe</h3><p>Mac 화면 활동 기록</p><ul><li>저장 용량에 대한 부담</li><li>원했던 세부 맥락을 찾기 어려움</li></ul></div>
-          <div class="llm-after"><span class="llm-step-label">수집 경로 변경</span><h3>Codex Computer History</h3><p>활동 요약 + Codex 작업 기록</p><ul><li>작업 기록을 주 근거로 사용</li><li>저장된 활동 요약으로 보완</li></ul></div>
-          <div class="llm-audio"><span aria-hidden="true">◉</span><div><strong>회의·중요한 대화는 PLAUD Note로 별도 수집</strong><p>화면 활동과 회의 녹음은 담고 있는 맥락이 달라 입력 경로를 구분했습니다.</p></div></div>
-        </div>
-        <p class="llm-small">사용하면서 느낀 제약을 바탕으로 방식을 바꿨습니다. 전환 후의 용량 감소나 정리 시간 절감은 측정하지 않았습니다.</p>
-      </div>
+    <section id="part-3" class="case-section">
+      <h2>저장 구조: 채팅 기록 대신 Wiki를 선택한 이유</h2>
+      <p>수집한 자료를 특정 AI와의 대화 안에만 두고 싶지는 않았습니다. 모델이나 도구가 바뀌더라도 제 과거 결정과 그 근거를 찾아 다시 전달할 수 있어야 한다고 생각했습니다.</p>
+      <p>Karpathy의 LLM Wiki 패턴을 참고해 Obsidian의 Markdown 문서를 저장소로 삼았습니다. 원본 자료는 남겨두고, 새 자료를 기존 주제·프로젝트와 연결해 정리하는 방식을 개인 기록에 적용했습니다. 별도의 모델을 학습시킨 것이 아니라, 다음 대화에서 참고할 자료를 제 저장소에 축적하는 방식입니다.</p>
+      <h3>Raw·Daily·Wiki를 나눈 기준</h3>
+      <p>원문을 다시 확인할 때, 특정 날짜에 무엇을 했는지 찾을 때, 한 주제의 지식을 이어서 볼 때 필요한 정보가 달랐습니다. 이 차이에 맞춰 세 구역의 역할을 나눴습니다.</p>
+      <pre class="llm-folder-tree" aria-label="기록 저장 구조"><code>LLM Wiki/
+├── Raw/       확보한 자료와 출처 원문 — 정리 후에도 보존
+├── Daily/     날짜별 계획·관찰·결정·실행·후속 행동
+└── Wiki/
+    ├── Sources/    출처와 주장, 해석의 범위
+    ├── Concepts/   여러 자료에서 다시 쓸 개념
+    ├── Projects/   프로젝트별 판단과 다음 행동
+    └── INDEX.md    관련 노트를 찾는 색인</code></pre>
+      <p><code>log</code>는 대화에서 판단·이유·결과·남은 일을 추려 Daily에 남깁니다. <code>ingest</code>는 자료의 출처와 저장 목적을 확인하고 관련 Wiki 노트에 연결합니다. 모든 Daily를 자동으로 지식 노트로 옮기는 방식은 아닙니다.</p>
+      <p>자료만으로 제 의도를 알 수 없는 경우에는 왜 저장했는지, 어떤 작업과 연결되는지 질문하도록 지침을 뒀습니다. AI가 요약한 사실과 제 생각을 섞지 않는 것도 운영 문서의 기준으로 정했습니다.</p>
+      <p class="llm-source">참고한 원형: <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">Andrej Karpathy — LLM Wiki</a>. 원형을 바탕으로 개인 기록 분류와 입력·저장 흐름을 확장했습니다.</p>
     </section>
 
-    <section id="part-4" class="case-section llm-chapter">
-      <header><span class="case-index">04 · STRUCTURE</span><h2>원본, 하루, 지식은<br> 다르게 관리</h2></header>
-      <div class="llm-chapter-body">
-        <figure class="llm-vault">
-          <div class="llm-vault-bar"><span class="llm-eyebrow">OBSIDIAN · MARKDOWN</span><span>실제 운영 스키마 기반 요약</span></div>
-          <div class="llm-vault-row"><code>Raw/</code><div><h3>원본을 보존</h3><p>회의 녹음·자료·원문<br> 해석으로 원본을 덮어쓰지 않음</p></div><span class="llm-file-label">SOURCE</span></div>
-          <div class="llm-vault-row"><code>Daily/</code><div><h3>그날의 맥락을 기록</h3><p>계획 · 관찰 · 결정 · 실행 · 다음 행동<br> 하려던 일과 끝낸 일을 구분</p></div><span class="llm-file-label">BY DATE</span></div>
-          <div class="llm-vault-row"><code>Wiki/</code><div><h3>주제별 지식을 연결</h3><p>Sources · Concepts · Projects · INDEX<br> 관련 기록과 출처를 함께 참조</p></div><span class="llm-file-label">BY TOPIC</span></div>
-          <figcaption>운영 문서에 정의한 폴더 역할과 관리 기준을 요약했습니다.</figcaption>
-        </figure>
-        <div class="llm-skill-pair"><p><code>log</code><strong>대화 → 하루의 기록</strong><span>판단·이유·결과·남은 일을 Daily에</span></p><p><code>ingest</code><strong>자료 → 연결된 지식</strong><span>출처·목적·관련 맥락을 확인해 Wiki에</span></p></div>
-        <p class="llm-small">모든 Daily를 자동으로 Wiki에 옮기지는 않습니다. 필요한 맥락이 없으면 질문하고, 다시 활용할 자료를 별도로 정리합니다.</p>
-      </div>
+    <section id="part-4" class="case-section">
+      <h2>챗봇 확장: 클라우드 처리와 Mac 파일 저장 분리</h2>
+      <p>Mac에서 실행하는 챗봇은 컴퓨터가 잠들거나 종료되면 정시 실행을 보장할 수 없습니다. 클라우드 이전 구현에서는 메시지 처리와 초안 생성은 클라우드에서, Obsidian 파일 반영은 Mac에서 담당하도록 나눴습니다.</p>
+      <p class="llm-status-note">아래는 클라우드 이전 브랜치의 코드로 확인한 구성입니다. 해당 README에는 운영 전환 검증 중으로 명시돼 있으며, 이번 포트폴리오 작업에서 실제 클라우드 운영 전환 완료는 확인하지 않았습니다.</p>
+      <figure class="llm-technical-figure" id="architecture">
+        <a href="../assets/diagrams/llm-wiki-system-detail.svg" data-image-viewer data-caption="LLM Wiki 전체 구성과 클라우드 이전 구현">
+          <img src="../assets/diagrams/llm-wiki-system-detail.svg" width="1320" height="750" loading="lazy" alt="Telegram 요청은 Cloud Run Webhook, Cloud Tasks, Worker를 거친다. Worker는 Gemini와 Firestore를 사용하며, Mac 동기화 에이전트가 승인 작업을 조회해 Obsidian에 반영한다. 데스크톱 정리는 별도 경로다.">
+        </a>
+        <figcaption>클라우드와 Mac의 책임을 분리한 구성. 동기화 요청·응답은 그림에서 한 방향의 전달선으로 요약했고, 자세한 순서는 다음 그림에 표시했습니다. <a href="../assets/diagrams/llm-wiki-system-detail.html" target="_blank" rel="noopener">구조도 탐색 ↗</a></figcaption>
+      </figure>
+      <h3>요청 처리와 파일 반영은 따로 완료됩니다</h3>
+      <ol class="llm-prose-list">
+        <li><strong>요청 접수:</strong> Webhook에서 허용된 사용자와 중복 update를 확인하고 Cloud Tasks에 작업을 등록합니다.</li>
+        <li><strong>초안·확인:</strong> Worker에서 명령을 분기합니다. 기록 초안은 Gemini로 생성하고, 미리보기와 승인 작업은 Firestore에 보관합니다.</li>
+        <li><strong>로컬 반영:</strong> Mac 에이전트가 서명된 요청으로 승인 작업을 조회합니다. 파일을 검사·반영한 뒤 결과를 다시 전달합니다.</li>
+      </ol>
+      <p>사용자가 초안을 확인했을 때의 응답도 “저장 완료”가 아니라 <strong>“Obsidian 동기화 대기 중”</strong>으로 구분했습니다. Mac에서 실제 파일 반영이 끝나기 전에는 완료로 볼 수 없기 때문입니다. 일일 기록 자동화와 데스크톱 <code>ingest</code>는 이 챗봇 저장 경로와 별도로 동작합니다.</p>
+      <p class="llm-source">코드 확인 범위: <code>active-composition.ts</code>, <code>runtime-processor.ts</code>, <code>sync-client.ts</code>, <code>local-agent.ts</code>. 그림은 주요 기록 경로에 집중했으며 일정 조회·인증 설정의 세부 구성은 생략했습니다.</p>
     </section>
 
-    <section id="part-5" class="case-section llm-chapter">
-      <header><span class="case-index">05 · HUMAN IN THE LOOP</span><h2>AI가 모르는 이유는<br> 사람에게 질문</h2></header>
-      <div class="llm-chapter-body">
-        <figure class="llm-real-screen">
-          <div class="llm-figure-heading"><span class="llm-eyebrow">실제 TELEGRAM 알림</span><span>개인 일정 제외</span></div>
-          <a class="llm-image-link" href="../assets/evidence/llm-wiki-telegram.webp" data-image-viewer data-caption="Telegram 기반 기록·회고 챗봇의 실제 알림">
-            <img src="../assets/evidence/llm-wiki-telegram.webp" width="625" height="313" alt="아침에는 가장 중요한 일 1~3개를, 저녁에는 완료한 일과 남은 장애물을 묻는 챗봇의 실제 알림" loading="lazy">
-          </a>
-          <figcaption>아침에는 우선순위, 저녁에는 끝낸 일과 장애물을 묻습니다. 사용자의 답변으로 활동 기록에 없는 의도와 판단을 보충합니다.</figcaption>
-        </figure>
-        <p>화면에서 페이지를 열었다고 작업을 끝낸 것은 아닙니다. 관찰한 활동, 사용자가 말한 판단, 확인된 결과를 구분하는 기준을 두었습니다.</p>
-        <div class="llm-save-boundary"><h3>챗봇의 Wiki 저장은 확인 후에</h3><ol><li><span>01</span><strong>초안 확인</strong><small>미리보기·사용자 승인</small></li><li><span>02</span><strong>파일 대조</strong><small>해시가 다르면 충돌 처리</small></li><li><span>03</span><strong>반영 재확인</strong><small>쓰기 전 확인·저장 후 읽기</small></li></ol></div>
-        <details class="llm-detail"><summary>저장 검증의 범위와 한계</summary><p>승인한 초안을 만드는 단계와 실제 로컬 파일에 반영하는 단계를 나눴습니다. 해시 비교와 저장 후 읽기는 기존 기록을 잘못 덮어쓰는 위험을 다룹니다. 내용이 사실과 의도를 정확히 담았는지는 별도로 검토해야 합니다. Telegram은 데스크톱 ingest와 처리 범위가 다르며, 알림 수신만으로 Wiki 저장 완료를 판단하지 않습니다.</p></details>
-      </div>
+    <section id="part-5" class="case-section">
+      <h2>저장 통제: 승인한 내용도 파일 상태를 다시 확인</h2>
+      <p>초안을 확인하는 동안 제가 Obsidian 문서를 수정할 수도 있습니다. 승인됐다는 이유만으로 예전 파일 상태를 전제해 내용을 반영하면, 그 사이의 수정과 충돌할 수 있습니다. 그래서 승인 여부와 현재 파일 상태를 따로 검사했습니다.</p>
+      <figure class="llm-technical-figure llm-sequence">
+        <a href="../assets/diagrams/llm-wiki-save-sequence.svg" data-image-viewer data-caption="사용자 승인부터 로컬 파일 반영 확인까지">
+          <img src="../assets/diagrams/llm-wiki-save-sequence.svg" width="1050" height="600" loading="lazy" alt="사용자 미리보기 확인 후 승인 작업을 저장한다. Mac 에이전트가 현재 파일과 비교해 해시가 다르면 conflict로 종료하고, 일치할 때만 쓰기 전 재확인과 저장 후 읽기를 거쳐 applied를 전달한다.">
+        </a>
+        <figcaption><code>conflict</code>와 <code>applied</code>는 대안 경로입니다. 해시가 다르면 이후의 파일 쓰기를 실행하지 않습니다. 잘못된 경로·작업 형식은 그보다 앞서 거부합니다. <a href="../assets/diagrams/llm-wiki-save-sequence.html" target="_blank" rel="noopener">처리 순서 확대 ↗</a></figcaption>
+      </figure>
+      <h3>원본이 바뀌었으면 자동으로 이어 쓰지 않기</h3>
+      <p>승인 작업에는 대상 경로와 예상 파일 해시가 들어갑니다. 로컬 에이전트는 실제 파일을 읽어 해시를 비교하고, 다르면 <code>conflict</code>를 반환합니다. 쓰기 직전에도 한 번 더 검사합니다.</p>
+      <figure class="code-figure"><figcaption>local-agent.ts — 예상한 파일 상태와 다르면 충돌 반환</figcaption><pre><code>if (job.expectedSha256 !== observedSha256) {
+  return { status: "conflict", observedSha256 };
+}</code></pre></figure>
+      <p>같은 작업이 다시 전달됐을 때는 이미 해당 내용이 반영돼 있는지 먼저 확인합니다. 저장한 뒤에는 파일을 다시 읽어 예상 결과와 일치하는지도 확인합니다. 이 검사는 파일 반영의 안전성을 다루며, AI가 작성한 내용이 맞는지는 원문과 사용자 검토로 따로 판단해야 합니다.</p>
+      <div class="case-table-wrap" role="region" aria-label="저장 예외 처리" tabindex="0"><table><caption>코드와 로컬 테스트에서 확인한 처리</caption><thead><tr><th scope="col">상황</th><th scope="col">처리</th></tr></thead><tbody>
+        <tr><th scope="row">확인 전</th><td>미리보기만 만들고 승인 작업은 생성하지 않음</td></tr>
+        <tr><th scope="row">파일 해시가 달라짐</th><td>충돌로 반환하고 기존 파일을 유지</td></tr>
+        <tr><th scope="row">같은 작업 재전달</th><td>이미 반영된 내용을 다시 붙이지 않음</td></tr>
+        <tr><th scope="row">허용 범위 밖 경로·심볼릭 링크</th><td>작업 거부</td></tr>
+      </tbody></table></div>
     </section>
 
-    <section id="part-6" class="case-section llm-chapter">
-      <header><span class="case-index">06 · REUSE</span><h2>저장한 자료를<br> 다음 작업의 근거로</h2></header>
-      <div class="llm-chapter-body">
-        <p>포트폴리오를 준비하며 Wiki에 저장한 AI 개발 워크플로우 영상의 정리와 자막을 다시 확인했습니다. <strong>HASHI의 실제 문서·코드와 대조해 구현한 범위와 앞으로의 과제를 구분</strong>하는 데 활용했습니다.</p>
-        <figure class="llm-reuse-evidence">
-          <a href="hashi-ai-workflow.html"><img src="../assets/diagrams/hashi-harness.svg" alt="Wiki의 영상 자료를 다시 참조해 검토한 HASHI AI 개발 하네스 사례의 공개 구조도" loading="lazy"><span>HASHI AI 개발 하네스 적용 사례 ↗</span></a>
-          <figcaption>재사용한 결과가 반영된 포트폴리오 사례 · 클릭하면 상세 내용으로 이동합니다.</figcaption>
-        </figure>
-        <div class="llm-result"><div><span class="llm-eyebrow">현재 활용</span><p>기록 분류·정리 지침과 자동화·동기화 구현을 마련하고, 저장된 자료를 다시 찾아 사례 검토에 사용했습니다.</p></div><div><span class="llm-eyebrow">다음 검증</span><p>필요한 근거를 잘 찾는지, 중요한 판단이 요약에서 빠지지 않는지, 장기 운영이 안정적인지 확인하고 있습니다.</p></div></div>
-        <p class="llm-small">모델이 달라져도 맥락을 충분히 전달할 수 있는지는 후속 검증 과제입니다. 시간·비용 절감률이나 장기 운영 안정성을 달성 성과로 제시하지 않습니다.</p>
-      </div>
+    <section id="part-6" class="case-section">
+      <h2>활용 사례: 저장한 영상 자료를 HASHI 포트폴리오 검토에 사용</h2>
+      <p>자료를 다시 사용한 예가 이번 포트폴리오 작업입니다. Wiki에 저장해둔 AI 개발 워크플로우 영상의 정리와 자막을 찾아보고, HASHI의 문서·코드와 대조했습니다.</p>
+      <h3>입력: 하네스를 다시 검토해야 한다는 영상</h3>
+      <p>저장한 자료 중에는 메이커 에반의 「1년 만든 AI 하네스, 지난달에 전부 지웠습니다」가 있습니다. Source 노트에는 원본 영상, 자막의 한계, 발표자의 주장과 제 해석을 나눠 남겼습니다.</p>
+      <figure class="llm-source-excerpt">
+        <figcaption>실제 Source 노트에서 확인한 정리 내용 · 공개 가능한 부분만 발췌·요약</figcaption>
+        <dl><div><dt>원문</dt><dd>영상 URL과 한국어 자동 자막의 출처를 연결</dd></div><div><dt>해석</dt><dd>실행 방법을 과도하게 고정하는 장치와 목표·판단 기준을 보존하는 문서를 구분</dd></div><div><dt>한계</dt><dd>발표자의 개선 경험을 보편적인 성능 효과로 일반화하지 않음</dd></div></dl>
+      </figure>
+      <h3>재사용: 영상의 개념을 내 구현 범위와 대조</h3>
+      <p>HASHI에서 확인할 수 있는 것은 작업별 문서 안내, 스킬·체크리스트, 생성기와 검증 기준이었습니다. 여러 에이전트가 자동으로 분기·재시도하는 실행 시스템까지 만들었다고 설명하면 실제 구현보다 앞서갑니다. 저장된 자료를 다시 참고하며 이 둘을 구분해 사례를 정리했습니다.</p>
+      <p><a class="llm-inline-link" href="hashi-ai-workflow.html">HASHI AI 개발 하네스 적용 사례 보기 ↗</a></p>
+      <p>이 사례에서 확인한 결과는 자료를 다시 찾아 실제 작업에 사용했다는 것입니다. 검색 정확도나 준비 시간의 절감률을 측정한 것은 아닙니다.</p>
+    </section>
+
+    <section id="part-7" class="case-section">
+      <h2>검증 결과와 남은 과제</h2>
+      <p>기록 분류와 정리 지침, 일일 기록 자동화, 챗봇의 미리보기·승인·동기화 코드를 구성했습니다. 실제 알림을 받고 기록을 다시 활용한 경험과, 아직 운영 전환을 확인해야 하는 클라우드 구현은 구분해 보고 있습니다.</p>
+      <p>이번 검토에서는 <code>ingest-workflow</code>, <code>publish-job</code>, <code>local-sync-agent</code>의 <strong>로컬 테스트 8개가 통과</strong>했습니다. 확인 전 작업 미생성, 파일 충돌 시 기존 내용 보존, 재전달 시 중복 방지, 허용하지 않은 경로 거부 등을 검사합니다. 임시 파일과 대체 모델·저장 인터페이스를 사용한 테스트이며 실제 클라우드 연동이나 운영 중 파일 경쟁까지 증명하지는 않습니다.</p>
+      <p>앞으로는 기록량보다 필요한 자료를 다시 찾을 수 있는지, 요약에 제 판단의 이유가 빠지지 않는지를 확인하려 합니다. 모델이 바뀌었을 때 기록을 얼마나 잘 재사용할 수 있는지와 장기 동기화 안정성도 남은 검증 과제입니다.</p>
+      <p class="llm-source">구현 확인·선별 테스트 실행: 2026.09.25. 직접 사용한 경험과 로컬 코드·운영 지침을 바탕으로 작성했습니다.</p>
     </section>
   </article>
   <a class="next-project" href="api-workflow.html"><span>다음 프로젝트</span><strong>코드에서 다시 계산하는 API 연동 현황 ↗</strong></a>

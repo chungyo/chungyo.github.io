@@ -2,94 +2,156 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="강북삼성병원 심케어 3.0에서 한 회기의 완료와 전체 상담의 종결을 구분하도록 제안했습니다. 고객 동의를 받아 상태 전이와 화면 규칙을 명세로 연결했습니다."><meta name="theme-color" content="#0f172a">
-<title>같은 ‘완료’에 섞여 있던 두 업무 상태 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
+<meta name="description" content="CIMCARE 3.0의 첫 오픈 범위 조정, 상담 상태 설계, 고객 의사결정을 다룬 PM 프로젝트 사례입니다."><meta name="theme-color" content="#0f172a">
+<title>평가·상담·통계 통합 플랫폼 구축 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
+<link rel="stylesheet" href="../assets/simcare-case.css?v=20260927-results">
 </head>
 <body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
-<main id="main" class="detail-main container">
-  <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
-  <div class="case-cover"><div class="project-art" style="--art:#4ade80" aria-hidden="true"><div class="art-corner">SIMCARE 3.0 · PRODUCT MANAGEMENT</div><svg viewBox="0 0 416 185"><path d="M111 89h70m54 0h70" stroke="#4ade80" stroke-opacity=".35" stroke-dasharray="4 5"/><circle cx="146" cy="89" r="3" fill="#4ade80"/><circle cx="270" cy="89" r="3" fill="#4ade80"/><g transform="translate(57 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">✓</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Session</text></g><g transform="translate(181 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">↻</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Case</text></g><g transform="translate(305 62)"><rect width="54" height="54" rx="12" fill="#4ade80" fill-opacity=".07" stroke="#4ade80" stroke-opacity=".7"/><text x="27" y="34" text-anchor="middle" fill="#4ade80" font-size="23" font-family="monospace">≡</text><text x="27" y="78" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="monospace">Spec</text></g></svg><div class="art-title">고객의 언어를 개발 기준으로</div><div class="art-caption">SESSION → CASE → SPEC</div></div></div>
-  <header class="detail-header">
-    <p class="project-category">SIMCARE 3.0 · PRODUCT MANAGEMENT</p>
-    <h1>같은 ‘완료’에 섞여 있던 두 업무 상태</h1>
-    <p class="detail-lead">강북삼성병원 심케어 3.0에서 한 회기의 완료와 전체 상담의 종결을 구분하도록 제안했습니다. 고객 동의를 받아 상태 전이와 화면 규칙을 명세로 연결했습니다.</p>
-    <div class="tags"><span>PM</span><span>Requirements</span><span>Frontend</span></div>
-  </header>
-  <dl class="case-facts">
-    <div><dt>담당 범위</dt><dd>고객 협의 · 요구 분석 · 상태 설계 제안 · 명세·개발 전달</dd></div>
-    <div><dt>기간·맥락</dt><dd>2026.04 주요 제안·고객 회신</dd></div>
-    <div><dt>현재 단계</dt><dd>심케어 3.0 개발·검증 진행 중</dd></div>
-  </dl>
-  <div class="case-outcome case-summary"><span>이 사례의 핵심 변화</span><p>상담 회기와 전체 상담의 상태를 분리 제안하고 고객 동의·명세 반영까지 연결</p></div>
-  <div class="detail-layout">
-    <aside class="case-sidebar">
-      <details class="case-toc" open>
-        <summary>목차 <span>CONTENTS</span></summary>
-        <nav aria-label="상세 사례 목차">
-          <a href="#part-1" data-part="part-1"><b>01</b><span>배경: 상담사가 처리하는 단위와 관리자가 보는 단위</span></a>
-          <a href="#part-2" data-part="part-2"><b>02</b><span>발견: 같은 ‘완료’가 서로 다른 뜻으로 쓰였다</span></a>
-          <a href="#part-3" data-part="part-3"><b>03</b><span>검토: 상태를 나누면 무엇이 명확해지는가</span></a>
-          <a href="#part-4" data-part="part-4"><b>04</b><span>설계: 화면 선택이 어느 상태를 바꾸는지 명시</span></a>
-          <a href="#part-5" data-part="part-5"><b>05</b><span>개발 전달: 고객 회신에서 화면 명세까지 연결</span></a>
-          <a href="#part-6" data-part="part-6"><b>06</b><span>같은 방식의 범위 조율: 척도별 차트 요구</span></a>
-          <a href="#part-7" data-part="part-7"><b>07</b><span>결과와 한계: 합의된 규칙과 운영 성과를 구분</span></a>
-          <a href="#part-8" data-part="part-8"><b>08</b><span>돌아보며: 용어보다 업무의 단위를 먼저 확인하기</span></a>
-        </nav>
-      </details>
-      <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">고객 회신·결정 기록·기능 명세 / 2026.09.20 대조 자료</p>
-    </aside>
-    <article class="case-study" aria-label="같은 ‘완료’에 섞여 있던 두 업무 상태 상세">
-      <section id="part-1" class="case-section">
-        <span class="case-index">01</span>
-        <h2>배경: 상담사가 처리하는 단위와 관리자가 보는 단위</h2>
-<p>강북삼성병원 심케어 3.0은 평가·결과지·상담·운영 관리를 연결하는 기업 상담·멘탈케어 프로젝트입니다. 관리자·상담사·내담자 세 채널의 요구사항을 구체화하고 고객 미팅, 일정과 범위 조율을 맡았습니다.</p>
-<p>상담 기능을 정의하려면 예약 한 건을 처리하는 일과 여러 회기를 묶은 전체 상담을 관리하는 일을 함께 설명해야 했습니다. 이번 사례는 그 업무 단위를 상태와 화면 규칙으로 옮긴 과정입니다.</p>
-<figure class="product-evidence" id="service-flow">
-  <a class="evidence-image-link" href="../assets/diagrams/simcare-service-flow.html" target="_blank" rel="noopener" aria-label="심케어 서비스 흐름도 크게 보기 (새 창)">
-    <img src="../assets/diagrams/simcare-service-flow.png" width="2048" height="1320" loading="lazy" alt="관리자의 평가차수 등록에서 내담자의 문진·결과 확인, 상담사의 예약·상담, 기업 담당자의 결과 조회로 이어지는 서비스 흐름">
-  </a>
-  <figcaption><strong>여러 사용자의 업무가 하나의 서비스로 이어지는 구조</strong><span>서비스의 기획 흐름을 역할별로 정리했습니다. 현재 개발·검증 중이며, 아래 사례는 이 흐름에서 상담 회기와 전체 상담의 상태를 구분한 과정입니다.</span></figcaption>
+<main id="main" class="detail-main container simcare-case">
+<a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
+<header class="detail-header">
+<p class="simcare-preview">CIMCARE 3.0 · PROJECT MANAGEMENT CASE</p>
+<h1>평가·상담·통계 통합 플랫폼 구축</h1>
+<p class="detail-lead">수기 업무와 외부 도구로 나뉜 마음건강 평가·상담을 한 서비스로 연결하는 프로젝트입니다. 전체 PM으로서 고객의 운영 기준을 개발 가능한 결정으로 바꾸고, 보안 승인 상황에 맞춰 첫 오픈의 범위를 조정했습니다.</p>
+<div class="tags"><span>고객·협력사 조율</span><span>범위·일정 관리</span><span>상담 운영 정책</span></div>
+<div class="simcare-hero-points" aria-label="이 사례에서 보여줄 두 가지 판단"><a href="#release-case"><span>01 / 첫 오픈 범위</span><strong>외부 상담사 접속을 미루되, 역할 설계는 유지</strong><small>사용 범위와 이후 확장 기준을 분리</small></a><a href="#state-case"><span>02 / 상담 운영</span><strong>한 회기의 완료와 전체 상담의 종결을 분리</strong><small>상태·화면·집계의 기준을 함께 정리</small></a></div>
+</header>
+<dl class="case-facts">
+<div><dt>프로젝트</dt><dd>CIMCARE 3.0 · 기업 임직원 마음건강 통합관리</dd></div>
+<div><dt>담당과 협업</dt><dd>전체 PM · 프론트엔드 개발 참여<br>기업정신건강연구소 / 삼성 클라우드 담당자 / 디자인·개발팀</dd></div>
+<div><dt>현재 상태</dt><dd>개발·검증 진행 중<br>납품·운영 성과는 아직 확인되지 않음</dd></div>
+</dl>
+<nav class="simcare-contents" aria-label="CIMCARE 프로젝트 목차"><span>이 페이지에서 볼 것</span><a href="#part-1">서비스와 화면</a><a href="#release-case">첫 오픈 범위 결정</a><a href="#state-case">상담 상태 설계</a><a href="#part-6">현재 결과와 남은 일</a></nav>
+<article class="simcare-reading" aria-label="평가·상담·통계 통합 플랫폼 구축 상세">
+<section class="case-section" id="part-1">
+<p class="simcare-section-label">01 / 프로젝트</p>
+<h2>따로 움직이던 평가·상담 업무를 한 흐름으로</h2>
+<p>기존에는 수기로 처리하는 운영 업무가 많았고, 상담사도 여러 외부 도구를 사용하고 있었습니다. 건강검진·마음건강 평가 결과를 상담과 연결하고, 개인에게 맞는 미디어 콘텐츠까지 이어주는 서비스도 필요했습니다. CIMCARE 3.0은 임직원 앱과 상담사·관리자 웹을 함께 설계해 이 흐름을 만드는 프로젝트입니다.</p>
+<p>저는 프로젝트 전반의 PM을 맡아 요구사항 확인부터 범위·일정·변경 영향까지 관리했습니다. 기업정신건강연구소와는 평가·상담 운영 기준을, 삼성 클라우드 담당자와는 인프라 관련 조건을 협의했습니다. 화면과 구현 방식은 디자이너·개발팀과 맞췄고, 프론트엔드 개발과 API 연동 현황 도구 구현에도 직접 참여했습니다.</p>
+<div class="simcare-context" aria-label="기존 운영과 구축 목표"><div><span>기존 운영</span><strong>수기 처리 · 상담사별 외부 도구 · 흩어진 결과</strong></div><span class="simcare-context-arrow" aria-hidden="true">→</span><div><span>구축 목표</span><strong>평가 결과부터 상담·콘텐츠·운영 현황까지 연결</strong></div></div>
+<div class="cim-screen-showcase" id="service-screens" aria-label="CIMCARE 설계 화면">
+<div class="cim-screen-heading"><h3>하나의 운영 흐름, 세 사용자의 화면</h3><span>Figma 설계 화면</span></div>
+<div class="cim-screen-grid">
+<figure class="cim-screen-card cim-screen-card--mobile"><a href="../assets/cimcare/patient-home.png" target="_blank" rel="noopener" aria-label="임직원 앱 홈 설계 화면 크게 보기"><img src="../assets/cimcare/patient-home.png" width="1170" height="3720" alt="임직원 앱 홈 설계 화면. 마음 날씨, 상담 진입, 추천 콘텐츠가 한 화면에 배치되어 있다" loading="lazy"></a><figcaption><strong>임직원 앱</strong><span>평가 이후의 기록·상담·콘텐츠 진입</span></figcaption></figure>
+<figure class="cim-screen-card cim-screen-card--featured"><a href="../assets/cimcare/counselor-dashboard.png" target="_blank" rel="noopener" aria-label="상담사 대시보드 설계 화면 크게 보기"><img src="../assets/cimcare/counselor-dashboard.png" width="3840" height="3970" alt="상담사 대시보드 설계 화면. 예정 상담, 미서명 문서, 예약과 상담 상태가 보인다" loading="lazy"></a><figcaption><strong>상담사 웹 — 예약·문서·상담 현황</strong><span>예정 상담, 미서명 문서, 예약과 상담 상태를 한 화면에서 확인</span></figcaption></figure>
+<figure class="cim-screen-card"><a href="../assets/cimcare/admin-dashboard.png" target="_blank" rel="noopener" aria-label="관리자 상담 대시보드 설계 화면 크게 보기"><img src="../assets/cimcare/admin-dashboard.png" width="1920" height="2835" alt="관리자 상담 대시보드 설계 화면. 상담 현황, 효과성 지표, 가동률과 내담자 목록이 보인다" loading="lazy"></a><figcaption><strong>관리자 웹</strong><span>상담 현황과 효과성 지표 조회</span></figcaption></figure>
+</div>
+<details class="cim-screen-more"><summary>임직원 앱 화면 2개 더 보기</summary><div class="cim-screen-grid cim-screen-grid--extra"><figure class="cim-screen-card cim-screen-card--mobile"><a href="../assets/cimcare/patient-home-variant.png" target="_blank" rel="noopener" aria-label="임직원 앱 홈 변형 화면 크게 보기"><img src="../assets/cimcare/patient-home-variant.png" width="1170" height="3228" alt="임직원 앱 홈의 다른 평가 상태 설계 화면" loading="lazy"></a><figcaption><strong>홈 변형</strong><span>평가 상태에 따른 화면 차이</span></figcaption></figure><figure class="cim-screen-card cim-screen-card--mobile"><a href="../assets/cimcare/patient-chat.png" target="_blank" rel="noopener" aria-label="임직원 상담 채팅 화면 크게 보기"><img src="../assets/cimcare/patient-chat.png" width="1170" height="2910" alt="임직원 앱의 상담 예약 확정 후 채팅방 설계 화면. 예시 대화가 담겨 있다" loading="lazy"></a><figcaption><strong>상담 채팅</strong><span>예약 확정 이후 상담 진입</span></figcaption></figure></div></details>
+</div>
+<figure class="cim-diagram" id="service-flow">
+<figcaption><strong>평가·상담·기업 보고의 연결</strong></figcaption>
+<div class="cim-diagram-frame" role="region" tabindex="0" aria-label="평가·상담·기업 보고의 연결 이미지">
+<a href="../assets/diagrams/cimcare-service.svg" target="_blank" rel="noopener" aria-label="평가·상담·기업 보고의 연결 원본 확대">
+<img src="../assets/diagrams/cimcare-service.svg" width="555" height="662" alt="내담자의 마음건강 평가와 결과 확인에서 상담·콘텐츠 이용으로 이어지고, 평가·상담 데이터가 기업 보고로 연결되는 흐름" loading="lazy">
+</a></div>
+<p class="cim-diagram-note">평가 결과가 상담과 기업 보고로 이어지는 흐름을 정리했습니다.</p>
+<div class="cim-diagram-links"><span>그림을 누르면 원본 크기로 볼 수 있습니다.</span><a href="../assets/diagrams/cimcare-service.svg" target="_blank" rel="noopener">그림 확대 ↗</a> <a href="../assets/diagrams/simcare-service-flow.html" target="_blank" rel="noopener">Archify 상세 구조도 ↗</a></div>
 </figure>
-<div class="evidence-links"><a href="../assets/diagrams/simcare-service-flow.html" target="_blank" rel="noopener">서비스 흐름도 크게 보기 ↗</a></div>
-      </section>
-      <section id="part-2" class="case-section">
-        <span class="case-index">02</span>
-        <h2>발견: 같은 ‘완료’가 서로 다른 뜻으로 쓰였다</h2>
-<p>요구사항에서는 ‘완료·진행·중단’이 개별 예약 회기와 전체 상담 과정에 섞여 있었습니다. 오늘 상담 한 회기를 마쳤어도 다음 상담이 남아 있을 수 있는데, 하나의 상태만으로 두 상황을 설명하기 어려웠습니다.</p><div class="case-table-wrap" role="region" aria-label="두 업무 단위를 구분해야 하는 이유 — 설명용 예시" tabindex="0"><table><caption>두 업무 단위를 구분해야 하는 이유 — 설명용 예시</caption><thead><tr><th scope="col">상황</th><th scope="col">오늘의 회기</th><th scope="col">전체 상담</th></tr></thead><tbody><tr><th scope="row">오늘 상담 종료, 다음 회기 예정</th><td>완료</td><td>계속 진행</td></tr><tr><th scope="row">마지막 회기를 마치고 상담 종료</th><td>완료</td><td>종결</td></tr></tbody></table></div><p>이 차이는 용어만 바꾸는 문제가 아닙니다. 상담사가 완료 버튼을 눌렀을 때 어느 상태를 바꿀지, 관리자가 무엇을 집계할지까지 영향을 줍니다.</p>
-      </section>
-      <section id="part-3" class="case-section">
-        <span class="case-index">03</span>
-        <h2>검토: 상태를 나누면 무엇이 명확해지는가</h2>
-<p>내부 검토 노트에는 두 상태 축 분리, 하나의 상태에 플래그 추가, 기존 혼용 유지가 대안으로 정리돼 있습니다. 이 비교 기록이 있다는 것과 모든 대안을 고객에게 설명했다는 것은 다르므로, 고객과의 합의는 확인된 분리 제안에 한정합니다.</p><div class="case-table-wrap" role="region" aria-label="내부 검토 기록을 바탕으로 정리한 선택의 차이" tabindex="0"><table><caption>내부 검토 기록을 바탕으로 정리한 선택의 차이</caption><thead><tr><th scope="col">구성</th><th scope="col">표현 방식</th><th scope="col">검토할 점</th></tr></thead><tbody><tr><th scope="row">기존 혼용 유지</th><td>하나의 완료·진행 용어를 사용</td><td>회기 처리와 전체 상담 집계의 의미가 계속 섞임</td></tr><tr><th scope="row">단일 상태 + 플래그</th><td>상태 외의 추가 값으로 구분</td><td>화면·집계에서 상태와 플래그 조합을 함께 해석해야 함</td></tr><tr><th scope="row">회기·전체 상담 분리</th><td>각 업무 단위의 상태를 별도로 정의</td><td>두 상태의 관계와 동시에 바뀌는 규칙을 명시해야 함</td></tr></tbody></table></div><p>고객에게 운영상태와 집계상태를 나누는 방안을 제안했고, 4월 21일 회신에서 분리 방향에 대한 동의를 받았습니다. 이후의 설계 책임은 두 축을 나누는 것에서 끝나지 않고 전이 규칙을 정리하는 것이었습니다.</p>
-      </section>
-      <section id="part-4" class="case-section">
-        <span class="case-index">04</span>
-        <h2>설계: 화면 선택이 어느 상태를 바꾸는지 명시</h2>
-<figure class="case-figure"><ol class="flow-steps"><li><strong>전체 상담</strong><span>여러 회기를 묶는 관리 단위</span></li><li><strong>개별 회기</strong><span>한 번의 예약·상담 처리 단위</span></li><li><strong>완료 화면의 선택</strong><span>계속 진행 / 전체 종결</span></li><li><strong>상태 전이</strong><span>어느 단위를 변경할지 규칙화</span></li></ol><figcaption>업무 개념과 화면 처리 규칙의 연결을 설명한 도식</figcaption></figure><div class="case-table-wrap" role="region" aria-label="완료 화면에 연결한 상태 변경 기준" tabindex="0"><table><caption>완료 화면에 연결한 상태 변경 기준</caption><thead><tr><th scope="col">사용자의 선택</th><th scope="col">해당 회기</th><th scope="col">전체 상담</th></tr></thead><tbody><tr><th scope="row">상담 진행</th><td>회기 완료</td><td>전체 상담은 계속 진행</td></tr><tr><th scope="row">상담 종결</th><td>회기 완료</td><td>전체 상담도 종결</td></tr></tbody></table></div><p>이후 화면 검토와 결정 기록에서 회기 상태가 7개에서 5개로 정리됐습니다. 상태 수를 줄인 결정과 두 업무 단위를 분리한 결정은 서로 다른 작업입니다. 숫자 자체를 복잡도나 오류 감소율로 표현하지 않습니다.</p>
-      </section>
-      <section id="part-5" class="case-section">
-        <span class="case-index">05</span>
-        <h2>개발 전달: 고객 회신에서 화면 명세까지 연결</h2>
-<p>고객 원문·회의 결정·기능 명세·화면 처리 규칙을 GitHub에 연결했습니다. 개발자가 상태 명칭만 보고 추측하지 않도록 회기·전체 상담의 전이, 완료 화면의 선택, 되돌리기와 회기 번호 규칙을 기능 명세로 구체화했습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>고객의 설명·회신</strong><span>업무 의미와 동의 확인</span></li><li><strong>결정 기록</strong><span>선택한 정책과 범위</span></li><li><strong>기능 명세</strong><span>상태·예외·전이 규칙</span></li><li><strong>화면·인수 기준</strong><span>사용자의 선택과 기대 동작</span></li></ol><figcaption>기획 산출물 간의 확인 경로</figcaption></figure><p>AI와 함께 문서를 작성하면서 과도한 구현 지시도 조정했습니다. PM이 합의해야 할 동작과 개발팀이 자율적으로 설계할 영역을 공통 지침과 템플릿에 나눠 적었습니다.</p>
-      </section>
-      <section id="part-6" class="case-section">
-        <span class="case-index">06</span>
-        <h2>같은 방식의 범위 조율: 척도별 차트 요구</h2>
-<p>결과지 차트에서도 여러 척도를 하나의 상태값 그래프로 표현하기 어려운 문제가 있었습니다. 척도마다 판정 단계, 하위요인, 평균 비교와 상대 기준 등이 달랐기 때문입니다.</p>
-<p>척도 기준과 비교 데이터를 분석해 기준이 명확한 고정 차트를 우선 구현하는 방안을 제안했습니다. 고객은 구현 가능 범위를 고려해 차트 자료를 다시 정리했다고 회신했습니다. 다만 제안한 모든 제외·연기 항목이 그대로 최종 합의된 것은 아니며, 후속 논의에서 범위가 달라졌습니다.</p><aside class="case-note"><strong>현재 단계</strong><p>고객의 전문적인 판정 기준 자체를 제가 개발한 것은 아닙니다. 이번 기여는 그 기준을 구현 가능한 화면·데이터 조건으로 구체화한 것입니다.</p></aside>
-      </section>
-      <section id="part-7" class="case-section">
-        <span class="case-index">07</span>
-        <h2>결과와 한계: 합의된 규칙과 운영 성과를 구분</h2>
-<div class="case-table-wrap" role="region" aria-label="이 사례에서 확인 가능한 결과" tabindex="0"><table><caption>이 사례에서 확인 가능한 결과</caption><thead><tr><th scope="col">항목</th><th scope="col">변화·산출물</th><th scope="col">현재 확인 범위</th></tr></thead><tbody><tr><th scope="row">상담 상태</th><td>회기와 전체 상담의 두 축으로 분리</td><td>고객 동의·결정 기록·기능 명세</td></tr><tr><th scope="row">회기 상태 목록</th><td>7개에서 5개로 정리</td><td>명세의 설계 범위</td></tr><tr><th scope="row">차트 요구</th><td>구현 가능 범위 제안 후 고객 자료 재정리</td><td>발신 제안·고객 회신</td></tr><tr><th scope="row">제품 상태</th><td>개발·검증 진행 중</td><td>전체 운영 검증 완료 아님</td></tr><tr><th scope="row">운영 효과</th><td>오류율·처리시간 개선 수치 없음</td><td>별도 측정 필요</td></tr></tbody></table></div><p>완료한 것은 제안·협의와 개발 기준을 만드는 작업입니다. 기능 명세에는 후속 정책과 검토 항목이 남아 있어, 제품 출시나 운영 정확도 개선까지 완료했다고 설명하지 않습니다.</p>
-      </section>
-      <section id="part-8" class="case-section">
-        <span class="case-index">08</span>
-        <h2>돌아보며: 용어보다 업무의 단위를 먼저 확인하기</h2>
-<p>‘완료’라는 단어를 그대로 상태값으로 옮기기 전에 무엇이 끝난 것인지 확인해야 했습니다. 회기와 전체 상담의 단위가 정리되자 화면의 선택과 관리자의 집계 기준도 따로 설명할 수 있었습니다.</p>
-<p>이 사례에서 제 역할을 가장 잘 보여주는 근거는 문서 개수가 아니라 고객의 업무 해석이 어떻게 상태·전이·화면 규칙으로 이어졌는지입니다.</p>
-      </section>
-    </article>
-  </div>
-  <a class="next-project" href="leaders-club.html"><span>다음 프로젝트</span><strong>네이버 예약과 현장 접수를 한 흐름으로 ↗</strong></a>
+<p>요구사항은 문서·엑셀·결과지 예시·메일에 나뉘어 있었습니다. 연구소의 운영 언어를 화면 동작과 개발 기준으로 옮기면서, 같은 ‘완료’나 ‘평균’을 서로 다르게 이해하던 지점을 먼저 확인해야 했습니다.</p>
+</section>
+<section class="case-section simcare-feature-case" id="release-case">
+<p class="simcare-section-label">02 / 핵심 사례 · 첫 오픈 범위 조정</p>
+<h2>외부 상담사 접속이 늦어질 때, 무엇을 첫 오픈에 남길까</h2>
+<p>상담사는 내부 인력뿐 아니라 외부 인력도 사용할 예정이었습니다. 다만 외부 상담사의 접속 방식과 다중 인증은 보안 검토가 끝나지 않아 첫 오픈 일정에 영향을 줄 수 있었습니다. 외부 상담사 기능을 통째로 빼면 나중에 권한과 데이터를 다시 설계해야 했고, 승인되지 않은 접속을 먼저 열 수도 없었습니다.</p>
+<div class="simcare-decision-frame" aria-label="첫 오픈 범위 결정"><div class="simcare-decision-frame-head"><span>쟁점</span><strong>외부 접속 승인 대기 ≠ 상담 기능 전체 대기</strong></div><div class="simcare-scope-grid"><div><span>첫 오픈에 유지</span><strong>내부 상담사 사용</strong><p>외부 상담사 역할·권한·데이터 구조는 유지하되 로그인은 비활성화</p></div><div><span>보안 확정 후 활성화</span><strong>외부 상담사 접속</strong><p>접속 방식과 인증 기준이 정해진 뒤 별도 확인</p></div></div></div>
+<h3>제가 맡은 일은 ‘미룰 기능’만 정하는 것이 아니었습니다</h3>
+<p>고객·보안·개발 논의에서 외부 접속을 첫 오픈의 필수 조건에서 분리하고, 그 결정이 로그인·권한·배포 범위에 주는 영향을 정리했습니다. 9월 23일 고객 측 회의에서 <strong>첫 오픈은 내부 상담사만 사용</strong>하는 것으로 확정됐습니다. 저는 외부 상담사 역할과 권한은 설계에 남기고, 접속 활성화만 보안 확정 이후로 분리한 내용과 후속 작업을 명세에 반영했습니다.</p>
+</section>
+<section class="case-section" id="part-2">
+<p class="simcare-section-label">03 / 요구사항 관리</p>
+<h2>문서가 있다는 것과 개발 기준이 정해졌다는 것은 달랐습니다</h2>
+<p>처음에는 제품별 요구사항 회수 양식과 가이드를 공유했습니다. 고객이 전체 재작성의 부담을 설명하자 상담관리 초안을 제공하고 확인할 범위를 안내했습니다. 이후에도 원자료와 내부 명세를 대조하며 확정·수정·보류할 내용을 구분했습니다.</p>
+<h3>고객 원문에서 개발 과제까지 이어지는 공통 기준</h3>
+<p>GitHub 기획 저장소에 고객 원문, 회의 결정, 기능·화면 명세, 단계별 범위를 연결했습니다. 디자이너와 개발자가 같은 결정을 찾아볼 수 있게 하고, AI가 작업할 때도 원문·확정 사항·미결정 사항을 구분하도록 규칙을 뒀습니다. 개발 과제를 넘길 때는 관련 명세와 입력·예외·완료 기준을 함께 적었습니다.</p>
+<h3>명단이 없어도 참여할 수 있는 가입 경로</h3>
+<p>임직원 명단을 미리 제공할 수 있는 기업과 개인정보 정책상 어려운 기업이 있었습니다. 그래서 사전 등록 명단과 가입자를 맞추는 경로, 기업이 배포한 링크로 가입하면서 기업·평가 차수를 연결하는 경로를 함께 기획했습니다. 이 내용은 가입·차수 운영 기준으로 정리했으며, 여기서는 설계한 범위를 소개합니다.</p>
+<div class="simcare-questions-count" aria-label="고객 확인 과정"><div><strong>42<span>개</span></strong><p>6개 분야에서 원문·화면·명세가 어긋난 지점을 질문으로 정리</p></div><span aria-hidden="true">→</span><div><strong>15<span>개</span></strong><p>첫 회신 뒤에도 해석이 필요한 항목에 적용안·선택지를 붙여 재확인</p></div></div>
+<p>콘텐츠·평가·결과지·상담·알림·권한 등 6개 분야에서 고객이 확인해야 할 질문 42개를 정리했습니다. 각 질문에는 관련 문서와 위치를 붙였고, 첫 회신 뒤에도 해석이 필요한 15개 항목은 현재 적용안과 선택지를 제시해 다시 확인했습니다. 예약 변경·동의서·벤치마크 산식처럼 후속 구현에 영향을 주는 항목을 우선 확인했습니다.</p>
+<div class="case-table-wrap" role="region" tabindex="0" aria-label="개발 범위 협의 사례"><table><caption>고객과 합의한 구현 범위 · 협의 내용 재구성</caption><thead><tr><th scope="col">운영 요구</th><th scope="col">제안하고 합의한 범위</th><th scope="col">남는 제약</th></tr></thead><tbody>
+<tr><th scope="row">국가 비교값 갱신·이력 관리</th><td>고정값을 유지보수 요청으로 갱신하고 변경 전후 값·일자·요청자를 기록. 관리자 직접 편집 화면은 두지 않음</td><td>갱신 시 개발·유지보수 대응 필요</td></tr>
+<tr><th scope="row">프로그램 다시하기·과거 기록</th><td>사용자에게 최신 결과를 표시하고 이전 기록은 내부 보관. 사용자용 과거 회차 조회 화면은 두지 않음</td><td>사용자가 과거 회차를 직접 조회할 수 없음</td></tr>
+</tbody></table></div>
+<p>회신을 받으면 질문별로 확정된 기준, 내부 해석, 추가 확인 사항을 나누고 관련 결정·기능 명세·후속 작업에 연결했습니다. 답변을 받았다고 모두 확정으로 처리하지는 않았습니다.</p>
+</section>
+<section class="case-section" id="part-3">
+<p class="simcare-section-label">04 / 핵심 사례 · 상담 운영 설계</p>
+<h2>상담사의 실제 업무를 상태와 화면 동작으로 풀었습니다</h2>
+<div class="simcare-decision" id="state-case"><h3><span class="simcare-case-index">상태 모델</span>오늘 상담이 끝나도, 전체 상담은 계속될 수 있습니다</h3>
+<p>‘완료’가 한 번의 상담과 전체 상담 과정에 섞여 있었습니다. 한 내담자의 여러 회기 가운데 오늘 회기만 끝났는데도 전체 상담이 종결된 것처럼 읽힐 수 있었습니다. 검토한 안은 단일 상태에 ‘진행/종결’ 플래그를 더하는 방법과 <strong>회기·전체 상담의 상태를 별개로 두는 방법</strong>이었습니다.</p>
+<div class="simcare-state-visual" aria-label="회기와 전체 상담의 상태를 분리한 구조"><div><span>상담 케이스 · 전체 과정</span><strong>상담진행</strong><span>종결을 선택할 때만 → 상담종결</span></div><span aria-hidden="true" class="simcare-state-branch">1 : N</span><div><span>예약·회기 · 오늘 상담</span><strong>예약확정 → 완료</strong><span>다음 회기는 별도 예약으로 이어짐</span></div></div>
+<p>단일 상태+플래그만으로는 여러 회기가 같은 상담에 속하는지, 재신청·중단을 어떻게 집계할지 다시 모호해집니다. 그래서 회기 상태와 상담 케이스 상태를 두 축으로 분리하고, 상담 완료 화면의 ‘상담 진행/상담 종결’ 선택이 각각 어떤 상태를 바꾸는지 명세에 적었습니다. 회기 상태 7개를 5개로 줄인 결정은 별도로 관리했습니다.</p>
+<div class="case-table-wrap" role="region" tabindex="0" aria-label="상담 완료 선택에 따른 상태 변화"><table><caption>한 상담 케이스에 여러 회기가 속하는 구조 · 명세 기준 재구성</caption><thead><tr><th scope="col">상담 완료 화면의 선택</th><th scope="col">오늘 회기</th><th scope="col">전체 상담 케이스</th></tr></thead><tbody>
+<tr><th scope="row">상담 진행</th><td>완료</td><td class="simcare-selected">상담진행 유지</td></tr>
+<tr><th scope="row">상담 종결</th><td>완료</td><td class="simcare-selected">상담종결로 변경</td></tr>
+</tbody></table></div>
+<p>이 분리는 상담사 화면뿐 아니라 운영 집계에도 영향을 줍니다. 회기 완료·노쇼는 회기 단위, 상담 종결·중단은 케이스 단위로 읽어야 합니다. 결정 자체는 확정됐지만, 케이스 축의 최종 용어와 중단·재방문 처리 일부는 추가 확인 사항으로 남겼습니다.</p></div>
+<div class="simcare-decision" id="consent-case"><h3><span class="simcare-case-index">운영 정책</span>동의서가 필수라고 예약부터 막아야 하는 것은 아니었습니다</h3>
+<p>저는 신청 단계에서 동의를 완료하도록 제안했지만, 고객은 미작성 상태에서도 예약을 허용하고 첫 상담 전에 동의를 받는 운영 방식을 설명했습니다. 방문·접속 후 상담사가 안내할 수 있지만, 동의 없이 상담을 진행하는 것은 아니었습니다.</p>
+<figure class="cim-diagram" id="consent-flow">
+<figcaption><strong>최종 합의: 예약 이후 안내, 첫 상담 전 동의</strong></figcaption>
+<div class="cim-diagram-frame" role="region" tabindex="0" aria-label="최종 합의: 예약 이후 안내, 첫 상담 전 동의 이미지">
+<a href="../assets/diagrams/cimcare-consent.svg" target="_blank" rel="noopener" aria-label="최종 합의: 예약 이후 안내, 첫 상담 전 동의 원본 확대">
+<img src="../assets/diagrams/cimcare-consent.svg" width="820" height="748" alt="내담자, 서비스, 상담사 간의 상담동의서 처리 순서. 미작성 상태 예약 허용, 예약 확정 후 안내, 필요 시 상담사 안내를 거쳐 동의 완료 후 상담 시작" loading="lazy">
+</a></div>
+<p class="cim-diagram-note">예약은 가능하지만 첫 상담 전에는 동의를 마쳐야 합니다. 이 순서로 고객과 기준을 맞췄습니다.</p>
+<div class="cim-diagram-links"><span>모바일에서는 좌우로 밀어 볼 수 있습니다.</span><a href="../assets/diagrams/cimcare-consent.svg" target="_blank" rel="noopener">그림 확대 ↗</a></div>
+</figure>
+<p>신청 차단안을 철회하고 명세를 수정했습니다. 당시 구현은 이미 예약을 허용하고 예약 확정 후 동의서를 전달하고 있어 기존 흐름은 유지했습니다. 추가로 필요한 앱 안내, 상담사 화면의 동의 확인, 관련 디자인 수정을 후속 작업으로 나눴습니다.</p></div>
+</section>
+<section class="case-section" id="part-4">
+<p class="simcare-section-label">05 / 통계 기준</p>
+<h2>같은 ‘평균’도 누구를 어떻게 세는지에 따라 달랐습니다</h2>
+<p>고객이 기업별 평균을 같은 비중으로 합산하는 방식에 의문을 제기했습니다. 저는 개발 현황 대조 내용을 정리하고, 단순 평균·수검자 수 가중 평균·개인별 최신 결과 평균을 숫자 예시와 함께 비교할 수 있도록 확인표에 담았습니다.</p>
+<div class="case-table-wrap" role="region" tabindex="0" aria-label="통계 집계 선택지 비교"><table><caption>고객에게 제시한 선택지와 차이</caption><thead><tr><th scope="col">비교안</th><th scope="col">계산 기준</th><th scope="col">확인할 문제</th></tr></thead><tbody>
+<tr><th scope="row">평균의 단순 평균</th><td>기업·차수별 평균에 같은 비중</td><td>참여 인원이 달라도 동일 비중으로 반영</td></tr>
+<tr><th scope="row">수검자 수 가중 평균</th><td>기업·차수별 참여 규모 반영</td><td>반복 참여자의 중복 처리 기준 필요</td></tr>
+<tr><th scope="row">개인별 최신 결과 평균</th><td>동일인당 최신 결과 1건</td><td>최신 결과를 기준으로 삼는 것이 운영 의도에 맞는지 확인</td></tr>
+</tbody></table></div>
+<p>고객은 가중 방식을 선택하면서 <strong>동일 연도 최초 완료 결과 1건만 집계</strong>하라는 조건을 추가했습니다. 제가 제시한 ‘최신 결과’와 달라, 산식 이름만 채택하지 않고 집계 대상·중복 처리 규칙까지 명세에 반영했습니다. 이후 결과는 보존하되 해당 연도 통계에서 제외하도록 백엔드 후속 작업에 연결했습니다.</p>
+<p>콘텐츠 평균 시청시간도 클릭 조회수와 실제 측정된 재생 건수를 구분해 분모를 확인했습니다. 이 부분은 고객 기준을 확인한 뒤 명세·구현 정합 작업이 남아 있습니다.</p>
+</section>
+<section class="case-section" id="part-5">
+<p class="simcare-section-label">06 / 프로젝트 실행 관리</p>
+<h2>일정뿐 아니라, 무엇을 근거로 진행됐다고 볼지도 관리했습니다</h2>
+<h3>변경 요청을 화면·PDF·선행 작업의 영향으로 나누기</h3>
+<p>디자인 변경 요청을 검토할 때 컬러·일러스트·개인결과지·스티커를 나누어 확인했습니다. 개인결과지는 웹 화면뿐 아니라 PDF 출력 구현과 다른 화면의 확정에도 영향을 받아, 항목별 예상 소요기간과 선행 조건을 정리했습니다. 협력사 피드백을 받아 고객 회신안을 보완했습니다.</p>
+<div class="case-table-wrap simcare-handoff" role="region" tabindex="0" aria-label="프로젝트 진행 관리 자료"><table><caption>실제 공유·검토한 자료와 관리 항목</caption><thead><tr><th scope="col">자료</th><th scope="col">정리한 내용</th><th scope="col">구분한 상태</th></tr></thead><tbody>
+<tr><th scope="row">6월 개략 WBS</th><td>기획·개발·테스트·배포, 담당 영역, 월·주차별 일정</td><td>확정 납기가 아닌 일정 초안</td></tr>
+<tr><th scope="row">7월 진행 현황 보고</th><td>FE·BE 계획 대비 현황, 실제 연동, 외부 의존·검토 일정</td><td>구현 진행과 외부 확인 사항</td></tr>
+<tr><th scope="row">9월 통계 DB 검토</th><td>구현된 기능·저장 가능한 데이터·추가 작업·정책 확인</td><td>개발 준비와 운영 검증</td></tr>
+</tbody></table></div>
+<h3 id="api-evidence">코드에서 API 연동 현황을 다시 계산하는 도구 구현</h3>
+<p>API 현황 자동화에는 다른 문제가 있었습니다. 상태 파일의 갱신이 실패해도 문서는 다시 게시될 수 있어, 코드가 바뀌었는데 표에는 예전 상태가 남았습니다. 저는 <strong>OpenAPI 명세와 현재 소스 전체를 대조해 API 호출·화면 연결 근거에서 연동 상태를 재계산</strong>하도록 바꿨습니다.</p>
+<figure class="cim-diagram" id="api-status-visual">
+<figcaption><strong>소스 분석부터 현황 보고까지</strong></figcaption>
+<div class="cim-diagram-frame" role="region" tabindex="0" aria-label="소스 분석부터 현황 보고까지 이미지">
+<a href="../assets/diagrams/cimcare-api.svg" target="_blank" rel="noopener" aria-label="소스 분석부터 현황 보고까지 원본 확대">
+<img src="../assets/diagrams/cimcare-api.svg" width="736" height="712" alt="OpenAPI와 프론트엔드 소스를 분석해 앱별 코드 연동 상태를 만들고, 수동 QA 기록과 합쳐 CI 보고 및 조건부 Confluence 갱신으로 연결하는 구조" loading="lazy">
+</a></div>
+<p class="cim-diagram-note">코드에서 계산한 연동 상태와 사람이 기록한 실제 QA를 함께 보고합니다. Confluence 갱신은 동기화 설정에 따라 실행됩니다.</p>
+<div class="cim-diagram-links"><span>모바일에서는 좌우로 밀어 볼 수 있습니다.</span><a href="../assets/diagrams/cimcare-api.svg" target="_blank" rel="noopener">그림 확대 ↗</a></div>
+</figure>
+<details class="cim-source" id="api-report-source"><summary>실제 API 현황 보고 화면 보기 <span>2026.09.20 제공 자료</span></summary>
+<figure class="product-evidence simcare-service-figure"><a class="evidence-image-link" href="../assets/evidence/cim-api-status.png" target="_blank" rel="noopener" aria-label="실제 API 연동 현황 보고 화면 확대"><img src="../assets/evidence/cim-api-status.png" width="1622" height="1516" alt="API 연동 현황 보고 화면. 코드상 연동 완료와 실제 API QA 미검증을 별도로 표시하고 앱별로 집계한다." loading="lazy"></a><figcaption><strong>실제 보고 화면 — 코드 연동과 API QA를 따로 표시</strong><span>9월 20일에 공유받은 화면입니다. 당시 집계 기준과 생성 시점은 확인이 필요하며, 현재 진행률을 뜻하지 않습니다.</span></figcaption></figure>
+</details>
+
+<p>집계 결과를 CI 보고서에 넣고, 성공한 CI의 기준 커밋을 사용해 Confluence의 자동 관리 영역을 갱신하도록 구성했습니다. 보고서에서는 코드 연결과 실제 통신 QA를 따로 보여줍니다.</p>
+<p><a class="simcare-detail-link" href="api-workflow.html">API 현황 자동화의 구현 과정 자세히 보기 ↗</a></p>
+</section>
+<section class="case-section" id="part-6">
+<p class="simcare-section-label">07 / 산출물과 결과</p>
+<h2>운영 기준을 정하고 개발 작업으로 연결했습니다</h2>
+<div class="simcare-result-status" aria-label="프로젝트에서 확정하고 실행한 일"><div><span>확정한 기준</span><strong>첫 오픈의 사용 범위 · 상담 상태 · 통계 집계 기준</strong></div><div><span>실행으로 옮긴 일</span><strong>상담·통계 명세 반영 · API 현황 도구 구현</strong></div></div>
+<div class="case-table-wrap" role="region" tabindex="0" aria-label="프로젝트 산출물과 확인된 결과"><table><thead><tr><th scope="col">산출물</th><th scope="col">확인된 변화</th><th scope="col">결과 범위</th></tr></thead><tbody>
+<tr><th scope="row">요구사항 확인표·결정 기록</th><td>모호한 운영 요구에 적용안을 제시하고 고객의 선택·수정 내용을 추적</td><td>주요 기준 합의, 일부 추가 확인</td></tr>
+<tr><th scope="row">상담·통계 기능 명세</th><td>회기/케이스 분리, 동의 시점, 집계 대상·중복 기준 구체화</td><td>관련 명세 반영, 후속 구현·QA 남음</td></tr>
+<tr><th scope="row">WBS·현황·변경 영향 자료</th><td>담당 영역과 진행 상태, 외부 의존·선행 조건을 구분해 공유</td><td>일정·변경 영향 협의 자료</td></tr>
+<tr><th scope="row">API 연동 현황 도구</th><td>소스 기반 재계산과 앱별 보고, 코드 연동과 QA 분리</td><td>구현 코드·보고 화면 확인</td></tr>
+</tbody></table></div>
+<h3>판단을 바꿔야 했던 경험도 있었습니다</h3>
+<p>기업결과지의 상세 예시를 처음에는 큰 변경으로 판단했지만, 고객은 기존 자료를 다시 설명한 것이라고 정정했습니다. 원자료를 재검토한 뒤 해석 차이와 Figma 반영 부족을 구분해 회신했습니다. 새로운 요청처럼 보여도 먼저 원래 합의와 실제 반영 상태를 대조해야 한다는 점을 배웠습니다.</p>
+<p>외부 상담사 접속은 첫 오픈에서 분리하되 권한 구조는 남겼고, 상담 완료는 회기와 전체 상담에 각각 다른 뜻으로 정의했습니다. 이런 결정이 회의에서 끝나지 않도록 명세와 화면 규칙에 반영하고, 개발팀이 이어서 확인할 작업을 정리했습니다.</p>
+</section>
+</article>
+<a class="next-project" href="leaders-club.html"><span>다음 프로젝트</span><strong>네이버 예약과 현장 접수를 한 흐름으로 ↗</strong></a>
 </main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>

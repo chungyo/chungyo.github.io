@@ -1,0 +1,56 @@
+/* A reading-first layout for the local case-study revision. */
+.llm-article{max-width:1100px}
+.llm-article .detail-header{max-width:880px;margin-top:28px;margin-bottom:38px}
+.llm-article .detail-header h1{font-size:clamp(28px,3.2vw,38px);line-height:1.55;word-break:keep-all}
+.llm-article .detail-lead{font-size:16px;line-height:1.95;margin:20px 0 0;color:#b4c0d1}
+.llm-preview-note{font-size:11px;letter-spacing:.2px;color:#a78bfa;margin-bottom:18px}
+.llm-byline{font-size:12px;color:var(--quiet);line-height:1.9;margin:22px 0 20px}
+.llm-contents{max-width:880px;margin:0 0 45px}
+.llm-contents h2{font-size:19px;font-weight:600;border-bottom:1px solid var(--border);padding-bottom:15px}
+.llm-contents ol{padding-left:23px;margin:16px 0 0;color:var(--green);font-size:14px;line-height:2.4}
+.llm-contents a{text-decoration:underline;text-decoration-color:#22c55e50;text-underline-offset:4px}
+.llm-reading{max-width:920px}
+.llm-reading .case-section{margin-top:40px;padding-top:36px}
+.llm-reading .case-section:first-child{margin-top:0;padding-top:0;border:0}
+.llm-reading h2{font-size:25px;line-height:1.65;letter-spacing:-.6px;margin:0 0 23px;word-break:keep-all}
+.llm-reading h3{font-size:18px;font-weight:600;line-height:1.7;margin:30px 0 14px}
+.llm-reading p{font-size:15px;line-height:2;word-break:keep-all;color:#aebbcf;margin:0 0 19px}
+.llm-reading strong{color:#e2e8f0;font-weight:500}
+.llm-reading p code,.llm-reading li code,.llm-reading td code{font:12px/1.8 var(--mono);color:#b8dbc9;background:#172638;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}
+.llm-reading .llm-source{font-size:11px;line-height:1.9;color:#8c9cb3}
+.llm-source a,.llm-inline-link,.llm-technical-figure figcaption a{color:var(--green);text-decoration:underline;text-underline-offset:4px}
+.llm-evidence-photo{margin:28px 0;max-width:625px}
+.llm-evidence-photo>a,.llm-technical-figure>a{display:block;cursor:zoom-in;overflow:hidden;border:1px solid #40516a;border-radius:9px;background:#0b1220}
+.llm-evidence-photo img,.llm-technical-figure img{display:block;width:100%;height:auto}
+.llm-evidence-photo figcaption,.llm-technical-figure figcaption{font-size:11px;color:#92a2b9;line-height:1.9;margin-top:12px}
+.llm-technical-figure{margin:28px 0}
+.llm-folder-tree{margin:26px 0;padding:24px;background:#0b1220;border:1px solid var(--border);border-radius:8px;overflow-x:auto;color:#c1ccdb;font:12px/2.25 var(--mono)}
+.llm-status-note{border-left:2px solid #a78bfa70;padding-left:16px;font-size:12px!important;color:#b7abc9!important}
+.llm-prose-list{padding-left:23px;color:#aebbcf;font-size:14px;line-height:2}
+.llm-prose-list li{padding-left:4px;margin-bottom:12px}
+.llm-reading .code-figure pre{font-size:13px;line-height:1.85}
+.llm-source-excerpt{margin:25px 0;border-left:2px solid #22c55e70;padding:4px 0 4px 22px}
+.llm-source-excerpt figcaption{font-size:11px;color:#8e9fb7;margin-bottom:20px}
+.llm-source-excerpt dl{margin:0;display:grid;gap:14px}
+.llm-source-excerpt dl>div{display:grid;grid-template-columns:45px minmax(0,1fr);gap:16px}
+.llm-source-excerpt dt{font-size:12px;color:#d1ded9}.llm-source-excerpt dd{margin:0;font-size:13px;line-height:1.9;color:#aebbcf}
+@media(max-width:760px){
+ .llm-article .detail-header h1{font-size:27px}.llm-article .detail-lead{font-size:14px}
+ .llm-contents ol{font-size:12px;line-height:1.95}.llm-contents li{margin-bottom:11px;padding-left:3px}
+ .llm-reading h2{font-size:21px;line-height:1.7}.llm-reading h3{font-size:17px}
+ .llm-reading p{font-size:14px;line-height:1.95}
+ .llm-reading .case-section{padding-top:28px;margin-top:32px}
+ .llm-prose-list{font-size:13px}
+ .llm-folder-tree{padding:18px;font-size:10px}
+ .llm-source-excerpt{padding-left:16px}.llm-source-excerpt dd{font-size:12px}
+ .llm-reading .code-figure pre{font-size:11px}
+}
+@media print{
+ .llm-preview-note,.llm-contents{display:none}
+ .llm-reading,.llm-article .detail-header{max-width:none}
+ .llm-reading p,.llm-reading strong,.llm-prose-list,.llm-source-excerpt dd,.llm-byline{color:#334155}
+ .llm-folder-tree{background:#f8fafc;color:#334155;white-space:pre-wrap}
+ .llm-evidence-photo,.llm-technical-figure,.llm-source-excerpt{break-inside:avoid}
+ .llm-technical-figure img{max-height:550px;object-fit:contain}
+ .llm-reading h2,.llm-reading h3{break-after:avoid}
+}

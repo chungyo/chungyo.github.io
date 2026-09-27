@@ -1,0 +1,17 @@
+flowchart TB
+  subgraph input["분석 입력"]
+    direction LR
+    spec["OpenAPI 명세"]
+    source["프론트엔드 소스"]
+  end
+  spec --> analyze["호출·화면 참조 분석"]
+  source --> analyze
+  analyze --> status["앱별 코드 연동 상태"]
+  manual["담당 · 예외 · QA 기록"] -. 별도 관리 .-> report["API 현황 보고서"]
+  status --> report
+  report --> ci["GitHub CI 보고"]
+  report -->|동기화 활성화 시| confluence["Confluence 갱신"]
+  classDef focus fill:#14352e,stroke:#4ade80,color:#f1f5f9,stroke-width:2px;
+  classDef manual fill:#262535,stroke:#a78bfa,color:#f1f5f9;
+  class analyze,status,report focus;
+  class manual manual;

@@ -1,0 +1,217 @@
+.simcare-case .detail-header{margin-top:34px;max-width:940px}
+.simcare-case .detail-header h1{font-size:clamp(35px,4.5vw,54px);line-height:1.34;letter-spacing:-1.6px;word-break:keep-all}
+.simcare-case .detail-lead{font-size:17px;line-height:1.85;max-width:780px}
+.simcare-preview{color:#a78bfa;font-size:11px;margin-bottom:18px}
+.simcare-case .case-facts{grid-template-columns:1fr 1.45fr 1fr}
+.simcare-hero-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:32px 0 18px}
+.simcare-hero-points a{display:flex;flex-direction:column;gap:9px;padding:22px 24px;background:#142236;border:1px solid #344356;border-top:2px solid #22c55e;border-radius:10px;text-decoration:none;transition:border-color .2s,transform .2s}
+.simcare-hero-points a:hover{border-color:#4ade80;transform:translateY(-2px)}
+.simcare-hero-points a>span{font:11px "JetBrains Mono",monospace;color:#4ade80}
+.simcare-hero-points strong{font-size:18px;line-height:1.5;color:#f1f5f9;word-break:keep-all}
+.simcare-hero-points small{font-size:12px;line-height:1.6;color:#9cadc2}
+.simcare-context{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;padding:24px 28px;margin:28px 0 42px;background:#111f31;border:1px solid #344356;border-radius:12px}
+.simcare-context>div{display:flex;flex-direction:column;gap:8px}
+.simcare-context>div>span{font:11px "JetBrains Mono",monospace;color:#86efac}
+.simcare-context strong{font-size:16px;line-height:1.6;color:#f1f5f9;word-break:keep-all}
+.simcare-context-arrow{font-size:26px;color:#4ade80}
+.cim-screen-showcase{margin:34px 0 42px}
+.cim-screen-heading{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:18px}
+.simcare-reading .cim-screen-heading h3{margin:0;font-size:21px}
+.cim-screen-heading>span{font-size:11px;color:#94a3b8;text-align:right}
+.cim-screen-grid{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:14px}
+.cim-screen-card{min-width:0;margin:0;background:#1c293b;border:1px solid #344356;border-radius:12px;overflow:hidden}
+.cim-screen-card>a{display:block;overflow:hidden;background:#fff;cursor:zoom-in}
+.cim-screen-card img{display:block;width:100%;height:300px;object-fit:cover;object-position:top}
+.cim-screen-card--mobile img{object-position:center 37%;object-fit:contain;background:#f6f7fa}
+.cim-screen-card--featured{order:-1;grid-column:1/-1}
+.cim-screen-card--featured img{height:520px;object-fit:cover;object-position:center top;background:#f6f7fa}
+.cim-screen-card figcaption{display:flex;flex-direction:column;gap:5px;padding:14px 15px 16px}
+.simcare-reading .cim-screen-card figcaption strong{font-size:14px;font-weight:600;color:#f1f5f9}
+.cim-screen-card figcaption span{font-size:11px;line-height:1.5;color:#aebbcf}
+.cim-screen-more{border-bottom:1px solid #344356;margin-top:14px}
+.cim-screen-more summary{cursor:pointer;color:#86efac;font-size:12px;padding:12px 0}
+.cim-screen-grid--extra{grid-template-columns:repeat(2,minmax(0,205px));padding:8px 0 18px}
+.cim-screen-grid--extra .cim-screen-card img{height:260px}
+.simcare-contents{max-width:940px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:28px 0 52px;padding-bottom:23px;border-bottom:1px solid var(--border)}
+.simcare-contents>span{font-size:11px;color:#94a3b8;margin-right:12px}
+.simcare-contents a{font-size:12px;color:#d4e2ef;border:1px solid #344356;border-radius:999px;padding:8px 13px;text-decoration:none}
+.simcare-contents a:hover{border-color:#4ade80;color:#86efac}
+.simcare-reading{max-width:940px}
+.simcare-reading .case-section{margin-top:42px;padding-top:36px}
+.simcare-reading .case-section:first-child{margin-top:0;padding-top:0;border-top:0}
+.simcare-reading h2{font-size:25px;line-height:1.65;letter-spacing:-.6px;word-break:keep-all;margin:0 0 24px}
+.simcare-reading h3{font-size:18px;font-weight:600;line-height:1.7;margin:30px 0 14px}
+.simcare-reading p{font-size:15px;line-height:2;color:#aebbcf;word-break:keep-all;margin:0 0 20px}
+.simcare-reading strong{color:#e2e8f0;font-weight:500}
+.simcare-reading .case-list{font-size:14px;line-height:2;color:#aebbcf}
+.simcare-reading .case-list li{margin-bottom:12px}
+.simcare-service-figure{margin:30px 0}
+.simcare-detail-link{color:var(--green);text-decoration:underline;text-underline-offset:5px}
+.cim-diagram{margin:34px 0 40px}
+.simcare-reading .cim-diagram figcaption strong{display:block;font-size:20px;font-weight:600;color:#f1f5f9;line-height:1.6;margin-bottom:22px}
+.cim-diagram-frame{overflow-x:auto;background:#0f172a;padding:10px 0;max-width:100%}
+.cim-diagram-frame a{display:block;width:min(100%,880px);min-width:640px;margin:0 auto;cursor:zoom-in}
+#service-flow.cim-diagram .cim-diagram-frame a{width:min(100%,460px);min-width:0}
+.cim-diagram-frame img{display:block;width:100%;height:auto}
+.simcare-reading .cim-diagram-note{font-size:12px;color:#94a3b8;line-height:1.8;margin:18px 0 8px}
+.cim-diagram-links{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;line-height:1.8}
+.cim-diagram-links a{color:#4ade80;text-decoration:underline;text-underline-offset:4px}
+.cim-diagram-links>span{display:none;color:#94a3b8}
+.cim-diagram-frame:focus-visible,.cim-diagram-links a:focus-visible{outline:2px solid #4ade80;outline-offset:4px}
+.simcare-service-figure .evidence-image-link{background:#0b1220}
+.simcare-reading .simcare-section-label{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--green);letter-spacing:1px;margin-bottom:14px}
+.simcare-question{border-left:3px solid var(--green);background:#142236;padding:24px 28px;margin:28px 0}
+.simcare-question>span{font-size:11px;color:#93a5bd}
+.simcare-reading .simcare-question p{font-size:23px;line-height:1.6;margin:12px 0 0;color:#cbd5e1}
+.simcare-question strong{color:#f8fafc;font-weight:600}
+.simcare-comparison{margin:30px 0}
+.simcare-comparison figcaption{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.simcare-comparison figcaption strong{font-size:16px}
+.simcare-comparison figcaption span{font-size:11px;color:#93a5bd}
+.simcare-case .case-table-wrap{max-width:100%;overflow-x:auto}
+.simcare-case .case-table-wrap table{width:100%;min-width:560px;border-collapse:collapse;font-size:13px;line-height:1.8}
+.simcare-case .case-table-wrap th,.simcare-case .case-table-wrap td{padding:20px 18px;vertical-align:top}
+.simcare-comparison th:first-child{width:21%}
+.simcare-selected{background:#22c55e0b}
+.simcare-step{display:block;color:#94a3b8;font-family:"JetBrains Mono",monospace;font-size:10px;margin-bottom:6px}
+.simcare-case .simcare-selected strong{color:#4ade80}
+.simcare-status{display:inline-block;color:#86efac;white-space:nowrap;font-size:11px}
+.simcare-status.pending{color:#c4b5fd}
+.simcare-handoff caption{text-align:left;color:#93a5bd;font-size:11px;padding-bottom:12px}
+.simcare-outcome{border-top:1px solid #22c55e66;padding-top:22px;margin:30px 0}
+.simcare-role-list{padding-left:20px;margin:25px 0}
+.simcare-decision{margin-top:36px}
+.simcare-decision+.simcare-decision{border-top:1px solid var(--border);padding-top:8px}
+.simcare-case-index{display:block;font:11px "JetBrains Mono",monospace;color:var(--green);margin-bottom:8px}
+.simcare-case .case-table-wrap caption{text-align:left;font-size:11px;color:#93a5bd;padding-bottom:12px}
+.simcare-reading .simcare-state-note{font-size:13px;color:#b8a9d1;border-left:2px solid #7c6ba2;padding-left:16px}
+.simcare-reading .simcare-outcome h3{margin:0 0 12px;color:#4ade80}
+.cim-visual{margin:32px 0;padding:34px;background:#101c2c;border:1px solid #344356;border-radius:16px}
+.cim-visual figcaption{display:flex;flex-direction:column;gap:12px}
+.cim-eyebrow{color:#89a3b9;font-size:11px;letter-spacing:1px}
+.simcare-reading .cim-visual figcaption>strong{font-size:clamp(24px,2.3vw,32px);font-weight:600;line-height:1.45;letter-spacing:-.7px;color:#f1f5f9;word-break:keep-all}
+.cim-flow,.cim-mini-flow{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px;padding:0;margin:32px 0}
+.cim-flow li,.cim-mini-flow li{position:relative;display:flex;flex-direction:column;gap:9px;min-width:0}
+.cim-flow li:not(:last-child):after,.cim-mini-flow li:not(:last-child):after{content:"→";position:absolute;right:-25px;top:33px;color:#6c8299;font-size:21px}
+.cim-step-label{font-size:10px;color:#7dd3a6;letter-spacing:.5px}
+.simcare-reading .cim-flow li>strong{font-size:22px;font-weight:600;line-height:1.5;color:#f1f5f9}
+.cim-flow li>span:last-child,.cim-mini-flow li>span{font-size:12px;line-height:1.7;color:#9cadc2}
+.cim-report-line{border-top:1px solid #344356;padding-top:21px;display:flex;align-items:baseline;gap:22px}
+.cim-report-line>span{font-size:11px;color:#7dd3a6;flex-shrink:0}
+.simcare-reading .cim-report-line>strong{font-size:15px}
+.cim-visual-footer{margin-top:26px;display:flex;justify-content:space-between;gap:18px;align-items:baseline;font-size:11px;line-height:1.8;color:#92a4ba}
+.cim-visual-footer a{flex-shrink:0;color:#86efac;text-decoration:underline;text-underline-offset:4px}
+.cim-policy-row{display:grid;grid-template-columns:106px minmax(0,1fr);gap:20px;padding-top:26px;margin-top:26px;border-top:1px solid #344356}
+.cim-lane-label{font-size:13px;color:#86efac;font-weight:600}
+.cim-lane-label small{display:block;font-size:10px;font-weight:400;color:#9cadc2;margin-top:6px}
+.cim-mini-flow{margin:0}
+.cim-mini-flow li:not(:last-child):after{top:0}
+.simcare-reading .cim-mini-flow li>strong{font-size:18px;line-height:1.5;font-weight:600}
+.cim-policy-before .cim-mini-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cim-policy-before .cim-lane-label,.simcare-reading .cim-policy-before .cim-mini-flow strong{color:#a5b3c6}
+.simcare-reading .cim-mini-flow .cim-emphasis>strong{color:#86efac}
+.cim-not-equal{color:#86efac;padding:0 6px}
+.cim-verification{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:28px}
+.cim-verification>div+div{border-left:1px solid #344356;padding-left:32px}
+.cim-verification h4{font-size:21px;font-weight:500;color:#f1f5f9;margin:10px 0 18px}
+.cim-verification ul{padding:0;margin:0;list-style:none;font-size:13px}
+.cim-verification li{display:flex;justify-content:space-between;gap:12px;color:#a8b8ca;padding:10px 0;border-bottom:1px solid #243548}
+.cim-verification li span{color:#e2e8f0}
+.simcare-reading .cim-verification p{font-size:14px;line-height:1.9;margin:0}
+.cim-source{margin:0 0 32px;border-bottom:1px solid #344356}
+.cim-source summary{cursor:pointer;padding:18px 0;color:#d6e2ef;font-size:14px}
+.cim-source summary span{font-size:11px;color:#92a4ba;margin-left:14px}
+.cim-source summary:focus-visible,.cim-visual a:focus-visible{outline:2px solid #86efac;outline-offset:5px}
+.cim-source .simcare-service-figure{margin:8px 0 24px}
+.simcare-feature-case{scroll-margin-top:105px}
+.simcare-decision-frame{margin:30px 0 32px;background:#111f31;border:1px solid #34544d;border-radius:12px;overflow:hidden}
+.simcare-decision-frame-head{padding:20px 24px;border-bottom:1px solid #34544d;display:flex;gap:18px;align-items:baseline}
+.simcare-decision-frame-head span,.simcare-scope-grid>div>span{font:11px "JetBrains Mono",monospace;color:#86efac;flex-shrink:0}
+.simcare-decision-frame-head strong{font-size:19px;line-height:1.5;color:#f1f5f9}
+.simcare-scope-grid{display:grid;grid-template-columns:1fr 1fr}
+.simcare-scope-grid>div{padding:25px 24px}
+.simcare-scope-grid>div+div{border-left:1px solid #34544d}
+.simcare-scope-grid strong{display:block;color:#f1f5f9;font-size:22px;line-height:1.45;margin:8px 0 10px}
+.simcare-reading .simcare-scope-grid p{font-size:13px;line-height:1.7;margin:0}
+.simcare-questions-count{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;margin:29px 0;padding:22px 26px;border-block:1px solid #344356}
+.simcare-questions-count>div{display:flex;align-items:center;gap:18px}
+.simcare-questions-count>div>strong{font:600 37px "JetBrains Mono",monospace;color:#86efac;white-space:nowrap}
+.simcare-questions-count>div>strong>span{font-size:14px;margin-left:2px}
+.simcare-reading .simcare-questions-count p{font-size:12px;line-height:1.6;margin:0}
+.simcare-questions-count>span{font-size:22px;color:#61758a}
+.simcare-state-visual{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;margin:28px 0 30px;padding:26px;background:#111f31;border:1px solid #34544d;border-radius:12px}
+.simcare-state-visual>div{display:flex;flex-direction:column;gap:8px}
+.simcare-state-visual>div>span{font-size:11px;color:#9aafc3}
+.simcare-state-visual strong{font-size:21px;line-height:1.5;color:#f1f5f9}
+.simcare-state-branch{font:14px "JetBrains Mono",monospace;color:#4ade80;border:1px solid #34544d;border-radius:100px;padding:8px 11px;white-space:nowrap}
+.simcare-result-status{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:25px 0 34px}
+.simcare-result-status>div{border-top:2px solid #22c55e;background:#142236;padding:17px 18px}
+.simcare-result-status>div:nth-child(2){border-color:#a78bfa}
+.simcare-result-status span{display:block;color:#9db4cb;font-size:11px;margin-bottom:8px}
+.simcare-result-status strong{font-size:13px;line-height:1.6;color:#e2e8f0}
+@media(max-width:760px){
+ .simcare-case .case-facts{grid-template-columns:1fr}
+ .simcare-hero-points{grid-template-columns:1fr}
+ .simcare-context,.simcare-questions-count,.simcare-state-visual{grid-template-columns:1fr;gap:10px}
+ .simcare-context-arrow,.simcare-questions-count>span{transform:rotate(90deg);justify-self:start}
+ .simcare-questions-count>div{align-items:flex-start}
+ .simcare-scope-grid{grid-template-columns:1fr}
+ .simcare-scope-grid>div+div{border-left:0;border-top:1px solid #34544d}
+ .simcare-decision-frame-head{flex-direction:column;gap:8px}
+ .simcare-result-status{grid-template-columns:1fr}
+ .cim-screen-heading{align-items:flex-start;flex-direction:column;gap:4px}
+ .cim-screen-heading>span{text-align:left}
+ .cim-screen-grid{grid-template-columns:1fr 1fr}
+ .cim-screen-card--featured{grid-column:1/-1}
+ .cim-screen-card--featured img{height:310px}
+ .cim-screen-card--mobile{grid-column:1/-1}
+ .cim-screen-card--mobile img{height:300px}
+ .cim-screen-card:not(.cim-screen-card--mobile) img{height:200px}
+ .cim-screen-card--featured img{height:310px!important}
+ .cim-screen-grid--extra .cim-screen-card--mobile{grid-column:auto}
+ .cim-screen-grid--extra .cim-screen-card img{height:220px;object-fit:cover}
+ .cim-diagram-links>span{display:block;flex-basis:100%}
+ .simcare-reading .cim-diagram figcaption strong{font-size:18px}
+ .cim-visual{padding:24px 20px;margin:28px 0}
+ .cim-flow,.cim-mini-flow,.cim-policy-before .cim-mini-flow{grid-template-columns:1fr;gap:34px}
+ .cim-flow li:not(:last-child):after,.cim-mini-flow li:not(:last-child):after{content:"↓";left:0;right:auto;top:auto;bottom:-29px;font-size:18px}
+ .cim-flow{margin:28px 0}
+ .cim-report-line,.cim-visual-footer{flex-direction:column;gap:8px;align-items:flex-start}
+ .cim-policy-row{grid-template-columns:1fr;gap:22px}
+ .cim-lane-label small{display:inline;margin-left:10px}
+ .cim-verification{grid-template-columns:1fr;gap:26px}
+ .cim-verification>div+div{border-left:0;padding-left:0;border-top:1px solid #344356;padding-top:24px}
+ .cim-source summary span{display:block;margin:6px 0 0 18px}
+ .simcare-case .case-table-wrap:before{content:"표를 좌우로 밀어 전체 내용을 볼 수 있습니다 ↔";display:block;font-size:10px;color:#94a3b8;margin:0 0 10px}
+ .desktop-break{display:none}
+ .simcare-question{padding:20px}.simcare-reading .simcare-question p{font-size:20px}
+ .simcare-case .case-table-wrap th,.simcare-case .case-table-wrap td{padding:16px 12px}
+ .simcare-case .detail-lead{font-size:14px}
+ .simcare-contents{gap:8px;margin-bottom:35px}.simcare-contents>span{flex-basis:100%}
+ .simcare-reading h2{font-size:21px}.simcare-reading h3{font-size:17px}
+ .simcare-reading p,.simcare-reading .case-list{font-size:14px;line-height:1.95}
+ .simcare-reading .case-section{margin-top:30px;padding-top:28px}
+}
+@media print{
+ .simcare-hero-points a,.simcare-context,.simcare-decision-frame,.simcare-state-visual,.simcare-result-status>div{background:#f8fafc;border-color:#cbd5e1;break-inside:avoid}
+ .simcare-hero-points strong,.simcare-context strong,.simcare-decision-frame strong,.simcare-state-visual strong,.simcare-result-status strong{color:#0f172a}
+ .cim-screen-card{break-inside:avoid}
+ .cim-screen-more{display:none}
+ .cim-diagram{break-inside:avoid}
+ .cim-diagram-frame a{min-width:0}
+ .cim-diagram-links{display:none}
+ .cim-visual{background:#f8fafc;border-color:#cbd5e1;break-inside:avoid}
+ .simcare-reading .cim-visual figcaption>strong,.simcare-reading .cim-flow li>strong,.cim-verification h4,.cim-verification li span{color:#0f172a}
+ .cim-eyebrow,.cim-step-label,.cim-flow li>span:last-child,.cim-mini-flow li>span,.cim-visual-footer,.cim-verification li{color:#475569}
+ .cim-lane-label,.cim-not-equal,.simcare-reading .cim-mini-flow .cim-emphasis>strong,.cim-report-line>span{color:#166534}
+ .cim-source{display:none}
+ .simcare-question{background:#f1f5f9;break-inside:avoid}
+ .simcare-reading .simcare-question p,.simcare-question strong{color:#0f172a}
+ .simcare-case .case-table-wrap{overflow:visible}
+ .simcare-case .case-table-wrap table{min-width:0}
+ .simcare-case .simcare-selected strong,.simcare-reading .simcare-outcome h3,.simcare-status{color:#166534}
+ .simcare-status.pending{color:#6d28d9}
+ .simcare-preview,.simcare-contents{display:none}
+ .simcare-reading p,.simcare-reading strong,.simcare-reading .case-list{color:#334155}
+ .simcare-reading h2,.simcare-reading h3{break-after:avoid}
+}

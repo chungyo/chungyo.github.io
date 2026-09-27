@@ -1,0 +1,9 @@
+flowchart TB
+  assessment["마음건강 평가"] --> result["개인 결과 확인"]
+  result -->|상담 신청| session["상담 예약 · 진행"]
+  result --> contents["콘텐츠 이용"]
+  assessment -->|평가 결과| report
+  session -->|상담 기록| report["평가·상담 현황 집계"]
+  report --> company["기업 결과 확인"]
+  classDef focus fill:#14352e,stroke:#4ade80,color:#f1f5f9,stroke-width:2px;
+  class assessment,session,report focus;
