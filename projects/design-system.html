@@ -2,91 +2,83 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="상태·액션·닫기를 조합하는 공용 API와 디자인 토큰을 구현했습니다. 닫기 요청과 큐 제거 시점을 분리하고, 사용 시나리오를 Storybook으로 정리했습니다."><meta name="theme-color" content="#0f172a">
-<title>npm 패키지로 배포되는 공용 Toast | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
+<meta name="description" content="반복해서 만들던 UI를 공통 기준과 컴포넌트로 정리하고, 팀과 함께 npm 패키지로 배포한 디자인 시스템 구축 사례입니다."><meta name="theme-color" content="#0f172a">
+<title>여러 프로젝트에서 쓰는 디자인 시스템 구축 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
 </head>
 <body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
 <main id="main" class="detail-main container">
   <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
-  <div class="case-cover"><div class="project-art" style="--art:#c084fc" aria-hidden="true"><div class="art-corner">03 / PLAIDLABS</div><svg viewBox="0 0 416 185"><g fill="none" stroke="#c084fc" stroke-opacity=".2"><rect x="119" y="33" width="215" height="58" rx="10"/><rect x="107" y="48" width="215" height="58" rx="10"/></g><rect x="94" y="64" width="228" height="62" rx="10" fill="#191e34" stroke="#c084fc" stroke-opacity=".65"/><circle cx="120" cy="95" r="10" fill="#c084fc" fill-opacity=".16"/><path d="m116 95 3 3 6-7" fill="none" stroke="#c084fc" stroke-width="1.8"/><text x="143" y="90" fill="#e2e8f0" font-size="12" font-family="monospace">Changes saved</text><text x="143" y="108" fill="#8b98ae" font-size="10" font-family="monospace">toast.success()</text><path d="m299 90 8 8m0-8-8 8" stroke="#718096"/></svg><div class="art-title">공용 Toast 컴포넌트</div><div class="art-caption">COMPOSE → QUEUE → DISMISS</div></div></div>
+  <div class="case-cover"><div class="project-art" style="--art:#c084fc" aria-hidden="true"><div class="art-corner">PLAIDLABS · DESIGN SYSTEM</div><svg viewBox="0 0 416 185"><path d="M90 85h20m86 0h20m86 0h20" fill="none" stroke="#c084fc" stroke-opacity=".55" stroke-width="2"/><path d="m105 81 5 4-5 4m101-8 5 4-5 4m101-8 5 4-5 4" fill="none" stroke="#c084fc" stroke-opacity=".75"/><g fill="#171f31" stroke="#c084fc" stroke-opacity=".7"><rect x="10" y="54" width="80" height="62" rx="10"/><rect x="110" y="54" width="86" height="62" rx="10"/><rect x="216" y="54" width="86" height="62" rx="10"/><rect x="322" y="54" width="84" height="62" rx="10"/></g><g fill="#e2e8f0" text-anchor="middle" font-family="monospace" font-size="11"><text x="50" y="82">Figma</text><text x="153" y="82">UI</text><text x="259" y="82">Storybook</text><text x="364" y="82">npm</text></g><g fill="#9aa9bd" text-anchor="middle" font-family="monospace" font-size="8"><text x="50" y="99">DESIGN</text><text x="153" y="99">CHIP · TOAST</text><text x="259" y="99">EXAMPLES</text><text x="364" y="99">PACKAGE</text></g></svg><div class="art-title">디자인 시스템 구축</div><div class="art-caption">DESIGN → COMPONENTS → PACKAGE</div></div></div>
   <header class="detail-header">
     <p class="project-category">PLAIDLABS · DESIGN SYSTEM</p>
-    <h1>npm 패키지로 배포되는 공용 Toast</h1>
-    <p class="detail-lead">상태·액션·닫기를 조합하는 공용 API와 디자인 토큰을 구현했습니다. 닫기 요청과 큐 제거 시점을 분리하고, 사용 시나리오를 Storybook으로 정리했습니다.</p>
-    <div class="tags"><span>React Aria</span><span>Storybook</span><span>vanilla-extract</span></div>
+    <h1>여러 프로젝트에서 쓰는 디자인 시스템 구축</h1>
+    <p class="detail-lead">프로젝트마다 다시 만들던 UI를 공통 컴포넌트로 정리했습니다. 팀과 함께 설계 기준과 배포 방식을 고민했고, 저는 Chip·Toast의 API와 동작, Storybook 사용 예시를 구현했습니다. 결과물은 <code>@plaidlabs/ui</code>로 배포되어 제품에서 사용되고 있습니다.</p>
+    <div class="tags"><span>React</span><span>Storybook</span><span>vanilla-extract</span><span>npm</span></div>
   </header>
   <dl class="case-facts">
-    <div><dt>담당 범위</dt><dd>공용 호출 API · 디자인 토큰 · 애니메이션 상태 · Storybook</dd></div>
-    <div><dt>기간·맥락</dt><dd>PlaidLabs 디자인시스템 작업</dd></div>
-    <div><dt>현재 단계</dt><dd>병합 및 npm 패키지 포함 확인</dd></div>
+    <div><dt>내 역할</dt><dd>공통 컴포넌트 설계·구현, Storybook, 배포 방식 논의</dd></div>
+    <div><dt>기간</dt><dd>2025.12–2026.02 초기 구축</dd></div>
+    <div><dt>팀 결과</dt><dd><code>@plaidlabs/ui</code> npm 배포 · 제품 적용</dd></div>
   </dl>
-  <div class="case-outcome case-summary"><span>이 사례의 핵심 변화</span><p>소비 화면이 상태·액션·닫기를 조합할 수 있는 공용 Toast 제공</p></div>
+  <div class="case-outcome case-summary"><span>실제로 이어진 변화</span><p>제가 만든 Chip·Toast가 공용 패키지에 포함됐고, NUVION 콘솔에서 사용되고 있습니다.</p></div>
   <div class="detail-layout">
     <aside class="case-sidebar">
       <details class="case-toc" open>
         <summary>목차 <span>CONTENTS</span></summary>
         <nav aria-label="상세 사례 목차">
-          <a href="#part-1" data-part="part-1"><b>01</b><span>배경: 여러 화면에서 조합해 쓰는 알림</span></a>
-          <a href="#part-2" data-part="part-2"><b>02</b><span>설계: 소비 화면은 내용과 옵션을 전달</span></a>
-          <a href="#part-3" data-part="part-3"><b>03</b><span>문제: 닫는 순간 제거하면 종료 동작을 표현할 수 없다</span></a>
-          <a href="#part-4" data-part="part-4"><b>04</b><span>핵심 구현: 상태 구독과 중복 닫기 처리</span></a>
-          <a href="#part-5" data-part="part-5"><b>05</b><span>사용 시나리오: Storybook에서 조합 확인</span></a>
-          <a href="#part-6" data-part="part-6"><b>06</b><span>기여와 배포 결과</span></a>
-          <a href="#part-7" data-part="part-7"><b>07</b><span>이 사례에서 남긴 설계 기준</span></a>
-          <a href="#references" data-part="references"><b>↗</b><span>공개 근거·관련 링크</span></a>
+          <a href="#part-1" data-part="part-1"><b>01</b><span>왜 공통 UI가 필요했나</span></a>
+          <a href="#part-2" data-part="part-2"><b>02</b><span>제품 개발과 함께 기준을 쌓기</span></a>
+          <a href="#part-3" data-part="part-3"><b>03</b><span>디자인 기준에서 사용 가능한 코드까지</span></a>
+          <a href="#part-4" data-part="part-4"><b>04</b><span>내가 맡은 Chip과 Toast</span></a>
+          <a href="#part-5" data-part="part-5"><b>05</b><span>npm 패키지로 배포하며 맞춘 사용 방식</span></a>
+          <a href="#part-6" data-part="part-6"><b>06</b><span>제품 적용과 결과</span></a>
+          <a href="#references" data-part="references"><b>↗</b><span>관련 링크</span></a>
         </nav>
       </details>
-      <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">요구사항·본인 최초 구현·후속 수정·@plaidlabs/ui@0.1.14 확인 기록</p>
     </aside>
-    <article class="case-study" aria-label="npm 패키지로 배포되는 공용 Toast 상세">
+    <article class="case-study" aria-label="여러 프로젝트에서 쓰는 디자인 시스템 구축 상세">
       <section id="part-1" class="case-section">
         <span class="case-index">01</span>
-        <h2>배경: 여러 화면에서 조합해 쓰는 알림</h2>
-<p>사내 제품 화면에서 상태별 알림에 설명·액션 버튼·닫기 버튼을 조합하고, 디자인에 맞게 CSS를 조정할 수 있는 Toast가 필요했습니다. 공용 컴포넌트는 한 화면에서 보기 좋은 것뿐 아니라 소비 화면이 어떤 정보를 넘길 수 있는지까지 정해야 했습니다.</p>
-<p>React Aria의 Toast 구성 요소와 큐를 바탕으로 사내 디자인 토큰, 호출 API와 진입·종료 상태를 구현했습니다.</p>
+        <h2>왜 공통 UI가 필요했나</h2>
+        <p>플래드랩스는 자체 서비스와 여러 고객사의 프로젝트를 병행합니다. 비슷한 버튼과 입력 필드를 프로젝트마다 새로 만들다 보니, 디자인 값과 사용 방식도 조금씩 달라졌습니다. 디자이너가 정한 상태·간격·아이콘 기준을 개발자가 다시 묻고 해석하는 일도 반복됐습니다.</p>
+        <p>팀이 만들고 싶었던 것은 화면을 복사해 쓰는 템플릿이 아니라, 새로운 제품에서도 같은 기준으로 시작할 수 있는 공용 UI였습니다. 다만 모든 프로젝트를 한 가지 모습으로 통일할 수는 없었습니다. 공통 요소가 많은 B2B 제품을 중심으로 구축하고, 브랜드와 사용 경험이 다른 B2C 프로젝트는 별도 디자인 기준을 두기로 했습니다.</p>
       </section>
       <section id="part-2" class="case-section">
         <span class="case-index">02</span>
-        <h2>설계: 소비 화면은 내용과 옵션을 전달</h2>
-<div class="case-table-wrap" role="region" aria-label="공용 API에 담은 정보" tabindex="0"><table><caption>공용 API에 담은 정보</caption><thead><tr><th scope="col">분류</th><th scope="col">화면이 전달하는 값</th><th scope="col">공통 컴포넌트의 책임</th></tr></thead><tbody><tr><th scope="row">내용</th><td>제목·설명</td><td>긴 문구와 줄바꿈 표현</td></tr><tr><th scope="row">상태·크기</th><td>상태별 호출·크기 옵션</td><td>디자인 토큰과 스타일 적용</td></tr><tr><th scope="row">상호작용</th><td>액션·닫기 여부</td><td>버튼 조합과 닫기 동작</td></tr><tr><th scope="row">렌더링</th><td>toast.success / toast.error 등</td><td>ToastRegion의 공통 렌더링</td></tr></tbody></table></div><p>상태별 표현을 매번 화면에서 조립하지 않도록 호출과 렌더링을 나눴습니다. 큐 자체는 React Aria가 제공하고, 제가 구현한 부분은 소비 화면에 노출할 옵션과 사내 디자인·동작의 연결입니다.</p>
+        <h2>제품 개발과 함께 기준을 쌓기</h2>
+        <p>처음부터 모든 컴포넌트를 완성한 뒤 NUVION 개발을 시작하면 제품 일정이 늦어집니다. 그래서 팀은 제품을 만들면서 반복되는 요소를 추출해 디자인 시스템에 더하는 방식으로 방향을 잡았습니다. 컬러·타이포·아이콘 같은 기반을 먼저 맞추고, Button·Chip 같은 기본 요소와 Toast·Modal 같은 조합형 요소로 넓혀갔습니다.</p>
+        <p>디자인 시스템은 제품 저장소와 분리했습니다. 여러 고객 프로젝트를 한 저장소에 묶지 않아도, 필요한 제품이 패키지 버전을 선택해 설치할 수 있도록 하기 위해서입니다. 컴포넌트를 각각 배포하기보다는 초기 릴리스와 버전 관리를 단순하게 할 수 있는 단일 <code>@plaidlabs/ui</code> 패키지로 묶었습니다. 이 구조와 배포 방식은 팀에서 함께 논의했습니다.</p>
       </section>
       <section id="part-3" class="case-section">
         <span class="case-index">03</span>
-        <h2>문제: 닫는 순간 제거하면 종료 동작을 표현할 수 없다</h2>
-<p>닫기 요청과 화면에서 실제로 사라지는 시점은 달라야 합니다. 큐에서 바로 제거하면 종료 애니메이션을 표현할 대상이 없어지므로, 먼저 닫는 상태를 알리고 지정한 시간이 지난 뒤 제거하도록 구성했습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>호출</strong><span>내용·상태·옵션 전달</span></li><li><strong>표시</strong><span>ToastRegion 렌더링</span></li><li><strong>닫기 요청</strong><span>종료 상태로 전환</span></li><li><strong>애니메이션</strong><span>종료 스타일 표시</span></li><li><strong>큐 제거</strong><span>지정 시간 뒤 실제 제거</span></li></ol><figcaption>Toast 수명주기의 책임을 설명한 흐름</figcaption></figure>
+        <h2>디자인 기준에서 사용 가능한 코드까지</h2>
+        <p>디자이너가 Figma에서 정한 컬러·타이포를 코드에 매번 손으로 옮기면 이름이나 값이 어긋나기 쉽습니다. 팀은 디자인 토큰을 JSON으로 관리하고, 개발자가 변환 스크립트를 실행해 코드에서 사용할 값을 생성하는 흐름을 마련했습니다.</p>
+        <p>컴포넌트는 토큰을 사용해 구현하고, Storybook에 상태와 조합별 예시를 남겼습니다. 제품 팀이 이름만 보고 추측하는 대신 실제 모양과 동작을 확인할 수 있게 하려는 선택이었습니다.</p>
+        <figure class="case-figure"><ol class="flow-steps"><li><strong>Figma</strong><span>디자인 기준과 토큰 정의</span></li><li><strong>컴포넌트</strong><span>토큰을 적용한 공용 UI 구현</span></li><li><strong>Storybook</strong><span>상태·사용 예시 확인</span></li><li><strong>npm 패키지</strong><span>버전을 정해 배포</span></li><li><strong>제품</strong><span>필요한 버전을 설치해 사용</span></li></ol><figcaption>디자인 기준을 제품에 전달하는 경로. 토큰 코드는 변환 스크립트를 실행해 생성합니다.</figcaption></figure>
       </section>
       <section id="part-4" class="case-section">
         <span class="case-index">04</span>
-        <h2>핵심 구현: 상태 구독과 중복 닫기 처리</h2>
-<p>진입·종료 상태는 useSyncExternalStore로 구독하고 스타일에 전달했습니다. 이미 닫는 중인 항목에 추가 닫기 요청이 들어오면 무시하도록 처리했습니다.</p><figure class="code-figure"><figcaption>실제 구현의 책임을 요약한 의사코드</figcaption><pre tabindex="0"><code>닫기 요청:
-  이미 닫는 중이면 종료
-  종료 상태를 알림
-  지정한 종료 시간 뒤 큐에서 제거
-
-렌더링:
-  진입·종료 상태를 구독
-  상태에 맞는 스타일을 적용</code></pre></figure><p>시간을 기준으로 제거하는 구조이므로 CSS 재생 시간과 큐 제거 시점을 함께 관리해야 합니다. 움직임 감소 설정에 맞춘 스타일도 포함했지만, 이를 모든 접근성 요구의 검증 완료로 표현하지 않습니다.</p>
+        <h2>내가 맡은 Chip과 Toast</h2>
+        <p>저는 팀의 공통 기준 위에서 Chip과 Toast를 설계·구현했습니다. 두 컴포넌트 모두 한 화면에만 맞춰 만들면 다른 제품에서 다시 예외를 처리해야 했습니다. 어떤 값을 사용하는 쪽에서 넘기고, 무엇을 컴포넌트가 책임질지 먼저 나눴습니다.</p>
+        <div class="case-note"><strong>Chip — 디자인 조합을 props로 정리</strong><p>색상·크기·형태·스타일을 조합할 수 있게 만들고, 아이콘만 있는 경우는 텍스트 유무로 판별해 전용 여백을 적용했습니다. 스타일의 variant 타입을 컴포넌트 props에 연결해 디자인 규칙이 바뀌어도 타입 정의가 따로 어긋나지 않도록 했습니다. Storybook에는 주요 조합을 나란히 볼 수 있게 정리했습니다.</p></div>
+        <div class="case-note"><strong>Toast — 호출 방식과 닫히는 동작을 분리</strong><p>제품 화면에서는 제목·설명·상태·액션을 전달하고, 공통 영역이 알림을 렌더링하도록 구성했습니다. 닫기를 누른 즉시 큐에서 제거하면 퇴장 애니메이션을 보여줄 수 없어, 닫기 상태를 먼저 표시하고 애니메이션 후 제거하도록 했습니다. 긴 문구, 액션 유무, 상태별 표현은 Storybook에서 확인할 수 있게 했습니다.</p></div>
+        <p>Toast의 큐와 기본 접근성 구성에는 React Aria를 활용했습니다. 제가 구현한 부분은 이를 팀 디자인 토큰, 공용 호출 API, 진입·퇴장 상태와 연결한 영역입니다.</p>
       </section>
       <section id="part-5" class="case-section">
         <span class="case-index">05</span>
-        <h2>사용 시나리오: Storybook에서 조합 확인</h2>
-<div class="case-table-wrap" role="region" aria-label="정리한 사용 시나리오" tabindex="0"><table><caption>정리한 사용 시나리오</caption><thead><tr><th scope="col">축</th><th scope="col">확인할 조합</th><th scope="col">목적</th></tr></thead><tbody><tr><th scope="row">상태·크기</th><td>각 상태와 크기</td><td>디자인 표현 비교</td></tr><tr><th scope="row">본문</th><td>짧은 문구·긴 문구·설명</td><td>내용 길이에 따른 배치</td></tr><tr><th scope="row">액션</th><td>액션 있음·없음</td><td>사용자가 취할 다음 행동</td></tr><tr><th scope="row">닫기</th><td>닫기 있음·없음 및 조합</td><td>소비 화면의 사용 방식</td></tr></tbody></table></div><p>이 조합을 Storybook에서 같은 환경으로 확인할 수 있게 정리했습니다. Storybook 예시의 존재를 자동 회귀 테스트나 전 소비 화면의 검증 완료와 동일하게 쓰지 않습니다.</p>
+        <h2>npm 패키지로 배포하며 맞춘 사용 방식</h2>
+        <p>컴포넌트가 저장소 안에서 보이는 것과 다른 제품에 설치해 쓰는 것은 달랐습니다. 초기 배포 과정에서는 JavaScript 컴포넌트가 표시돼도 vanilla-extract가 생성한 CSS가 소비 프로젝트에 로드되지 않는 문제가 있었습니다. 팀은 빌드 결과의 진입점에서 CSS를 함께 불러오고, 패키지의 <code>exports</code>와 <code>sideEffects</code>를 정리해 설치한 쪽에서 별도 내부 경로를 찾지 않도록 했습니다.</p>
+        <p>단일 패키지 구조와 사용 방식은 팀에서 함께 고민했습니다. 저는 Chip·Toast의 공개 export와 Storybook 예시를 맡았고, 패키지 게시와 빌드 문제 해결은 동료가 진행했습니다. 함께 만든 디자인 시스템은 <code>@plaidlabs/ui</code>로 배포됐습니다.</p>
       </section>
       <section id="part-6" class="case-section">
         <span class="case-index">06</span>
-        <h2>기여와 배포 결과</h2>
-<div class="case-table-wrap" role="region" aria-label="누가 무엇을 제공했는가" tabindex="0"><table><caption>누가 무엇을 제공했는가</caption><thead><tr><th scope="col">주체</th><th scope="col">범위</th><th scope="col">결과</th></tr></thead><tbody><tr><th scope="row">React Aria</th><td>Toast 구성 요소·큐</td><td>기존 라이브러리 기능 활용</td></tr><tr><th scope="row">본인</th><td>공용 API·디자인 토큰·진입/종료 상태·스토리</td><td>구현 PR 병합</td></tr><tr><th scope="row">동료 후속 작업</th><td>스타일 빌드 규칙·토큰 import·일부 타입 보정</td><td>소비·배포 구조 보완</td></tr><tr><th scope="row">패키지</th><td>Toast 실행 코드와 타입 선언</td><td>당시 공개 @plaidlabs/ui@0.1.14 포함 확인</td></tr></tbody></table></div><p>라이브러리 선정 당시 다른 후보와 비교한 기록이나 팀 전체의 개발시간 절감 수치는 확보하지 못했습니다. 공용 API부터 스타일·사용 예시까지 연결해 배포 패키지에 포함된 범위로 결과를 설명합니다.</p>
-      </section>
-      <section id="part-7" class="case-section">
-        <span class="case-index">07</span>
-        <h2>이 사례에서 남긴 설계 기준</h2>
-<p>소비 화면이 전달할 정보와 컴포넌트 내부의 수명주기를 분리했습니다. 특히 사용자에게는 한 번의 닫기처럼 보여도 구현에서는 닫기 요청·종료 표현·큐 제거를 별개 단계로 다뤄야 했습니다.</p>
-<p>공용 컴포넌트의 완료를 본체 코드만으로 판단하지 않고 사용 예시, 타입 선언, 배포 패키지 포함까지 확인한 경험입니다.</p>
+        <h2>제품 적용과 결과</h2>
+        <p>배포 후 NUVION 콘솔에서는 공용 컬러·타이포와 Button, Dropdown 같은 컴포넌트를 가져다 쓰고 있습니다. 제가 만든 Chip은 알림 화면의 상태 표시에, Toast는 여러 화면의 피드백에 연결돼 있습니다. 같은 컴포넌트가 문서 예시를 넘어 실제 제품 코드에서 사용되는 지점까지 확인했습니다.</p>
       </section>
       <section id="references" class="case-section">
         <span class="case-index">↗</span>
-        <h2>공개 근거·관련 링크</h2>
-<div class="evidence-links"><a href="https://www.npmjs.com/package/@plaidlabs/ui">공개 npm 패키지 @plaidlabs/ui ↗</a></div>
+        <h2>관련 링크</h2>
+        <div class="evidence-links"><a href="https://www.npmjs.com/package/@plaidlabs/ui">npm 패키지 @plaidlabs/ui ↗</a><a href="https://dsy.plaid.ai.kr/">Storybook ↗</a><a href="https://plaidlabs.ai/blog/design-system-creation">기술 블로그: 구축 배경 ↗</a><a href="https://plaidlabs.ai/blog/sanae-design-system">기술 블로그: 디자인 토큰 운영 ↗</a></div>
       </section>
     </article>
   </div>
