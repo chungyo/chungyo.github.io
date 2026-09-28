@@ -12,7 +12,7 @@
   <header class="detail-header">
     <p class="project-category">TOSS · OPEN SOURCE</p>
     <h1>React 훅의 이벤트·생명주기 오류 수정</h1>
-    <p class="detail-lead">탭 간 저장소 초기화 이벤트와 ref·effect 실행 순서에서 발생한 오류를 수정했습니다. 회귀 테스트와 리뷰를 거쳐 react-simplikit에 두 PR이 병합됐습니다.</p>
+    <p class="detail-lead">다른 탭에서 <code>localStorage.clear()</code>를 실행해도 화면에 이전 값이 남고, React의 ref가 새로 붙을 때는 이전 렌더의 콜백이 실행됐습니다. 두 오류를 실제 조건으로 재현해 수정하고, 다시 발생하지 않도록 테스트를 남겼습니다.</p>
     <div class="tags"><span>React</span><span>Browser QA</span><span>Open Source</span></div>
   </header>
   <dl class="case-facts">
@@ -20,73 +20,89 @@
     <div><dt>기간·맥락</dt><dd>2026.09 / #482·#483 병합</dd></div>
     <div><dt>현재 단계</dt><dd>공개 PR 병합 / 패키지 릴리즈 포함 시점 별도</dd></div>
   </dl>
-  <div class="case-outcome case-summary"><span>이 사례의 핵심 변화</span><p>저장소 전체 삭제와 ref 부착 순서의 두 경계 조건 수정</p></div>
+  <div class="case-outcome case-summary"><span>수정한 두 동작</span><p>전체 삭제 이벤트의 <code>key: null</code>도 다시 읽기 · 의존성 변경 시 <code>cleanup(A) → setup(B)</code> 보장</p></div>
   <div class="detail-layout">
     <aside class="case-sidebar">
       <details class="case-toc" open>
         <summary>목차 <span>CONTENTS</span></summary>
         <nav aria-label="상세 사례 목차">
           <a href="#part-1" data-part="part-1"><b>01</b><span>배경: 정상적인 업데이트 사이에 숨어 있는 경계 조건</span></a>
-          <a href="#part-2" data-part="part-2"><b>02</b><span>사례 1 — 재현: 다른 탭에서 전체 삭제한 뒤에도 이전 값</span></a>
-          <a href="#part-3" data-part="part-3"><b>03</b><span>사례 1 — 원인과 선택: null 이벤트도 snapshot을 다시 읽기</span></a>
-          <a href="#part-4" data-part="part-4"><b>04</b><span>사례 2 — 재현: 새 의존성인데 이전 setup이 실행</span></a>
-          <a href="#part-5" data-part="part-5"><b>05</b><span>사례 2 — 구현: 의존성이 바뀔 때 새 콜백 보관 객체</span></a>
-          <a href="#part-6" data-part="part-6"><b>06</b><span>검증과 메인테이너 리뷰</span></a>
-          <a href="#part-7" data-part="part-7"><b>07</b><span>결과와 이후 확인할 범위</span></a>
-          <a href="#part-8" data-part="part-8"><b>08</b><span>돌아보며: 조건과 순서를 테스트 이름으로 남기기</span></a>
-          <a href="#references" data-part="references"><b>↗</b><span>공개 근거·관련 링크</span></a>
+          <a href="#part-2" data-part="part-2"><b>02</b><span>다른 탭에서 저장소를 비우면 왜 값이 남았나</span></a>
+          <a href="#part-3" data-part="part-3"><b>03</b><span>이벤트 값을 대입하지 않고 다시 읽은 이유</span></a>
+          <a href="#part-4" data-part="part-4"><b>04</b><span>의존성은 B인데 setup은 A로 실행된 순간</span></a>
+          <a href="#part-5" data-part="part-5"><b>05</b><span>ref 부착 시점과 미커밋 렌더를 함께 처리</span></a>
+          <a href="#part-6" data-part="part-6"><b>06</b><span>실패하는 테스트부터 리뷰 반영까지</span></a>
+          <a href="#part-7" data-part="part-7"><b>07</b><span>병합 결과와 확인 범위</span></a>
+          <a href="#part-8" data-part="part-8"><b>08</b><span>두 수정에서 공통으로 본 것</span></a>
+          <a href="#references" data-part="references"><b>↗</b><span>수정 PR</span></a>
         </nav>
       </details>
-      <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">공개 PR·브라우저·React 버전별 당시 검증 기록</p>
     </aside>
     <article class="case-study" aria-label="React 훅의 이벤트·생명주기 오류 수정 상세">
       <section id="part-1" class="case-section">
         <span class="case-index">01</span>
         <h2>배경: 정상적인 업데이트 사이에 숨어 있는 경계 조건</h2>
-<p>Toss react-simplikit에서 저장소 이벤트와 React ref/effect 실행 순서에 관한 두 오류를 수정했습니다. 공개 함수의 사용 방법을 바꾸기보다 기존 동작이 지켜져야 할 조건을 재현하고 회귀 테스트로 남긴 기여입니다.</p>
-<p>두 PR은 각각 useStorageState와 useRefEffect를 다룹니다. 같은 저장소의 기여이지만 서로 다른 오류이므로 재현·원인·수정·검증도 구분해 설명합니다.</p>
+<p><code>react-simplikit</code>의 <code>useStorageState</code>는 브라우저 저장소의 값을 React 상태처럼 읽고, <code>useRefEffect</code>는 DOM 요소가 ref에 연결되거나 바뀔 때 setup과 cleanup을 실행합니다. 평소의 값 변경과 요소 부착은 동작했지만, 저장소 전체 삭제와 의존성 변경처럼 이벤트의 모양이나 실행 순서가 달라지는 경우에는 결과가 어긋났습니다.</p>
+<p>서로 다른 두 버그였습니다. 하나는 <strong>어떤 저장소 이벤트를 다시 읽기의 신호로 볼지</strong>, 다른 하나는 <strong>ref가 붙는 순간 어떤 렌더의 콜백을 읽을지</strong>가 핵심이었습니다. 공개 API를 바꾸지 않고 각각의 실패 조건을 재현한 뒤 수정했습니다.</p>
       </section>
       <section id="part-2" class="case-section">
         <span class="case-index">02</span>
-        <h2>사례 1 — 재현: 다른 탭에서 전체 삭제한 뒤에도 이전 값</h2>
-<figure class="case-figure"><ol class="flow-steps"><li><strong>탭 A</strong><span>저장된 이름을 읽음</span></li><li><strong>탭 B</strong><span>localStorage.clear() 실행</span></li><li><strong>저장소</strong><span>전체 값이 비워짐</span></li><li><strong>탭 A의 훅</strong><span>이전 이름이 남음</span></li></ol><figcaption>useStorageState 오류의 재현 흐름</figcaption></figure><p>기본값이 Guest라면 저장소 전체 삭제 후에는 Guest를 보여줘야 하는 상황이었습니다. 하지만 전체 삭제 이벤트를 기존 구독 조건이 놓치고 있었습니다.</p>
+        <h2>다른 탭에서 저장소를 비우면 왜 값이 남았나</h2>
+<p>탭 A에서 <code>name</code>을 읽는 화면을 열고, 같은 출처의 탭 B에서 <code>localStorage.clear()</code>를 실행했습니다. 저장소에서는 <code>name</code>이 사라졌지만 탭 A의 훅은 기존 값인 <code>Alice</code>를 계속 보여줬습니다. 기본값 <code>Guest</code>를 지정한 화면이라면 그 값으로 돌아가야 했습니다.</p>
+<figure class="code-figure"><figcaption>PR에서 재현한 입력과 기대값</figcaption><pre tabindex="0"><code>const [name] = useStorageState&lt;string&gt;('name', { defaultValue: 'Guest' });
+
+탭 A: name === 'Alice'
+탭 B: localStorage.clear()
+탭 A: 실제 'Alice' / 기대 'Guest'</code></pre></figure>
+<figure class="case-figure"><ol class="flow-steps"><li><strong>탭 B</strong><span>전체 저장소 삭제</span></li><li><strong>storage 이벤트</strong><span>key가 null로 전달</span></li><li><strong>기존 구독 조건</strong><span>'name'과 다르다고 무시</span></li><li><strong>탭 A</strong><span>snapshot을 다시 읽지 않아 Alice 유지</span></li></ol><figcaption>저장소는 비워졌지만 화면 값은 그대로 남은 이유</figcaption></figure>
       </section>
       <section id="part-3" class="case-section">
         <span class="case-index">03</span>
-        <h2>사례 1 — 원인과 선택: null 이벤트도 snapshot을 다시 읽기</h2>
-<p>전체 삭제 이벤트의 key는 null인데 기존 코드는 관찰하는 key와 일치하는 이벤트만 처리했습니다. null인 경우에도 구독자를 깨워 기존 snapshot 로직이 저장소를 다시 읽도록 조건을 수정했습니다.</p><div class="case-table-wrap" role="region" aria-label="수정의 범위" tabindex="0"><table><caption>수정의 범위</caption><thead><tr><th scope="col">항목</th><th scope="col">기존 문제</th><th scope="col">수정 기준</th></tr></thead><tbody><tr><th scope="row">관찰 key 변경</th><td>해당 key 이벤트 처리</td><td>기존 의미 유지</td></tr><tr><th scope="row">전체 삭제</th><td>key=null이라 처리 누락</td><td>구독자에게 변경 알림</td></tr><tr><th scope="row">반영 값</th><td>이벤트 newValue를 곧바로 적용할 위험</td><td>훅이 사용하는 저장소의 snapshot 재조회</td></tr><tr><th scope="row">다른 저장소의 삭제</th><td>현재 저장소와 구분 필요</td><td>현재 저장소 값이 잘못 초기화되지 않도록 검증</td></tr></tbody></table></div><p>단순히 null 이벤트를 받으면 기본값으로 바꾸는 접근은 선택하지 않았습니다. 현재 훅이 읽는 저장소에 어떤 값이 있는지 다시 확인하는 기존 흐름을 유지했습니다.</p>
+        <h2>이벤트 값을 대입하지 않고 다시 읽은 이유</h2>
+<p>기존 구독 조건은 이벤트의 <code>key</code>가 관찰 중인 <code>'name'</code>과 같을 때만 다시 읽었습니다. 그런데 <code>clear()</code>의 이벤트는 개별 key 대신 <code>null</code>을 보냅니다. 수정한 코드는 이때도 구독자에게 변경을 알립니다. 실제 화면 값은 이벤트의 <code>newValue</code>가 아니라 기존 <code>getSnapshot()</code>이 훅에 지정된 저장소를 다시 읽어 결정합니다.</p>
+<figure class="code-figure"><figcaption>구독 조건의 실제 변경 — #482</figcaption><pre tabindex="0"><code>// 이전: 전체 삭제 이벤트(key === null)는 통과하지 못함
+if (event.key === key) onStoreChange();
+
+// 수정: 전체 삭제이거나 관찰 중인 key가 바뀌면 다시 읽음
+if (event.key == null || event.key === key) onStoreChange();</code></pre></figure>
+<div class="case-table-wrap" role="region" aria-label="이벤트별 다시 읽기 결과" tabindex="0"><table><caption>바뀐 조건이 다른 저장소 값까지 지우지 않는지 확인했습니다</caption><thead><tr><th scope="col">발생한 이벤트</th><th scope="col">구독 처리</th><th scope="col">화면 값</th></tr></thead><tbody><tr><th scope="row">localStorage 전체 삭제</th><td>key: null → 다시 읽기</td><td>저장된 값이 없으므로 기본값 또는 undefined</td></tr><tr><th scope="row">sessionStorage 전체 삭제</th><td>key: null → 다시 읽기</td><td>localStorage의 값은 그대로 유지</td></tr><tr><th scope="row">관찰 중인 key 삭제</th><td>일치하는 key → 다시 읽기</td><td>기본값으로 변경</td></tr><tr><th scope="row">무관한 key 삭제</th><td>불일치 → 건너뜀</td><td>관찰 중인 값 유지</td></tr></tbody></table></div>
+<p>특히 다른 저장소의 <code>clear()</code>도 <code>key: null</code>일 수 있어, 이벤트만 보고 무조건 기본값을 대입하면 안 됩니다. 훅이 실제로 읽는 저장소의 snapshot을 확인하는 기존 경로를 재사용했습니다.</p>
       </section>
       <section id="part-4" class="case-section">
         <span class="case-index">04</span>
-        <h2>사례 2 — 재현: 새 의존성인데 이전 setup이 실행</h2>
-<p>useRefEffect의 의존성이 A에서 B로 바뀌면 cleanup(A) 다음에 setup(B)가 실행돼야 했습니다. 그러나 ref 부착이 effect보다 먼저 실행되면서 이전 콜백을 읽어 setup(A)가 다시 호출되는 문제가 있었습니다.</p><div class="case-table-wrap" role="region" aria-label="의존성 변경 시 순서" tabindex="0"><table><caption>의존성 변경 시 순서</caption><thead><tr><th scope="col">단계</th><th scope="col">기대 동작</th><th scope="col">재현된 문제</th></tr></thead><tbody><tr><th scope="row">이전 연결 정리</th><td>cleanup(A)</td><td>이전 연결 정리</td></tr><tr><th scope="row">새 ref 부착</th><td>새 의존성의 콜백 사용</td><td>effect 갱신 전 이전 콜백 읽음</td></tr><tr><th scope="row">새 연결 설정</th><td>setup(B)</td><td>setup(A)가 다시 실행</td></tr><tr><th scope="row">영향받는 소비 훅</th><td>새 observer 옵션 적용</td><td>이전 observer에 요소를 연결</td></tr></tbody></table></div><p>이 흐름은 useIntersectionObserver에도 이어져 observer 옵션을 바꿨을 때 이전 observer에 요소를 붙이는 문제로 나타났습니다.</p>
+        <h2>의존성은 B인데 setup은 A로 실행된 순간</h2>
+<p><code>useRefEffect</code>에 전달한 의존성이 A에서 B로 바뀌면 기존 DOM 연결을 <code>cleanup(A)</code>로 정리하고, 새 콜백의 <code>setup(B)</code>를 실행해야 합니다. 실제 DOM을 렌더링하는 테스트에서는 <code>cleanup(A) → setup(A)</code>가 기록됐습니다. ref가 새로 연결되는 시점에는 <code>usePreservedCallback</code>이 보관한 콜백이 아직 effect에서 갱신되기 전이었기 때문입니다.</p>
+<figure class="case-figure"><ol class="flow-steps"><li><strong>B로 다시 렌더</strong><span>새 callback 생성</span></li><li><strong>기존 ref 해제</strong><span>cleanup(A)</span></li><li><strong>새 ref 부착</strong><span>effect 갱신 전이라 setup(A)</span></li><li><strong>effect 실행</strong><span>그제야 콜백이 B로 갱신</span></li></ol><figcaption>수정 전: 새 ref를 붙이는 순간에는 이전 렌더의 콜백이 남아 있었습니다</figcaption></figure>
+<p>이 문제는 <code>useIntersectionObserver</code>에서도 드러났습니다. <code>root</code>, <code>rootMargin</code>, <code>threshold</code>가 바뀌면 새 observer는 만들어지지만, 이미 화면에 붙은 요소가 이전 observer에 다시 연결될 수 있었습니다. observer 생성 여부만 검사해서는 이 오류를 잡을 수 없었습니다.</p>
       </section>
       <section id="part-5" class="case-section">
         <span class="case-index">05</span>
-        <h2>사례 2 — 구현: 의존성이 바뀔 때 새 콜백 보관 객체</h2>
-<p>의존성이 바뀌면 콜백을 담는 객체를 새로 만들도록 수정했습니다. 의존성이 같을 때는 effect에서 콜백을 갱신하는 기존 의미를 유지했습니다.</p>
-<p>렌더 도중 기존 객체를 덮어쓰지 않는 것도 중요했습니다. 커밋되지 않은 렌더에서 만든 콜백이 현재 동작에 섞이지 않도록, 의존성별 보관 구조로 구분했습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>의존성 변경</strong><span>새 보관 객체</span></li><li><strong>새 ref 부착</strong><span>새 의존성의 콜백</span></li><li><strong>의존성 동일</strong><span>기존 effect 갱신 의미 유지</span></li><li><strong>미커밋 렌더</strong><span>현재 객체 오염 방지</span></li></ol><figcaption>수정이 지키려는 두 조건</figcaption></figure><aside class="case-note"><strong>변경 범위</strong><p>공개 함수 시그니처와 공통 usePreservedCallback은 유지했습니다. 공통 훅을 광범위하게 바꾸는 대신 문제가 있는 수명주기의 범위를 수정했습니다.</p></aside>
+        <h2>ref 부착 시점과 미커밋 렌더를 함께 처리</h2>
+<p>의존성이 달라질 때마다 <code>useMemo</code>로 콜백 보관 객체를 새로 만들었습니다. 새 ref 함수는 새 객체를 참조하므로, DOM에 부착되는 순간 B의 콜백을 읽을 수 있습니다. 기존 연결의 cleanup은 그대로 실행됩니다. 변경 후에는 A에서 B로 갱신할 때 <code>cleanup(A) → setup(B)</code>가 됩니다.</p>
+<div class="case-table-wrap" role="region" aria-label="의존성에 따른 콜백 관리" tabindex="0"><table><caption>콜백을 무조건 최신 값으로 덮어쓰지 않은 이유</caption><thead><tr><th scope="col">상황</th><th scope="col">처리</th><th scope="col">지키려는 동작</th></tr></thead><tbody><tr><th scope="row">의존성 변경</th><td>새 콜백 보관 객체 생성</td><td>ref가 붙을 때 새 setup 실행</td></tr><tr><th scope="row">의존성 동일</th><td>effect에서 기존 객체의 콜백 갱신</td><td>같은 요소는 재연결하지 않고, 이후 요소 교체에는 최신 콜백 사용</td></tr><tr><th scope="row">렌더가 커밋되지 않음</th><td>렌더 중 기존 객체를 수정하지 않음</td><td>화면에 남은 ref가 미커밋 콜백을 읽지 않음</td></tr></tbody></table></div>
+<p>공통 <code>usePreservedCallback</code>을 수정하지 않고 <code>useRefEffect</code> 안에서 처리했습니다. 기존 공개 시그니처를 유지하면서 ref가 연결되는 시점에 필요한 콜백만 바꾸는 범위였습니다.</p>
       </section>
       <section id="part-6" class="case-section">
         <span class="case-index">06</span>
-        <h2>검증과 메인테이너 리뷰</h2>
-<div class="case-table-wrap" role="region" aria-label="당시 검증에 포함한 조건" tabindex="0"><table><caption>당시 검증에 포함한 조건</caption><thead><tr><th scope="col">대상</th><th scope="col">회귀 조건</th><th scope="col">검증 형태</th></tr></thead><tbody><tr><th scope="row">useStorageState</th><td>기본값 유무·다른 저장소 전체 삭제·무관한 key 삭제</td><td>명세 테스트</td></tr><tr><th scope="row">탭 간 동기화</th><td>실제 두 페이지에서 전체 삭제 전후</td><td>Chromium 브라우저 확인</td></tr><tr><th scope="row">useRefEffect</th><td>StrictMode·정리 함수·DOM 교체·미커밋 렌더</td><td>회귀 테스트</td></tr><tr><th scope="row">observer</th><td>옵션 변경 시 실제 IntersectionObserver 동작</td><td>React 18·19 브라우저 확인</td></tr><tr><th scope="row">컴파일 환경</th><td>React Compiler 모드</td><td>당시 테스트 기록</td></tr></tbody></table></div><p>메인테이너 리뷰를 반영해 테스트를 기존 명세 파일에 합치고 중복 사례를 줄였습니다. Suspense 테스트는 무엇을 보호하는지 이름에서 드러나도록 정리했습니다. 위 테스트는 당시 검증이며 이번 글 작성에서 재실행한 결과가 아닙니다.</p>
+        <h2>실패하는 테스트부터 리뷰 반영까지</h2>
+<p>두 수정 모두 테스트가 기존 코드에서 실패하는 것을 먼저 확인했습니다. <code>useStorageState</code>는 전체 삭제 시 기본값 유무를 나눠 검증했고, <code>useRefEffect</code>는 StrictMode 유무와 observer의 세 옵션 변경에서 실패를 재현했습니다. 수정 후에는 기존 동작을 깨지 않았는지도 확인했습니다.</p>
+<div class="case-table-wrap" role="region" aria-label="PR 당시 검증 범위" tabindex="0"><table><caption>공개 PR에 남긴 당시 검증</caption><thead><tr><th scope="col">대상</th><th scope="col">확인한 조건</th><th scope="col">PR에 남은 결과</th></tr></thead><tbody><tr><th scope="row">#482 저장소</th><td>전체 삭제·기본값 유무·다른 저장소 삭제·무관한 key</td><td>전체 삭제 테스트 2개 수정 전 실패, 수정 후 관련 테스트 53개 통과</td></tr><tr><th scope="row">#482 실제 탭</th><td>같은 출처의 두 페이지에서 localStorage.clear()</td><td>Chromium에서 key: null 이벤트와 값 갱신 확인</td></tr><tr><th scope="row">#483 ref와 observer</th><td>StrictMode 유무·root·rootMargin·threshold 변경</td><td>수정 전 5가지 실패 조건 재현</td></tr><tr><th scope="row">#483 회귀</th><td>cleanup·노드 교체·미커밋 렌더·새 observer의 observe/unobserve</td><td>관련 테스트를 일반 모드와 React Compiler 모드에서 확인</td></tr><tr><th scope="row">#483 실제 브라우저</th><td>React 18.3.1·19.2.4와 네이티브 IntersectionObserver</td><td>Chromium에서 수정 전후 동작 비교</td></tr></tbody></table></div>
+<p>메인테이너는 새 테스트 파일을 기존 명세 파일에 합치고, 같은 실패를 반복해서 확인하는 사례는 덜어내자고 요청했습니다. Suspense 테스트도 “커밋되지 않은 렌더의 콜백을 무시한다”는 보호 조건이 이름에서 보이도록 고쳤습니다. 테스트 개수보다 어떤 실행 순서를 지키는지가 분명해야 한다는 리뷰였습니다.</p>
       </section>
       <section id="part-7" class="case-section">
         <span class="case-index">07</span>
-        <h2>결과와 이후 확인할 범위</h2>
-<p>useStorageState #482는 2026년 9월 8일, useRefEffect #483은 9월 9일 병합됐습니다. 공개 PR에서 수정·리뷰·병합 이력을 확인할 수 있습니다.</p>
-<p>병합과 패키지 릴리즈 포함은 다른 상태입니다. 다운로드 수를 곧바로 영향 사용자 수로 계산하거나, 전체 소비 서비스의 오류 감소를 제 성과로 주장하지 않습니다.</p>
+        <h2>병합 결과와 확인 범위</h2>
+<p><code>useStorageState</code>의 전체 삭제 처리 #482는 2026년 9월 8일, <code>useRefEffect</code>의 콜백 갱신 #483은 9월 9일 병합됐습니다. 첫 수정은 전체 삭제 후 기본값 복귀, 두 번째 수정은 의존성 변경 시 새 콜백으로 DOM을 다시 연결하는 동작을 테스트에 남겼습니다.</p>
+<p>여기서 확인한 결과는 PR 병합과 당시의 테스트·브라우저 검증까지입니다. 이 두 수정으로 모든 소비 서비스의 오류가 얼마나 줄었는지, 패키지의 어느 버전부터 사용됐는지는 별도로 확인하지 않았습니다.</p>
       </section>
       <section id="part-8" class="case-section">
         <span class="case-index">08</span>
-        <h2>돌아보며: 조건과 순서를 테스트 이름으로 남기기</h2>
-<p>첫 오류는 어떤 이벤트를 받는지, 두 번째는 콜백 갱신과 ref 부착 중 무엇이 먼저인지가 원인이었습니다. 일반적인 업데이트만 확인하면 놓칠 수 있는 조건을 실제 재현으로 좁히고 테스트에 남겼습니다.</p>
-<p>리뷰 과정에서는 테스트의 양보다 보호하려는 동작이 분명한지도 확인했습니다. 수정 범위를 설명하는 것과 같은 수준으로 회귀 조건을 설명할 수 있어야 했습니다.</p>
+        <h2>두 수정에서 공통으로 본 것</h2>
+<p>첫 버그에서는 이벤트가 왔는지보다 <code>key: null</code>도 읽기 신호로 취급하는지가 중요했습니다. 두 번째 버그에서는 콜백이 최신인지보다 ref가 붙는 <em>그 시점</em>에 어떤 콜백을 읽는지가 중요했습니다. 정상 경로에서는 보이지 않던 입력과 순서를 테스트 이름·기대값에 그대로 남겼습니다.</p>
       </section>
       <section id="references" class="case-section">
         <span class="case-index">↗</span>
-        <h2>공개 근거·관련 링크</h2>
+        <h2>수정 PR</h2>
 <div class="evidence-links"><a href="https://github.com/toss/react-simplikit/pull/482">useStorageState #482 ↗</a><a href="https://github.com/toss/react-simplikit/pull/483">useRefEffect #483 ↗</a></div>
       </section>
     </article>
