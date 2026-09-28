@@ -31,12 +31,11 @@
           <a href="#part-3" data-part="part-3"><b>03</b><span>선택: 화면 이동의 기준을 결과 ID 수신으로</span></a>
           <a href="#part-4" data-part="part-4"><b>04</b><span>구현 흐름: 결과·대기·타임아웃 구분</span></a>
           <a href="#part-5" data-part="part-5"><b>05</b><span>주변 흐름과 팀에서 맡은 범위</span></a>
-          <a href="#part-6" data-part="part-6"><b>06</b><span>검증 결과와 남은 경계</span></a>
+          <a href="#part-6" data-part="part-6"><b>06</b><span>결과 수신을 기준으로 화면 전환</span></a>
           <a href="#part-7" data-part="part-7"><b>07</b><span>돌아보며: 사용자가 보는 진행과 실제 완료의 차이</span></a>
           <a href="#references" data-part="references"><b>↗</b><span>공개 근거·관련 링크</span></a>
         </nav>
       </details>
-      <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">사용자 회고·공개 PR #13·저장소 조사 기록</p>
     </aside>
     <article class="case-study" aria-label="AI 콘텐츠 생성의 대기·결과 전환 개선 상세">
       <section id="part-1" class="case-section">
@@ -70,19 +69,19 @@
       <section id="part-5" class="case-section">
         <span class="case-index">05</span>
         <h2>주변 흐름과 팀에서 맡은 범위</h2>
-<p>생성 폼 재진입 시 단계와 입력 상태를 초기화하는 작업, 사용자 조회 결과를 기준으로 대표 가게를 표시하는 작업도 있었습니다. 다만 실패 시 입력 복구·보존이나 모든 캐시 동기화가 완벽히 해결됐다는 의미로 합치지 않습니다.</p>
-<p>프론트엔드 저장소에서 확인한 것은 생성 입력을 API로 제출하고 결과를 보여주는 연결입니다. 콘텐츠 생성 모델의 학습이나 백엔드 전체 구현을 본인 기여로 쓰지 않습니다.</p>
+<p>생성 폼에 다시 들어올 때 단계와 입력 상태를 초기화하고, 사용자 조회 결과를 기준으로 대표 가게를 표시하는 작업도 맡았습니다.</p>
+<p>제가 개발한 영역은 생성 입력을 API로 제출하고 결과를 보여주는 프론트엔드 흐름입니다. 콘텐츠 생성 모델은 담당하지 않았습니다.</p>
       </section>
       <section id="part-6" class="case-section">
         <span class="case-index">06</span>
-        <h2>검증 결과와 남은 경계</h2>
-<div class="case-table-wrap" role="region" aria-label="증거의 수준" tabindex="0"><table><caption>증거의 수준</caption><thead><tr><th scope="col">항목</th><th scope="col">확인된 내용</th><th scope="col">남은 범위</th></tr></thead><tbody><tr><th scope="row">생성 대기 전환</th><td>본인 작성 PR #13의 변경·병합 기록</td><td>운영 생성 성공률 미측정</td></tr><tr><th scope="row">구현 범위</th><td>입력·결과·기록·가게 화면</td><td>AI 모델 개발과 구분</td></tr><tr><th scope="row">자동 회귀 테스트</th><td>당시 조사에서 src 테스트 파일·테스트 명령 미확인</td><td>테스트 통과를 성과로 쓰지 않음</td></tr><tr><th scope="row">실서비스 효과</th><td>마케팅 효과·비용 절감 실측 없음</td><td>README의 기대 효과와 구분</td></tr></tbody></table></div><p>공개 PR은 어떤 흐름을 수정했는지 보여주는 근거입니다. 이번 편집에서 실제 생성 API를 호출하거나 지연·실패 시나리오를 새로 검증하지 않았습니다.</p>
+        <h2>결과 수신을 기준으로 화면을 전환했습니다</h2>
+<p>PR #13에서 진행률 표시와 화면 이동을 분리하고, 실제 결과 ID를 받았을 때 결과 화면으로 이동하도록 바꿨습니다. 변경·병합 기록으로 확인되는 것은 이 프론트엔드 동작이며, 운영 중 생성 성공률이나 마케팅 효과를 측정한 결과는 아닙니다.</p>
       </section>
       <section id="part-7" class="case-section">
         <span class="case-index">07</span>
         <h2>돌아보며: 사용자가 보는 진행과 실제 완료의 차이</h2>
 <p>생성형 기능의 대기 화면에서는 시간이 흐른다는 표현과 작업이 완료됐다는 근거를 구분해야 했습니다. 이 사례에서는 결과 ID라는 실제 응답을 화면 이동의 기준으로 사용했습니다.</p>
-<p>팀 협업에서는 작은 작업과 주간 체크인으로 구현을 이어갔습니다. 활동 방식은 사용자 회고로 설명하되, 스터디가 팀 생산성을 몇 배 높였다는 수치는 만들지 않습니다.</p>
+<p>팀에서는 작은 작업 단위와 주간 체크인으로 구현을 이어갔습니다.</p>
       </section>
       <section id="references" class="case-section">
         <span class="case-index">↗</span>

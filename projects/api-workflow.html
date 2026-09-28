@@ -36,7 +36,6 @@
           <a href="#part-8" data-part="part-8"><b>08</b><span>돌아보며: 파생 상태의 원본을 어디에 둘 것인가</span></a>
         </nav>
       </details>
-      <p class="case-evidence-label">작성 근거</p><p class="case-evidence-text">설계 기록·작성 PR·코드 대조 / 2026.09.20 로컬 분석·dry-run 기록</p>
     </aside>
     <article class="case-study" aria-label="코드에서 다시 계산하는 API 연동 현황 상세">
       <section id="part-1" class="case-section">
@@ -54,7 +53,7 @@
       <section id="part-3" class="case-section">
         <span class="case-index">03</span>
         <h2>판단: 계산할 정보와 사람이 기록할 정보를 분리</h2>
-<p>현재 소스 전체와 커밋된 OpenAPI에서 연동 상태를 다시 계산하도록 바꿨습니다. 코드에서 구할 수 있는 결과를 상태 파일에 계속 써 넣는 의존성을 줄이고, 사람이 판단해야 하는 정보만 별도로 남겼습니다.</p><div class="case-table-wrap" role="region" aria-label="기존 방식과 변경한 방식" tabindex="0"><table><caption>기존 방식과 변경한 방식</caption><thead><tr><th scope="col">기준</th><th scope="col">이전</th><th scope="col">변경 후</th></tr></thead><tbody><tr><th scope="row">분석 범위</th><td>PR 변경 중심</td><td>해당 커밋의 현재 소스 전체</td></tr><tr><th scope="row">일반 연동 상태</th><td>bot이 저장 파일을 수정</td><td>OpenAPI·호출·화면 연결에서 재산출</td></tr><tr><th scope="row">담당·메모·예외</th><td>상태와 함께 저장</td><td>수동 메타데이터로 유지</td></tr><tr><th scope="row">실제 API QA</th><td>코드 구현과 혼동될 여지</td><td>별도 검증 기록으로 유지</td></tr><tr><th scope="row">게시 대상</th><td>현재 저장된 JSON</td><td>성공한 CI의 기준 커밋 분석</td></tr></tbody></table></div><p>이 표는 실제 변경 전후를 정리한 것입니다. CLI 설치만 보완하는 방안 등은 당시 검토했다고 확인되지 않아, 제가 비교 후 기각한 대안으로 쓰지 않았습니다.</p>
+<p>현재 소스 전체와 커밋된 OpenAPI에서 연동 상태를 다시 계산하도록 바꿨습니다. 코드에서 구할 수 있는 결과를 상태 파일에 계속 써 넣는 의존성을 줄이고, 사람이 판단해야 하는 정보만 별도로 남겼습니다.</p><div class="case-table-wrap" role="region" aria-label="기존 방식과 변경한 방식" tabindex="0"><table><caption>기존 방식과 변경한 방식</caption><thead><tr><th scope="col">기준</th><th scope="col">이전</th><th scope="col">변경 후</th></tr></thead><tbody><tr><th scope="row">분석 범위</th><td>PR 변경 중심</td><td>해당 커밋의 현재 소스 전체</td></tr><tr><th scope="row">일반 연동 상태</th><td>bot이 저장 파일을 수정</td><td>OpenAPI·호출·화면 연결에서 재산출</td></tr><tr><th scope="row">담당·메모·예외</th><td>상태와 함께 저장</td><td>수동 메타데이터로 유지</td></tr><tr><th scope="row">실제 API QA</th><td>코드 구현과 혼동될 여지</td><td>별도 검증 기록으로 유지</td></tr><tr><th scope="row">게시 대상</th><td>현재 저장된 JSON</td><td>성공한 CI의 기준 커밋 분석</td></tr></tbody></table></div><p>상태 파일의 갱신 여부에 기대는 대신, 보고할 때마다 같은 커밋의 소스와 명세에서 상태를 계산하도록 했습니다.</p>
       </section>
       <section id="part-4" class="case-section">
         <span class="case-index">04</span>
@@ -71,18 +70,18 @@
         <span class="case-index">06</span>
         <h2>핵심 구현 2: 검증한 커밋과 게시한 커밋 맞추기</h2>
 <p>develop의 CI가 성공하면 해당 실행의 head SHA를 checkout해서 분석·게시하도록 구성했습니다. 이 연결이 없으면 CI는 A 커밋을 검증했는데 문서는 이후 B 커밋을 분석하는 식으로 기준이 달라질 수 있습니다.</p>
-<p>Confluence 전체 문서를 덮어쓰지 않고 자동 관리 영역만 교체하며 기준 커밋과 동기화 시각을 표시합니다. 같은 분석 결과를 PR 보고서에도 전달해 검토자가 변경을 확인하는 위치에서 볼 수 있게 했습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>CI 성공</strong><span>성공 실행의 head SHA 확보</span></li><li><strong>같은 SHA 분석</strong><span>현재 소스·명세로 상태 재계산</span></li><li><strong>관리 영역 갱신</strong><span>커밋·시각과 함께 문서에 게시</span></li></ol><figcaption>정기·수동 실행과 별도로 존재하는 CI 성공 연계 경로</figcaption></figure><aside class="case-note"><strong>실행 조건</strong><p>실제 Confluence 동기화는 설정 변수와 실행 옵션에 따라 활성화됩니다. workflow 코드가 있다는 사실만으로 최신 게시 성공을 단정하지 않습니다.</p></aside>
+<p>Confluence 전체 문서를 덮어쓰지 않고 자동 관리 영역만 교체하며 기준 커밋과 동기화 시각을 표시합니다. 같은 분석 결과를 PR 보고서에도 전달해 검토자가 변경을 확인하는 위치에서 볼 수 있게 했습니다.</p><figure class="case-figure"><ol class="flow-steps"><li><strong>CI 성공</strong><span>성공 실행의 head SHA 확보</span></li><li><strong>같은 SHA 분석</strong><span>현재 소스·명세로 상태 재계산</span></li><li><strong>관리 영역 갱신</strong><span>커밋·시각과 함께 문서에 게시</span></li></ol><figcaption>정기·수동 실행과 별도로 존재하는 CI 성공 연계 경로</figcaption></figure><aside class="case-note"><strong>게시 조건</strong><p>Confluence 동기화는 설정 변수와 실행 옵션을 켰을 때만 수행되도록 구성했습니다.</p></aside>
       </section>
       <section id="part-7" class="case-section">
         <span class="case-index">07</span>
-        <h2>결과: 산출 가능한 상태와 검증 대상을 분리</h2>
-<div class="case-table-wrap" role="region" aria-label="확인된 결과와 근거" tabindex="0"><table><caption>확인된 결과와 근거</caption><thead><tr><th scope="col">항목</th><th scope="col">확인된 내용</th><th scope="col">근거·범위</th></tr></thead><tbody><tr><th scope="row">분석 구조</th><td>소스 전체 재계산 및 앱별 상태 보고</td><td>본인 작성 변경 이력·소스 대조</td></tr><tr><th scope="row">PR 검토</th><td>분석 결과를 PR 보고서로 전달</td><td>보고서 연결 변경</td></tr><tr><th scope="row">실행 확인</th><td>상태 검사와 Confluence dry-run 정상 종료</td><td>2026.09.20 당시 로컬 확인 기록</td></tr><tr><th scope="row">실제 게시·통신</th><td>최신 원격 CI·Confluence 게시와 운영 API 통신은 별도</td><td>위 로컬 확인에서 실행하지 않음</td></tr></tbody></table></div><p>자동화의 핵심 결과는 진행률 숫자 자체보다, 무엇을 근거로 완료라고 판단했는지 확인할 수 있게 한 것입니다. 정적 분석의 미해석 경로와 실제 QA 미검증 상태도 함께 남겼습니다.</p>
+        <h2>결과: 코드 연동과 실제 API QA를 따로 보여주기</h2>
+<div class="case-table-wrap" role="region" aria-label="구현 및 확인 결과" tabindex="0"><table><caption>구현 및 확인 결과</caption><thead><tr><th scope="col">바뀐 지점</th><th scope="col">확인한 결과</th></tr></thead><tbody><tr><th scope="row">앱별 현황</th><td>해당 커밋의 소스·명세를 분석해 다시 계산</td></tr><tr><th scope="row">PR 검토</th><td>같은 분석 결과를 PR 보고서에 전달</td></tr><tr><th scope="row">로컬 실행</th><td>상태 검사와 Confluence dry-run 정상 종료(2026.09.20)</td></tr></tbody></table></div><p>보고서에는 코드에서 찾은 연결과 사람이 확인한 실제 API QA를 따로 표시합니다. 로컬 dry-run까지 확인했으며, 문서의 실제 게시와 운영 API 응답은 별도의 검증 단계로 둡니다.</p>
       </section>
       <section id="part-8" class="case-section">
         <span class="case-index">08</span>
         <h2>돌아보며: 파생 상태의 원본을 어디에 둘 것인가</h2>
 <p>이 변경에서 제가 사용한 기준은 ‘코드로 다시 계산할 수 있는 상태인가, 사람이 별도로 기록해야 하는 판단인가’였습니다. 전자는 기준 커밋에서 산출하고 후자는 예외·메모·QA로 남기는 구분이 구현과 보고에 함께 적용됐습니다.</p>
-<p>현재 확보한 자료로 팀의 수작업 시간 절감이나 도입률까지 수치화할 수는 없습니다. 이후 효과를 확인하려면 실제 사용자가 이전 상태표와 새 보고서로 어떤 판단을 다르게 했는지까지 연결해야 합니다.</p>
+<p>다음에는 팀이 이전 상태표와 새 보고서를 보며 어떤 판단을 다르게 하는지 확인하고 싶습니다.</p>
       </section>
     </article>
   </div>
