@@ -292,6 +292,12 @@ body{background:white;color:#111827}.nav,.skip-link,.scroll-hint,.hero-links,foo
 .product-evidence figcaption>span{font-size:12px;line-height:1.85;color:var(--muted)}
 .evidence-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:start}
 .evidence-gallery .product-evidence{margin-top:12px}
+.design-system-figma .evidence-image-link{height:clamp(230px,34vw,370px);background:#f3f4f6}
+.design-system-figma .evidence-image-link img{width:180%;max-width:none;height:auto;margin-top:-70px}
+.design-system-figma figcaption a{color:var(--green);text-decoration:underline;text-underline-offset:3px}
+.api-report-evidence{max-width:720px}
+.api-report-evidence .evidence-image-link{max-height:460px}
+.api-report-evidence .evidence-image-link img{object-fit:cover;object-position:top}
 .phone-evidence .evidence-image-link{background:#edf8fd}
 .case-section .media-source,.media-source{font-size:11px;line-height:1.8;color:var(--quiet);margin-top:15px}
 .media-source a{color:var(--green);text-decoration:underline;text-underline-offset:3px}
@@ -307,3 +313,4 @@ body{background:white;color:#111827}.nav,.skip-link,.scroll-hint,.hero-links,foo
 .image-lightbox-note{font-size:11px;color:var(--muted);text-align:center;margin-top:12px}
 @media(max-width:760px){.evidence-gallery{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(74vw,270px);overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:10px}.evidence-gallery .product-evidence{scroll-snap-align:start}.image-case-cover>span{font-size:7px;padding:4px 7px;left:8px;bottom:8px}.product-evidence figcaption strong{font-size:13px}.image-lightbox{padding:12px}.image-lightbox-header h2{font-size:13px}.image-lightbox-close{font-size:12px}}
 @media print{.image-expand,.image-lightbox,.image-case-cover>span{display:none}.product-evidence{break-inside:avoid}.product-evidence figcaption strong{color:#111827}.evidence-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible}.image-case-cover{max-width:650px}}
+@media print{.design-system-figma .evidence-image-link{height:auto}.design-system-figma .evidence-image-link img{width:100%;margin-top:0}.api-report-evidence .evidence-image-link{max-height:none}}

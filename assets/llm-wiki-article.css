@@ -3,7 +3,6 @@
 .llm-article .detail-header{max-width:880px;margin-top:28px;margin-bottom:38px}
 .llm-article .detail-header h1{font-size:clamp(28px,3.2vw,38px);line-height:1.55;word-break:keep-all}
 .llm-article .detail-lead{font-size:16px;line-height:1.95;margin:20px 0 0;color:#b4c0d1}
-.llm-preview-note{font-size:11px;letter-spacing:.2px;color:#a78bfa;margin-bottom:18px}
 .llm-byline{font-size:12px;color:var(--quiet);line-height:1.9;margin:22px 0 20px}
 .llm-contents{max-width:880px;margin:0 0 45px}
 .llm-contents h2{font-size:19px;font-weight:600;border-bottom:1px solid var(--border);padding-bottom:15px}
@@ -46,7 +45,7 @@
  .llm-reading .code-figure pre{font-size:11px}
 }
 @media print{
- .llm-preview-note,.llm-contents{display:none}
+ .llm-contents{display:none}
  .llm-reading,.llm-article .detail-header{max-width:none}
  .llm-reading p,.llm-reading strong,.llm-prose-list,.llm-source-excerpt dd,.llm-byline{color:#334155}
  .llm-folder-tree{background:#f8fafc;color:#334155;white-space:pre-wrap}
