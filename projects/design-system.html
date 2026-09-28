@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="반복해서 만들던 UI를 공통 기준과 컴포넌트로 정리하고, 팀과 함께 npm 패키지로 배포한 디자인 시스템 구축 사례입니다."><meta name="theme-color" content="#0f172a">
-<title>여러 프로젝트에서 쓰는 디자인 시스템 구축 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260928-evidence"><script src="../site.js?v=20260921-cases" defer></script>
+<title>여러 프로젝트에서 쓰는 디자인 시스템 구축 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260928-layers"><script src="../site.js?v=20260921-cases" defer></script>
 </head>
 <body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
 <main id="main" class="detail-main container">
   <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
-  <div class="case-cover"><div class="project-art" style="--art:#c084fc" aria-hidden="true"><div class="art-corner">PLAIDLABS · DESIGN SYSTEM</div><svg viewBox="0 0 416 185"><path d="M90 85h20m86 0h20m86 0h20" fill="none" stroke="#c084fc" stroke-opacity=".55" stroke-width="2"/><path d="m105 81 5 4-5 4m101-8 5 4-5 4m101-8 5 4-5 4" fill="none" stroke="#c084fc" stroke-opacity=".75"/><g fill="#171f31" stroke="#c084fc" stroke-opacity=".7"><rect x="10" y="54" width="80" height="62" rx="10"/><rect x="110" y="54" width="86" height="62" rx="10"/><rect x="216" y="54" width="86" height="62" rx="10"/><rect x="322" y="54" width="84" height="62" rx="10"/></g><g fill="#e2e8f0" text-anchor="middle" font-family="monospace" font-size="11"><text x="50" y="82">Figma</text><text x="153" y="82">UI</text><text x="259" y="82">Storybook</text><text x="364" y="82">npm</text></g><g fill="#9aa9bd" text-anchor="middle" font-family="monospace" font-size="8"><text x="50" y="99">DESIGN</text><text x="153" y="99">CHIP · TOAST</text><text x="259" y="99">EXAMPLES</text><text x="364" y="99">PACKAGE</text></g></svg><div class="art-title">디자인 시스템 구축</div><div class="art-caption">DESIGN → COMPONENTS → PACKAGE</div></div></div>
+  <div class="case-cover"><div class="project-art" style="--art:#c084fc" aria-hidden="true"><div class="art-corner">PLAIDLABS · DESIGN SYSTEM</div><svg viewBox="0 0 416 185"><path d="M90 85h20m86 0h20m86 0h20" fill="none" stroke="#c084fc" stroke-opacity=".55" stroke-width="2"/><path d="m105 81 5 4-5 4m101-8 5 4-5 4m101-8 5 4-5 4" fill="none" stroke="#c084fc" stroke-opacity=".75"/><g fill="#171f31" stroke="#c084fc" stroke-opacity=".7"><rect x="10" y="54" width="80" height="62" rx="10"/><rect x="110" y="54" width="86" height="62" rx="10"/><rect x="216" y="54" width="86" height="62" rx="10"/><rect x="322" y="54" width="84" height="62" rx="10"/></g><g fill="#e2e8f0" text-anchor="middle" font-family="monospace" font-size="11"><text x="50" y="82">Figma</text><text x="153" y="82">UI</text><text x="259" y="82">Storybook</text><text x="364" y="82">npm</text></g><g fill="#9aa9bd" text-anchor="middle" font-family="monospace" font-size="8"><text x="50" y="99">DESIGN</text><text x="153" y="99">BASIC / COMPLEX</text><text x="259" y="99">EXAMPLES</text><text x="364" y="99">PACKAGE</text></g></svg><div class="art-title">디자인 시스템 구축</div><div class="art-caption">DESIGN → COMPONENTS → PACKAGE</div></div></div>
   <header class="detail-header">
     <p class="project-category">PLAIDLABS · DESIGN SYSTEM</p>
     <h1>여러 프로젝트에서 쓰는 디자인 시스템 구축</h1>
-    <p class="detail-lead">프로젝트마다 다시 만들던 UI를 공통 컴포넌트로 정리했습니다. 팀과 함께 설계 기준과 배포 방식을 고민했고, 저는 Chip·Toast의 API와 동작, Storybook 사용 예시를 구현했습니다. 결과물은 <code>@plaidlabs/ui</code>로 배포되어 제품에서 사용되고 있습니다.</p>
+    <p class="detail-lead">프로젝트마다 다시 만들던 UI를 공통 기준으로 정리했습니다. 컬러·타이포 같은 기반부터 단일 요소와 조합형 패턴까지 나누고, 디자인·코드·사용 예시를 연결했습니다. 팀이 만든 결과물은 <code>@plaidlabs/ui</code>로 배포되어 제품에서 사용되고 있습니다.</p>
     <div class="tags"><span>React</span><span>Storybook</span><span>vanilla-extract</span><span>npm</span></div>
   </header>
   <dl class="case-facts">
@@ -20,16 +20,16 @@
     <div><dt>기간</dt><dd>2025.12–2026.02 초기 구축</dd></div>
     <div><dt>팀 결과</dt><dd><code>@plaidlabs/ui</code> npm 배포 · 제품 적용</dd></div>
   </dl>
-  <div class="case-outcome case-summary"><span>실제로 이어진 변화</span><p>제가 만든 Chip·Toast가 공용 패키지에 포함됐고, NUVION 콘솔에서 사용되고 있습니다.</p></div>
+  <div class="case-outcome case-summary"><span>실제로 이어진 변화</span><p>NUVION 콘솔에 공용 컬러·타이포와 컴포넌트를 적용했습니다. 반복되는 공통 UI 구현 공수는 체감상 약 30% 줄었습니다.</p></div>
   <div class="detail-layout">
     <aside class="case-sidebar">
       <details class="case-toc" open>
         <summary>목차 <span>CONTENTS</span></summary>
         <nav aria-label="상세 사례 목차">
           <a href="#part-1" data-part="part-1"><b>01</b><span>왜 공통 UI가 필요했나</span></a>
-          <a href="#part-2" data-part="part-2"><b>02</b><span>제품 개발과 함께 기준을 쌓기</span></a>
+          <a href="#part-2" data-part="part-2"><b>02</b><span>왜 Basic과 Complex를 나눴나</span></a>
           <a href="#part-3" data-part="part-3"><b>03</b><span>디자인 기준에서 사용 가능한 코드까지</span></a>
-          <a href="#part-4" data-part="part-4"><b>04</b><span>내가 맡은 Chip과 Toast</span></a>
+          <a href="#part-4" data-part="part-4"><b>04</b><span>Basic과 Complex의 대표 사례</span></a>
           <a href="#part-5" data-part="part-5"><b>05</b><span>npm 패키지로 배포하며 맞춘 사용 방식</span></a>
           <a href="#part-6" data-part="part-6"><b>06</b><span>제품 적용과 결과</span></a>
           <a href="#references" data-part="references"><b>↗</b><span>관련 링크</span></a>
@@ -45,9 +45,15 @@
       </section>
       <section id="part-2" class="case-section">
         <span class="case-index">02</span>
-        <h2>제품 개발과 함께 기준을 쌓기</h2>
-        <p>처음부터 모든 컴포넌트를 완성한 뒤 NUVION 개발을 시작하면 제품 일정이 늦어집니다. 그래서 팀은 제품을 만들면서 반복되는 요소를 추출해 디자인 시스템에 더하는 방식으로 방향을 잡았습니다. 컬러·타이포·아이콘 같은 기반을 먼저 맞추고, Button·Chip 같은 기본 요소와 Toast·Modal 같은 조합형 요소로 넓혀갔습니다.</p>
-        <p>디자인 시스템은 제품 저장소와 분리했습니다. 여러 고객 프로젝트를 한 저장소에 묶지 않아도, 필요한 제품이 패키지 버전을 선택해 설치할 수 있도록 하기 위해서입니다. 컴포넌트를 각각 배포하기보다는 초기 릴리스와 버전 관리를 단순하게 할 수 있는 단일 <code>@plaidlabs/ui</code> 패키지로 묶었습니다. 이 구조와 배포 방식은 팀에서 함께 논의했습니다.</p>
+        <h2>왜 Basic과 Complex를 나눴나</h2>
+        <p>처음부터 모든 화면을 컴포넌트로 옮기기보다, 어디까지를 공통으로 관리할지 먼저 나눴습니다. 실제 Figma 라이브러리도 Foundation, Basic, Complex 페이지로 구성돼 있습니다. 한 화면의 완성된 형태를 그대로 재사용하는 대신, 변경되는 범위에 맞춰 기준·단일 요소·조합 패턴을 구분한 것입니다.</p>
+        <div class="ds-layer-grid" aria-label="디자인 시스템의 세 층위">
+          <div class="ds-layer"><span>01 / FOUNDATION</span><strong>시각 언어의 기준</strong><p>컬러·타이포그래피·아이콘. 여러 컴포넌트가 공유하는 값은 한곳에서 관리합니다.</p></div>
+          <div class="ds-layer"><span>02 / BASIC</span><strong>화면을 이루는 요소</strong><p>Text Field·Tab·Toggle처럼 단독으로 쓰이는 UI의 크기와 상태를 정리합니다.</p></div>
+          <div class="ds-layer"><span>03 / COMPLEX</span><strong>요소가 만나는 패턴</strong><p>Dropdown·Modal·Menu처럼 여러 요소와 상호작용이 묶이는 흐름을 다룹니다.</p></div>
+        </div>
+        <p>이렇게 나누면 컬러 값 하나의 변경과 Dropdown의 선택 동작 변경을 같은 수준에서 다루지 않아도 됩니다. 제품을 만들면서 공통 요소를 추출해 라이브러리에 쌓고, 각 제품은 필요한 패키지 버전을 선택해 사용하도록 했습니다.</p>
+        <figure class="product-evidence design-system-figma ds-foundation-figure"><a class="evidence-image-link" href="../assets/design-system-color-figma.png" target="_blank" rel="noopener noreferrer" aria-label="Figma Foundation 컬러 기준 원본 보기"><img src="../assets/design-system-color-figma.png" alt="Foundation 페이지의 Blue, Yellow, Green, Red, Gray 컬러 팔레트와 단계별 값" width="3764" height="4005" loading="lazy" decoding="async"><span class="image-expand">원본 보기 ↗</span></a><figcaption><strong>Foundation · 컬러 기준</strong><span>제품마다 임의의 색을 새로 정하지 않도록 계열과 단계를 정리한 Figma 원본입니다.</span></figcaption></figure>
       </section>
       <section id="part-3" class="case-section">
         <span class="case-index">03</span>
@@ -58,24 +64,29 @@
       </section>
       <section id="part-4" class="case-section">
         <span class="case-index">04</span>
-        <h2>내가 맡은 Chip과 Toast</h2>
-        <p>저는 팀의 공통 기준 위에서 Chip과 Toast를 설계·구현했습니다. 두 컴포넌트 모두 한 화면에만 맞춰 만들면 다른 제품에서 다시 예외를 처리해야 했습니다. 어떤 값을 사용하는 쪽에서 넘기고, 무엇을 컴포넌트가 책임질지 먼저 나눴습니다.</p>
-        <div class="case-note"><strong>Chip — 디자인 조합을 props로 정리</strong><p>색상·크기·형태·스타일을 조합할 수 있게 만들고, 아이콘만 있는 경우는 텍스트 유무로 판별해 전용 여백을 적용했습니다. 스타일의 variant 타입을 컴포넌트 props에 연결해 디자인 규칙이 바뀌어도 타입 정의가 따로 어긋나지 않도록 했습니다. Storybook에는 주요 조합을 나란히 볼 수 있게 정리했습니다.</p></div>
-        <figure class="product-evidence design-system-figma"><a class="evidence-image-link" href="../assets/design-system-chip-figma.png" target="_blank" rel="noopener noreferrer" aria-label="Figma Chip 디자인 전체 이미지 보기"><img src="../assets/design-system-chip-figma.png" alt="Figma에 정리된 Chip의 filled·outlined·light 스타일과 색상·크기·아이콘 조합" width="3834" height="3160" loading="lazy" decoding="async"><span class="image-expand">원본 보기 ↗</span></a><figcaption><strong>Figma 디자인 기준 · Chip</strong><span>색상·스타일·크기·아이콘 조합을 한눈에 비교한 원본 화면입니다. <a href="https://dsy.plaid.ai.kr/storybook/?path=/docs/components-chip--documentation">Storybook 구현 예시 ↗</a></span></figcaption></figure>
-        <div class="case-note"><strong>Toast — 호출 방식과 닫히는 동작을 분리</strong><p>제품 화면에서는 제목·설명·상태·액션을 전달하고, 공통 영역이 알림을 렌더링하도록 구성했습니다. 닫기를 누른 즉시 큐에서 제거하면 퇴장 애니메이션을 보여줄 수 없어, 닫기 상태를 먼저 표시하고 애니메이션 후 제거하도록 했습니다. 긴 문구, 액션 유무, 상태별 표현은 Storybook에서 확인할 수 있게 했습니다.</p></div>
-        <figure class="product-evidence design-system-figma"><a class="evidence-image-link" href="../assets/design-system-toast-figma.png" target="_blank" rel="noopener noreferrer" aria-label="Figma Toast 디자인 전체 이미지 보기"><img src="../assets/design-system-toast-figma.png" alt="Figma에 정리된 Toast의 상태별 색상과 크기·설명·닫기 버튼·액션 조합" width="2385" height="2362" loading="lazy" decoding="async"><span class="image-expand">원본 보기 ↗</span></a><figcaption><strong>Figma 디자인 기준 · Toast</strong><span>알림 상태와 크기, 설명·닫기 버튼·액션 유무의 조합입니다. <a href="https://dsy.plaid.ai.kr/storybook/?path=/docs/components-toast--documentation">Storybook 구현 예시 ↗</a></span></figcaption></figure>
-        <p>Toast의 큐와 기본 접근성 구성에는 React Aria를 활용했습니다. 제가 구현한 부분은 이를 팀 디자인 토큰, 공용 호출 API, 진입·퇴장 상태와 연결한 영역입니다.</p>
+        <h2>Basic과 Complex의 대표 사례</h2>
+        <p>둘 다 여러 상태를 갖지만, 공통화하는 대상은 다릅니다. Text Field는 입력 요소 자체의 표현을, Dropdown은 선택 가능한 목록이 열리고 닫히는 흐름까지 다룹니다. Figma 원본에서 각 단계가 무엇을 기준으로 정리했는지 볼 수 있습니다.</p>
+        <div class="ds-example-grid">
+          <figure class="product-evidence design-system-figma ds-text-field-figure"><a class="evidence-image-link" href="../assets/design-system-text-field-figma.png" target="_blank" rel="noopener noreferrer" aria-label="Figma Basic Text Field 원본 보기"><img src="../assets/design-system-text-field-figma.png" alt="Basic 페이지의 Text Field 기본, Hover, Active, Error, Disabled 상태와 가이드 문구 변형" width="3834" height="3123" loading="lazy" decoding="async"><span class="image-expand">원본 보기 ↗</span></a><figcaption><strong>Basic · Text Field</strong><span>하나의 입력 요소 안에서 기본·활성·오류·비활성 상태와 안내 문구, 글자 수 표시를 정리했습니다.</span></figcaption></figure>
+          <figure class="product-evidence design-system-figma ds-dropdown-figure"><a class="evidence-image-link" href="../assets/design-system-dropdown-figma.png" target="_blank" rel="noopener noreferrer" aria-label="Figma Complex Dropdown 원본 보기"><img src="../assets/design-system-dropdown-figma.png" alt="Complex 페이지의 Dropdown 선택 상태, 비활성 상태, 메뉴 방향과 크기 변형" width="3113" height="1651" loading="lazy" decoding="async"><span class="image-expand">원본 보기 ↗</span></a><figcaption><strong>Complex · Dropdown</strong><span>트리거와 옵션 목록을 한 흐름으로 보고, 선택·비활성 상태와 열리는 방향까지 함께 정리했습니다.</span></figcaption></figure>
+        </div>
+        <p>Basic의 상태를 충분히 정의하되, 여러 요소가 결합되는 순간에는 별도 패턴으로 관리한 점이 이 분류의 핵심입니다. 그래서 새 화면을 만들 때도 입력 필드의 스타일과 선택 메뉴의 동작을 각각 재사용할 수 있습니다.</p>
       </section>
       <section id="part-5" class="case-section">
         <span class="case-index">05</span>
         <h2>npm 패키지로 배포하며 맞춘 사용 방식</h2>
         <p>컴포넌트가 저장소 안에서 보이는 것과 다른 제품에 설치해 쓰는 것은 달랐습니다. 초기 배포 과정에서는 JavaScript 컴포넌트가 표시돼도 vanilla-extract가 생성한 CSS가 소비 프로젝트에 로드되지 않는 문제가 있었습니다. 팀은 빌드 결과의 진입점에서 CSS를 함께 불러오고, 패키지의 <code>exports</code>와 <code>sideEffects</code>를 정리해 설치한 쪽에서 별도 내부 경로를 찾지 않도록 했습니다.</p>
-        <p>단일 패키지 구조와 사용 방식은 팀에서 함께 고민했습니다. 저는 Chip·Toast의 공개 export와 Storybook 예시를 맡았고, 패키지 게시와 빌드 문제 해결은 동료가 진행했습니다. 함께 만든 디자인 시스템은 <code>@plaidlabs/ui</code>로 배포됐습니다.</p>
+        <p>단일 패키지 구조와 사용 방식은 팀에서 함께 고민했습니다. 저는 공용 컴포넌트와 Storybook 예시 작업에 참여했고, 패키지 게시와 빌드 문제 해결은 동료가 진행했습니다. 함께 만든 디자인 시스템은 <code>@plaidlabs/ui</code>로 배포됐습니다.</p>
       </section>
       <section id="part-6" class="case-section">
         <span class="case-index">06</span>
         <h2>제품 적용과 결과</h2>
-        <p>배포 후 NUVION 콘솔에서는 공용 컬러·타이포와 Button, Dropdown 같은 컴포넌트를 가져다 쓰고 있습니다. 제가 만든 Chip은 알림 화면의 상태 표시에, Toast는 여러 화면의 피드백에 연결돼 있습니다. 같은 컴포넌트가 문서 예시를 넘어 실제 제품 코드에서 사용되는 지점까지 확인했습니다.</p>
+        <p>NUVION 콘솔은 <code>@plaidlabs/ui</code>의 컬러·타이포와 Button, Dropdown 같은 컴포넌트를 사용합니다. 공통 UI 구현은 프론트엔드 화면 작업에서 적지 않은 비중을 차지했습니다. 이제 화면마다 스타일과 상태를 다시 만드는 대신 필요한 컴포넌트를 가져와 조합합니다.</p>
+        <div class="ds-layer-grid" aria-label="공통 UI 적용 전후의 반복 작업 변화">
+          <div class="ds-layer"><span>BEFORE</span><strong>화면마다 다시 구현</strong><p>버튼·입력·선택 UI의 스타일과 상태를 화면별로 만들고, 디자인 기준을 다시 확인했습니다.</p></div>
+          <div class="ds-layer"><span>AFTER</span><strong>공통 요소를 가져와 조합</strong><p>패키지의 컴포넌트와 토큰을 사용하고, 화면 고유의 흐름과 데이터 연결에 집중했습니다.</p></div>
+          <div class="ds-layer"><span>RESULT · 체감 기준</span><strong>공통 UI 작업 공수 약 30% 감소</strong><p>같은 UI를 새로 만들고 상태별 스타일을 맞추는 시간이 줄었습니다.</p></div>
+        </div>
       </section>
       <section id="references" class="case-section">
         <span class="case-index">↗</span>
