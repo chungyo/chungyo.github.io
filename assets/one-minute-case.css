@@ -4,10 +4,21 @@
 .one-minute-card-art .art-title{margin-top:4px}
 .one-minute-card-art .art-caption{color:#92e5df}
 .minute-case{--minute-accent:#5ad6d1;--minute-border:#304558}
+.minute-case .minute-overview-description{max-width:820px;margin:22px 0 0;font-size:15px;line-height:1.95;color:var(--muted);word-break:keep-all}
+.minute-case .minute-work-summary{display:grid;grid-template-columns:1.15fr 1fr;gap:64px;margin-top:42px;padding-top:32px;border-top:1px solid var(--border)}
+.minute-case .minute-work-summary>section{min-width:0}
+.minute-case .minute-work-summary h2{margin:0 0 24px;font-size:18px;font-weight:600;line-height:1.7;color:var(--text)}
+.minute-case .minute-work-summary>section:last-child h2{color:var(--green)}
+.minute-case .minute-work-summary ul,.minute-case .minute-work-summary ol{list-style:none;margin:0;padding:0}
+.minute-case .minute-work-summary li+li{margin-top:23px}
+.minute-case .minute-work-summary strong{display:block;font-size:15px;font-weight:600;line-height:1.75;color:var(--text);word-break:keep-all}
+.minute-case .minute-work-summary p{margin:6px 0 0;font-size:14px;line-height:1.9;color:var(--muted);word-break:keep-all}
+.minute-case .minute-reading .minute-subheading{font-size:18px;line-height:1.7;color:var(--text);margin:30px 0 12px;word-break:keep-all}
 .minute-hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(230px,.65fr);gap:52px;align-items:center;margin:26px 0 32px;padding:42px 48px;background:radial-gradient(circle at 79% 20%,#1b5356 0,#122d37 30%,#101b2d 68%);border:1px solid var(--minute-border);border-radius:20px;overflow:hidden}
 .minute-hero-copy{min-width:0}
 .minute-hero .project-category{color:var(--minute-accent);margin-bottom:22px}
-.minute-hero h1{font-size:clamp(36px,4.3vw,59px);line-height:1.33;letter-spacing:-2px;color:#f8fafc;word-break:keep-all;margin:0 0 25px}
+.minute-hero h1{font-size:clamp(36px,3.6vw,50px);line-height:1.33;letter-spacing:-2px;color:#f8fafc;word-break:keep-all;margin:0 0 25px}
+.minute-hero .minute-title-segment{white-space:nowrap}
 .minute-hero .detail-lead{font-size:16px;line-height:1.85;color:#c3d1dc;max-width:670px;margin:0 0 26px;word-break:keep-all}
 .minute-hero .tags span{border-color:#457c7a;color:#9ce4df}
 .minute-store-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:33px}
@@ -81,6 +92,12 @@
 .minute-question-row strong{font-size:15px;color:#f1f8fa;line-height:1.5;word-break:keep-all}
 .minute-question-row i{font-style:normal;color:#6bd5cb}
 @media(max-width:760px){
+  .minute-case .minute-overview-description{font-size:14px;margin-top:18px}
+  .minute-case .minute-work-summary{grid-template-columns:1fr;gap:32px;margin-top:30px;padding-top:26px}
+  .minute-case .minute-work-summary h2{font-size:17px;margin-bottom:20px}
+  .minute-case .minute-work-summary li+li{margin-top:19px}
+  .minute-case .minute-work-summary strong{font-size:14px}
+  .minute-case .minute-work-summary p{font-size:13px}
   .minute-hero{grid-template-columns:1fr;padding:29px 24px;gap:34px}
   .minute-hero h1{font-size:36px;letter-spacing:-1px}
   .minute-hero .detail-lead{font-size:14px}
@@ -104,6 +121,10 @@
   .minute-question-row i{transform:rotate(90deg);justify-self:start}
 }
 @media print{
+  .minute-case .minute-overview-description,.minute-case .minute-work-summary p{color:#334155!important}
+  .minute-case .minute-work-summary h2,.minute-case .minute-work-summary strong,.minute-case .minute-reading .minute-subheading{color:#0f172a!important}
+  .minute-case .minute-work-summary{gap:30px}
+  .minute-case .minute-work-summary li{break-inside:avoid}
   .minute-hero,.minute-decision,.minute-review-flow,.minute-question-row,.minute-decision-grid>div,.minute-review-flow li{background:#f8fafc!important;border-color:#cbd5e1!important;break-inside:avoid}
   .minute-public-screens,.minute-public-screens-grid figure{background:#f8fafc!important;border-color:#cbd5e1!important;break-inside:avoid}
   .minute-hero h1,.minute-reading h2,.minute-decision figcaption strong,.minute-review-flow figcaption strong,.minute-decision-grid strong,.minute-review-flow li strong,.minute-question-row strong{color:#0f172a!important}

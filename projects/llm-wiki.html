@@ -3,56 +3,54 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="직접 기록하고 정리하는 부담을 줄이고, 활동과 대화의 맥락을 축적하기 위해 구축한 시스템입니다. AI로 정리한 내용을 원본 근거와 연결해 이후의 회고와 판단에 활용할 수 있도록 설계했습니다."><meta name="theme-color" content="#0f172a">
-<title>LLM Wiki — 개인 기록·지식 관리 시스템 구축 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=20260921-cases"><script src="../site.js?v=20260921-cases" defer></script>
+<title>LLM Wiki — 개인 기록·지식 관리 시스템 구축 | 김충영</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Noto+Sans+KR:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css?v=af9c8ca46365"><script src="../site.js?v=88c57bdc029a" defer></script>
 <link rel="stylesheet" href="../assets/llm-wiki-article.css?v=20260925-local">
 <link rel="canonical" href="https://chungyo.github.io/projects/llm-wiki.html">
+<link rel="stylesheet" href="../assets/pm-overview.css?v=6219cd79e57b">
 </head>
-<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#journey">Journey</a><a href="../index.html#projects">Projects</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
-<main id="main" class="detail-main container llm-article">
+<body><a class="skip-link" href="#main">본문으로 바로가기</a><header class="nav" id="nav"><nav class="container nav-inner" aria-label="주요 메뉴"><a class="brand" href="../index.html"><span>chungyoung</span><span class="brand-dim">.kim</span></a><div class="nav-links"><a href="../index.html#projects">Projects</a><a href="../index.html#journey">Journey</a><a href="../index.html#background">Background</a><a href="../index.html#skills">Skills</a></div></nav></header>
+<main id="main" class="detail-main container llm-article pm-detail">
   <a class="back-link" href="../index.html#projects">← 모든 프로젝트</a>
-  <header class="detail-header">
-    <h1>LLM Wiki — 개인 기록·지식 관리 시스템 구축</h1>
-    <p class="detail-lead">활동 기록과 회의 자료를 모으고, AI와 함께 정리한 내용을 다음 작업에 다시 활용하기 위해 만든 개인 프로젝트입니다. 기록 수집 방식을 바꾼 과정과 원본 보존, 사용자 확인, 로컬 저장을 구분한 이유를 정리했습니다.</p>
-    <p class="llm-byline">2026 · 개인 프로젝트<br>기록 구조·처리 기준 설계 및 검토 / AI 도구와 함께 구현</p>
-    <div class="tags"><span>Obsidian</span><span>Codex</span><span>Telegram</span><span>TypeScript</span></div>
+
+  <header class="pm-overview-head">
+    <p class="pm-kicker">LLM Wiki · 개인 AI 워크플로우</p>
+    <h1>AI로 기록을 정리하고, 승인한 내용만 저장하다</h1>
+    <p class="pm-meta">개인 프로젝트 · 기록 구조·처리 기준 설계 및 검토 · AI 도구와 함께 구현 · 로컬 검증</p>
   </header>
-  <nav class="llm-contents" aria-label="상세 사례 목차">
+  <section class="pm-outcomes" aria-label="프로젝트 요약">
+    <div><h2>문제</h2><p>활동 기록과 회의 자료가 쌓여도 당시의 판단과 이유를 다시 찾고 정리하는 부담이 남았습니다. AI 대화 안에만 기록을 두면 도구가 바뀔 때 재사용하기도 어려웠습니다.</p></div>
+    <div><h2>판단·실행</h2><p>원본·일일 기록·지식을 나누고, AI 초안과 사용자 확인을 분리했습니다. AI 도구와 함께 구현하면서 파일 충돌·중복 저장을 검사하는 흐름을 설계했습니다.</p></div>
+    <div><h2>확인된 결과</h2><p>저장한 자료를 HASHI 사례 검토에 다시 활용했고, 저장 안전성 로컬 테스트 8개가 통과했습니다. 클라우드 운영과 AI 요약 품질·비용의 정량 평가는 남아 있습니다.</p></div>
+  </section>
+  <details class="pm-evidence">
+    <summary>판단 과정과 상세 근거 보기</summary>
+    <nav class="llm-contents" aria-label="상세 사례 목차">
     <h2>목차</h2>
     <ol>
+      <li><a href="#part-6">활용 사례: 저장한 영상 자료를 HASHI 포트폴리오 검토에 사용</a></li>
+      <li><a href="#part-3">저장 구조: 채팅 기록 대신 Wiki를 선택한 이유</a></li>
+      <li><a href="#part-5">저장 통제: 승인한 내용도 파일 상태를 다시 확인</a></li>
+      <li><a href="#part-4">챗봇 확장: 클라우드 처리와 Mac 파일 저장 분리</a></li>
       <li><a href="#part-1">배경: 기록은 필요했지만, 직접 정리하는 일이 부담스러웠다</a></li>
       <li><a href="#part-2">수집 방식 변경: Screenpipe에서 Computer History로</a></li>
-      <li><a href="#part-3">저장 구조: 채팅 기록 대신 Wiki를 선택한 이유</a></li>
-      <li><a href="#part-4">챗봇 확장: 클라우드 처리와 Mac 파일 저장 분리</a></li>
-      <li><a href="#part-5">저장 통제: 승인한 내용도 파일 상태를 다시 확인</a></li>
-      <li><a href="#part-6">활용 사례: 저장한 영상 자료를 HASHI 포트폴리오 검토에 사용</a></li>
       <li><a href="#part-7">지금 쓰는 방식과 다음 개선</a></li>
     </ol>
   </nav>
 
-  <article class="llm-reading" aria-label="LLM Wiki 구축 과정">
-    <section id="part-1" class="case-section">
-      <h2>배경: 기록은 필요했지만, 직접 정리하는 일이 부담스러웠다</h2>
-      <p>제가 무엇을 했고 어떤 고민 끝에 결정을 내렸는지 남기고 싶었습니다. 지나간 일을 돌아보며 개선할 점을 찾으려면 결과뿐 아니라 당시의 이유도 필요하다고 생각했습니다. 다만 매번 시간을 내어 기억을 더듬고 글로 정리하는 일은 부담스러웠습니다.</p>
-      <p>처음에는 Mac 화면 활동과 중요한 대화를 남기는 것부터 시작했습니다. 화면은 Screenpipe로 기록하고, 회의나 중요한 순간의 대화는 PLAUD Note로 녹음했습니다. 이미 생긴 자료를 활용하면 처음부터 빈 문서에 하루를 다시 적는 부담을 줄일 수 있겠다고 생각했습니다.</p>
-      <p>화면과 녹음만으로 알 수 없는 부분도 있습니다. 어떤 일을 먼저 하기로 했는지, 무엇 때문에 막혔는지는 제가 설명해야 합니다. Telegram 챗봇에는 아침에 우선순위를, 저녁에 완료한 일과 남은 장애물을 묻는 흐름을 두었습니다.</p>
-      <figure class="llm-evidence-photo">
-        <a href="../assets/evidence/llm-wiki-telegram.webp" data-image-viewer data-caption="실제 사용 중 수신한 Telegram 알림">
-          <img src="../assets/evidence/llm-wiki-telegram.webp" width="625" height="313" alt="아침에는 가장 중요한 일을, 저녁에는 끝낸 일과 남은 장애물을 묻는 실제 Telegram 알림" fetchpriority="high">
-        </a>
-        <figcaption>실제 수신한 알림입니다. 개인 일정은 제외했습니다. 이 화면은 질문·알림의 사용 사례이며, 뒤에서 설명하는 클라우드 이전이나 Wiki 저장 완료를 증명하는 화면은 아닙니다.</figcaption>
+<article class="llm-reading" aria-label="LLM Wiki 구축 과정">
+    <section id="part-6" class="case-section">
+      <h2>활용 사례: 저장한 영상 자료를 HASHI 포트폴리오 검토에 사용</h2>
+      <p>자료를 다시 사용한 예가 이번 포트폴리오 작업입니다. Wiki에 저장해둔 AI 개발 워크플로우 영상의 정리와 자막을 찾아보고, HASHI의 문서·코드와 대조했습니다.</p>
+      <h3>입력: 하네스를 다시 검토해야 한다는 영상</h3>
+      <p>저장한 자료 중에는 메이커 에반의 「1년 만든 AI 하네스, 지난달에 전부 지웠습니다」가 있습니다. Source 노트에는 원본 영상, 자막의 한계, 발표자의 주장과 제 해석을 나눠 남겼습니다.</p>
+      <figure class="llm-source-excerpt">
+        <figcaption>실제 Source 노트에서 확인한 정리 내용 · 공개 가능한 부분만 발췌·요약</figcaption>
+        <dl><div><dt>원문</dt><dd>영상 URL과 한국어 자동 자막의 출처를 연결</dd></div><div><dt>해석</dt><dd>실행 방법을 과도하게 고정하는 장치와 목표·판단 기준을 보존하는 문서를 구분</dd></div><div><dt>한계</dt><dd>발표자의 개선 경험을 보편적인 성능 효과로 일반화하지 않음</dd></div></dl>
       </figure>
-    </section>
-
-    <section id="part-2" class="case-section">
-      <h2>수집 방식 변경: Screenpipe에서 Computer History로</h2>
-      <p>Screenpipe를 쓰면서 저장 용량이 부담됐고, 기록을 살펴봐도 제가 원했던 세부 내용을 충분히 찾기 어려웠습니다. Codex Computer History가 나온 뒤에는 화면 활동의 수집 경로를 바꿨습니다.</p>
-      <p>일일 기록은 Codex에서 주고받은 작업 내용을 주 근거로 정리하고, 저장된 Computer History 요약으로 보완하도록 구성했습니다. 회의와 중요한 대화는 계속 PLAUD Note로 따로 녹음했습니다. 화면에서 한 작업과 회의에서 나온 이야기는 서로 다른 근거이기 때문입니다.</p>
-      <div class="case-table-wrap" role="region" aria-label="기록 수집 방식 변경" tabindex="0"><table><caption>직접 사용하며 변경한 범위</caption><thead><tr><th scope="col">대상</th><th scope="col">처음 시도</th><th scope="col">변경·유지한 방식</th></tr></thead><tbody>
-        <tr><th scope="row">Mac 활동</th><td>Screenpipe 화면 기록</td><td>Codex 작업 기록 + Computer History 요약</td></tr>
-        <tr><th scope="row">회의·중요한 대화</th><td>PLAUD Note 녹음</td><td>별도 수집 경로로 유지</td></tr>
-        <tr><th scope="row">선택한 이유·남은 일</th><td>활동 기록만으로는 확인하기 어려움</td><td>대화와 챗봇 질문에 직접 답변</td></tr>
-      </tbody></table></div>
-      <p>정리 기준도 함께 정했습니다. 페이지를 열었다는 관찰을 작업 완료로 바꾸지 않고, 사용자가 말한 판단과 실제로 확인한 결과를 구분하도록 했습니다. 기록이 없는 시간대는 AI가 채우지 않도록 했습니다.</p>
+      <h3>재사용: 영상의 개념을 내 구현 범위와 대조</h3>
+      <p>HASHI에서 확인할 수 있는 것은 작업별 문서 안내, 스킬·체크리스트, 생성기와 검증 기준이었습니다. 여러 에이전트가 자동으로 분기·재시도하는 실행 시스템까지 만들었다고 설명하면 실제 구현보다 앞서갑니다. 저장된 자료를 다시 참고하며 이 둘을 구분해 사례를 정리했습니다.</p>
+      <p><a class="llm-inline-link" href="hashi-ai-workflow.html">HASHI AI 개발 하네스 적용 사례 보기 ↗</a></p>
+      <p>저장한 자료를 다시 찾아 HASHI 사례에서 설명할 수 있는 구현 범위를 정하는 데 사용했습니다.</p>
     </section>
 
     <section id="part-3" class="case-section">
@@ -72,26 +70,6 @@
       <p><code>log</code>는 대화에서 판단·이유·결과·남은 일을 추려 Daily에 남깁니다. <code>ingest</code>는 자료의 출처와 저장 목적을 확인하고 관련 Wiki 노트에 연결합니다. 모든 Daily를 자동으로 지식 노트로 옮기는 방식은 아닙니다.</p>
       <p>자료만으로 제 의도를 알 수 없는 경우에는 왜 저장했는지, 어떤 작업과 연결되는지 질문하도록 지침을 뒀습니다. AI가 요약한 사실과 제 생각을 섞지 않는 것도 운영 문서의 기준으로 정했습니다.</p>
       <p class="llm-source">참고한 원형: <a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener noreferrer">Andrej Karpathy — LLM Wiki</a>. 원형을 바탕으로 개인 기록 분류와 입력·저장 흐름을 확장했습니다.</p>
-    </section>
-
-    <section id="part-4" class="case-section">
-      <h2>챗봇 확장: 클라우드 처리와 Mac 파일 저장 분리</h2>
-      <p>Mac에서 실행하는 챗봇은 컴퓨터가 잠들거나 종료되면 정시 실행을 보장할 수 없습니다. 클라우드 이전 구현에서는 메시지 처리와 초안 생성은 클라우드에서, Obsidian 파일 반영은 Mac에서 담당하도록 나눴습니다.</p>
-      <p class="llm-status-note">아래는 클라우드 이전 브랜치의 코드로 확인한 구성입니다. 해당 README에는 운영 전환 검증 중으로 명시돼 있으며, 이번 포트폴리오 작업에서 실제 클라우드 운영 전환 완료는 확인하지 않았습니다.</p>
-      <figure class="llm-technical-figure" id="architecture">
-        <a href="../assets/diagrams/llm-wiki-system-detail.svg" data-image-viewer data-caption="LLM Wiki 전체 구성과 클라우드 이전 구현">
-          <img src="../assets/diagrams/llm-wiki-system-detail.svg" width="1320" height="750" loading="lazy" alt="Telegram 요청은 Cloud Run Webhook, Cloud Tasks, Worker를 거친다. Worker는 Gemini와 Firestore를 사용하며, Mac 동기화 에이전트가 승인 작업을 조회해 Obsidian에 반영한다. 데스크톱 정리는 별도 경로다.">
-        </a>
-        <figcaption>클라우드와 Mac의 책임을 분리한 구성. 동기화 요청·응답은 그림에서 한 방향의 전달선으로 요약했고, 자세한 순서는 다음 그림에 표시했습니다. <a href="../assets/diagrams/llm-wiki-system-detail.html" target="_blank" rel="noopener">구조도 탐색 ↗</a></figcaption>
-      </figure>
-      <h3>요청 처리와 파일 반영은 따로 완료됩니다</h3>
-      <ol class="llm-prose-list">
-        <li><strong>요청 접수:</strong> Webhook에서 허용된 사용자와 중복 update를 확인하고 Cloud Tasks에 작업을 등록합니다.</li>
-        <li><strong>초안·확인:</strong> Worker에서 명령을 분기합니다. 기록 초안은 Gemini로 생성하고, 미리보기와 승인 작업은 Firestore에 보관합니다.</li>
-        <li><strong>로컬 반영:</strong> Mac 에이전트가 서명된 요청으로 승인 작업을 조회합니다. 파일을 검사·반영한 뒤 결과를 다시 전달합니다.</li>
-      </ol>
-      <p>사용자가 초안을 확인했을 때의 응답도 “저장 완료”가 아니라 <strong>“Obsidian 동기화 대기 중”</strong>으로 구분했습니다. Mac에서 실제 파일 반영이 끝나기 전에는 완료로 볼 수 없기 때문입니다. 일일 기록 자동화와 데스크톱 <code>ingest</code>는 이 챗봇 저장 경로와 별도로 동작합니다.</p>
-      <p class="llm-source">코드 확인 범위: <code>active-composition.ts</code>, <code>runtime-processor.ts</code>, <code>sync-client.ts</code>, <code>local-agent.ts</code>. 그림은 주요 기록 경로에 집중했으며 일정 조회·인증 설정의 세부 구성은 생략했습니다.</p>
     </section>
 
     <section id="part-5" class="case-section">
@@ -117,19 +95,49 @@
       </tbody></table></div>
     </section>
 
-    <section id="part-6" class="case-section">
-      <h2>활용 사례: 저장한 영상 자료를 HASHI 포트폴리오 검토에 사용</h2>
-      <p>자료를 다시 사용한 예가 이번 포트폴리오 작업입니다. Wiki에 저장해둔 AI 개발 워크플로우 영상의 정리와 자막을 찾아보고, HASHI의 문서·코드와 대조했습니다.</p>
-      <h3>입력: 하네스를 다시 검토해야 한다는 영상</h3>
-      <p>저장한 자료 중에는 메이커 에반의 「1년 만든 AI 하네스, 지난달에 전부 지웠습니다」가 있습니다. Source 노트에는 원본 영상, 자막의 한계, 발표자의 주장과 제 해석을 나눠 남겼습니다.</p>
-      <figure class="llm-source-excerpt">
-        <figcaption>실제 Source 노트에서 확인한 정리 내용 · 공개 가능한 부분만 발췌·요약</figcaption>
-        <dl><div><dt>원문</dt><dd>영상 URL과 한국어 자동 자막의 출처를 연결</dd></div><div><dt>해석</dt><dd>실행 방법을 과도하게 고정하는 장치와 목표·판단 기준을 보존하는 문서를 구분</dd></div><div><dt>한계</dt><dd>발표자의 개선 경험을 보편적인 성능 효과로 일반화하지 않음</dd></div></dl>
+    <section id="part-4" class="case-section">
+      <h2>챗봇 확장: 클라우드 처리와 Mac 파일 저장 분리</h2>
+      <p>Mac에서 실행하는 챗봇은 컴퓨터가 잠들거나 종료되면 정시 실행을 보장할 수 없습니다. 클라우드 이전 구현에서는 메시지 처리와 초안 생성은 클라우드에서, Obsidian 파일 반영은 Mac에서 담당하도록 나눴습니다.</p>
+      <p class="llm-status-note">아래는 클라우드 이전 브랜치의 코드로 확인한 구성입니다. 해당 README에는 운영 전환 검증 중으로 명시돼 있으며, 이번 포트폴리오 작업에서 실제 클라우드 운영 전환 완료는 확인하지 않았습니다.</p>
+      <figure class="llm-technical-figure" id="architecture">
+        <a href="../assets/diagrams/llm-wiki-system-detail.svg" data-image-viewer data-caption="LLM Wiki 전체 구성과 클라우드 이전 구현">
+          <img src="../assets/diagrams/llm-wiki-system-detail.svg" width="1320" height="750" loading="lazy" alt="Telegram 요청은 Cloud Run Webhook, Cloud Tasks, Worker를 거친다. Worker는 Gemini와 Firestore를 사용하며, Mac 동기화 에이전트가 승인 작업을 조회해 Obsidian에 반영한다. 데스크톱 정리는 별도 경로다.">
+        </a>
+        <figcaption>클라우드와 Mac의 책임을 분리한 구성. 동기화 요청·응답은 그림에서 한 방향의 전달선으로 요약했고, 자세한 순서는 다음 그림에 표시했습니다. <a href="../assets/diagrams/llm-wiki-system-detail.html" target="_blank" rel="noopener">구조도 탐색 ↗</a></figcaption>
       </figure>
-      <h3>재사용: 영상의 개념을 내 구현 범위와 대조</h3>
-      <p>HASHI에서 확인할 수 있는 것은 작업별 문서 안내, 스킬·체크리스트, 생성기와 검증 기준이었습니다. 여러 에이전트가 자동으로 분기·재시도하는 실행 시스템까지 만들었다고 설명하면 실제 구현보다 앞서갑니다. 저장된 자료를 다시 참고하며 이 둘을 구분해 사례를 정리했습니다.</p>
-      <p><a class="llm-inline-link" href="hashi-ai-workflow.html">HASHI AI 개발 하네스 적용 사례 보기 ↗</a></p>
-      <p>저장한 자료를 다시 찾아 HASHI 사례에서 설명할 수 있는 구현 범위를 정하는 데 사용했습니다.</p>
+      <h3>요청 처리와 파일 반영은 따로 완료됩니다</h3>
+      <ol class="llm-prose-list">
+        <li><strong>요청 접수:</strong> Webhook에서 허용된 사용자와 중복 update를 확인하고 Cloud Tasks에 작업을 등록합니다.</li>
+        <li><strong>초안·확인:</strong> Worker에서 명령을 분기합니다. 기록 초안은 Gemini로 생성하고, 미리보기와 승인 작업은 Firestore에 보관합니다.</li>
+        <li><strong>로컬 반영:</strong> Mac 에이전트가 서명된 요청으로 승인 작업을 조회합니다. 파일을 검사·반영한 뒤 결과를 다시 전달합니다.</li>
+      </ol>
+      <p>사용자가 초안을 확인했을 때의 응답도 “저장 완료”가 아니라 <strong>“Obsidian 동기화 대기 중”</strong>으로 구분했습니다. Mac에서 실제 파일 반영이 끝나기 전에는 완료로 볼 수 없기 때문입니다. 일일 기록 자동화와 데스크톱 <code>ingest</code>는 이 챗봇 저장 경로와 별도로 동작합니다.</p>
+      <p class="llm-source">코드 확인 범위: <code>active-composition.ts</code>, <code>runtime-processor.ts</code>, <code>sync-client.ts</code>, <code>local-agent.ts</code>. 그림은 주요 기록 경로에 집중했으며 일정 조회·인증 설정의 세부 구성은 생략했습니다.</p>
+    </section>
+
+    <section id="part-1" class="case-section">
+      <h2>배경: 기록은 필요했지만, 직접 정리하는 일이 부담스러웠다</h2>
+      <p>제가 무엇을 했고 어떤 고민 끝에 결정을 내렸는지 남기고 싶었습니다. 지나간 일을 돌아보며 개선할 점을 찾으려면 결과뿐 아니라 당시의 이유도 필요하다고 생각했습니다. 다만 매번 시간을 내어 기억을 더듬고 글로 정리하는 일은 부담스러웠습니다.</p>
+      <p>처음에는 Mac 화면 활동과 중요한 대화를 남기는 것부터 시작했습니다. 화면은 Screenpipe로 기록하고, 회의나 중요한 순간의 대화는 PLAUD Note로 녹음했습니다. 이미 생긴 자료를 활용하면 처음부터 빈 문서에 하루를 다시 적는 부담을 줄일 수 있겠다고 생각했습니다.</p>
+      <p>화면과 녹음만으로 알 수 없는 부분도 있습니다. 어떤 일을 먼저 하기로 했는지, 무엇 때문에 막혔는지는 제가 설명해야 합니다. Telegram 챗봇에는 아침에 우선순위를, 저녁에 완료한 일과 남은 장애물을 묻는 흐름을 두었습니다.</p>
+      <figure class="llm-evidence-photo">
+        <a href="../assets/evidence/llm-wiki-telegram.webp" data-image-viewer data-caption="실제 사용 중 수신한 Telegram 알림">
+          <img src="../assets/evidence/llm-wiki-telegram.webp" width="625" height="313" alt="아침에는 가장 중요한 일을, 저녁에는 끝낸 일과 남은 장애물을 묻는 실제 Telegram 알림" fetchpriority="high">
+        </a>
+        <figcaption>실제 수신한 알림입니다. 개인 일정은 제외했습니다. 이 화면은 질문·알림의 사용 사례이며, 뒤에서 설명하는 클라우드 이전이나 Wiki 저장 완료를 증명하는 화면은 아닙니다.</figcaption>
+      </figure>
+    </section>
+
+    <section id="part-2" class="case-section">
+      <h2>수집 방식 변경: Screenpipe에서 Computer History로</h2>
+      <p>Screenpipe를 쓰면서 저장 용량이 부담됐고, 기록을 살펴봐도 제가 원했던 세부 내용을 충분히 찾기 어려웠습니다. Codex Computer History가 나온 뒤에는 화면 활동의 수집 경로를 바꿨습니다.</p>
+      <p>일일 기록은 Codex에서 주고받은 작업 내용을 주 근거로 정리하고, 저장된 Computer History 요약으로 보완하도록 구성했습니다. 회의와 중요한 대화는 계속 PLAUD Note로 따로 녹음했습니다. 화면에서 한 작업과 회의에서 나온 이야기는 서로 다른 근거이기 때문입니다.</p>
+      <div class="case-table-wrap" role="region" aria-label="기록 수집 방식 변경" tabindex="0"><table><caption>직접 사용하며 변경한 범위</caption><thead><tr><th scope="col">대상</th><th scope="col">처음 시도</th><th scope="col">변경·유지한 방식</th></tr></thead><tbody>
+        <tr><th scope="row">Mac 활동</th><td>Screenpipe 화면 기록</td><td>Codex 작업 기록 + Computer History 요약</td></tr>
+        <tr><th scope="row">회의·중요한 대화</th><td>PLAUD Note 녹음</td><td>별도 수집 경로로 유지</td></tr>
+        <tr><th scope="row">선택한 이유·남은 일</th><td>활동 기록만으로는 확인하기 어려움</td><td>대화와 챗봇 질문에 직접 답변</td></tr>
+      </tbody></table></div>
+      <p>정리 기준도 함께 정했습니다. 페이지를 열었다는 관찰을 작업 완료로 바꾸지 않고, 사용자가 말한 판단과 실제로 확인한 결과를 구분하도록 했습니다. 기록이 없는 시간대는 AI가 채우지 않도록 했습니다.</p>
     </section>
 
     <section id="part-7" class="case-section">
@@ -140,5 +148,6 @@
       <p class="llm-source">구현 확인·선별 테스트 실행: 2026.09.25. 직접 사용한 경험과 로컬 코드·운영 지침을 바탕으로 작성했습니다.</p>
     </section>
   </article>
+  </details>
   <a class="next-project" href="api-workflow.html"><span>다음 프로젝트</span><strong>코드에서 다시 계산하는 API 연동 현황 ↗</strong></a>
-</main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a><button type="button" class="print-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"/></svg>Save as PDF</button></div></div></footer></body></html>
+</main><footer><div class="container footer-inner"><span>© 2026 김충영</span><div class="footer-actions"><a href="https://github.com/chungyo" aria-label="김충영 GitHub"><svg viewbox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.82.09-.65.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.65 0 0 .84-.27 2.75 1.03A9.6 9.6 0 0 1 12 6.81c.85 0 1.71.12 2.51.34 1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"></path></svg></a><button type="button" class="print-button"><svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5"></path></svg>Save as PDF</button></div></div></footer></body></html>

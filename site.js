@@ -23,14 +23,27 @@ window.addEventListener('scroll', () => {
   requestAnimationFrame(() => { updateNavigation(); scheduled = false; });
 }, { passive: true });
 updateNavigation();
+function revealAnchorTarget() {
+  if (!window.location.hash) return;
+  let target;
+  try { target = document.getElementById(decodeURIComponent(window.location.hash.slice(1))); }
+  catch { return; }
+  if (!target) return;
+  for (let parent = target.parentElement; parent; parent = parent.parentElement) {
+    if (parent.tagName === 'DETAILS') parent.open = true;
+  }
+  requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+}
+window.addEventListener('hashchange', revealAnchorTarget);
+revealAnchorTarget();
 window.addEventListener('beforeprint', () => {
-  document.querySelectorAll('.more-projects').forEach(section => {
+  document.querySelectorAll('.more-projects, .pm-evidence, .pm-secondary').forEach(section => {
     section.dataset.wasOpen = String(section.open);
     section.open = true;
   });
 });
 window.addEventListener('afterprint', () => {
-  document.querySelectorAll('.more-projects').forEach(section => {
+  document.querySelectorAll('.more-projects, .pm-evidence, .pm-secondary').forEach(section => {
     section.open = section.dataset.wasOpen === 'true';
     delete section.dataset.wasOpen;
   });
